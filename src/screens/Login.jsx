@@ -1,5 +1,4 @@
 import React from "react";
-// import { Card, Image } from "@nextui-org/react";
 import GambarLogin from "../assets/gambar-login.png";
 import {
   ButtonWithLeftIcon,
@@ -7,29 +6,31 @@ import {
   PrimaryButton,
   TextInput,
 } from "../components";
-import { CardFooter, CardHeader, Checkbox, Input } from "@nextui-org/react";
-import { Card, Image } from "@nextui-org/react";
+import { Card, CardFooter, Image, Input } from "@nextui-org/react";
 import GoogleIcon from "../assets/google.png";
+
 export default function Login() {
   return (
-    <div className="flex flex-row">
-      <Card radius="lg" className="border-none max-[900px]:hidden">
+    <div className="flex flex-row w-full justify-center">
+      <Card radius="lg" className="border-none max-[1100px]:hidden">
         <Image
           alt="Kelayo"
-          className="object-cover"
-          height={646}
+          className="object-cover w-full h-[646px] md:h-auto md:max-h-[646px]"
           src={GambarLogin}
-          width={600}
         />
       </Card>
-      <Card className="w-[579px] h-[646px] flex flex-col justify-center items-center min-[900px]:ml-24">
-        <div className="w-4/6 flex flex-wrap justify-center flex-col md:flex-nowrap gap-4">
-          <div className="text-2xl font-bold">Masuk</div>
-          <Input type="email" label="Email" className="mb-4" />
-          <Input type="password" label="Kata Sandi" />
-          <MedimumCheckbox className="mb-12">Ingatkan saya</MedimumCheckbox>
-          <PrimaryButton className="h-14 text-md">Login</PrimaryButton>
-          <div className="text-center">atau masuk dengan</div>
+      <Card className="w-full md:w-[579px] md:h-[646px] h-full flex flex-col justify-center items-center md:ml-4">
+        <div className="w-4/6 flex flex-wrap justify-center flex-col gap-4">
+          <div className="text-2xl font-bold mt-4 md:mb-0">Masuk</div>
+          <TextInput type="email" label="Email" className="mb-4" />
+          <TextInput type="password" label="Kata Sandi" />
+          <MedimumCheckbox className="mb-4 md:mb-12">
+            Ingatkan saya
+          </MedimumCheckbox>
+          <PrimaryButton className="h-14 text-md w-full">Login</PrimaryButton>
+          <div className="text-center overflow-hidden text-ellipsis">
+            atau masuk dengan
+          </div>
           <ButtonWithLeftIcon
             className="border-black w-full h-14 text-md"
             icon={

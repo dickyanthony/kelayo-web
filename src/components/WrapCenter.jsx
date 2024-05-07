@@ -2,7 +2,9 @@ import React from "react";
 
 const WrapCenter = ({ children }) => {
   return (
-    <div className="flex justify-center items-center h-screen">{children}</div>
+    <div className="flex justify-center items-center h-full w-full">
+      {children}
+    </div>
   );
 };
 

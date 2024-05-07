@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@nextui-org/react";
+import { useMediaQuery } from "react-responsive";
 
 export function PrimaryButton(props) {
   const { children, ...restProps } = props;
@@ -12,10 +13,17 @@ export function PrimaryButton(props) {
 
 export function ButtonWithLeftIcon(props) {
   const { icon, children, containerStyle, ...restProps } = props;
+  const superSmall = useMediaQuery({ maxWidth: "376px" });
+  const cutText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  };
   return (
-    <div className={`flex gap-4 items-center ${containerStyle}`}>
+    <div className={`flex flex-wrap gap-4 items-center ${containerStyle}`}>
       <Button variant="bordered" startContent={icon} {...restProps}>
-        {children}
+        {superSmall ? cutText(children, 5) : children}
       </Button>
     </div>
   );
