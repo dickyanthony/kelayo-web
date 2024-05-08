@@ -6,7 +6,7 @@ import {
   PrimaryButton,
   TextInput,
 } from "../components";
-import { Card, CardFooter, Image, Input } from "@nextui-org/react";
+import { Card, CardFooter, Image } from "@nextui-org/react";
 import GoogleIcon from "../assets/google.png";
 
 export default function Login() {
