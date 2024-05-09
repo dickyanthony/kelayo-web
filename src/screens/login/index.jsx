@@ -10,18 +10,29 @@ import { Card, CardFooter, Image } from "@nextui-org/react";
 import GoogleIcon from "../../assets/google.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../../hook/auth/Auth";
 
 const TEMP_USER = "nusantarabyte@support.com";
 const TEMP_PW = "nusantarabyte";
 export default function Login() {
   const { openSnackbarSuccess, openSnackbarError } = UseSnackbar();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm();
-  const onSubmit = (values) => {
-    if (values.email === TEMP_USER && values.kataSandi === TEMP_PW) {
-      openSnackbarSuccess("Berhasil Login");
-      navigate("/");
-    } else openSnackbarError("Email atau password tidak sesuai");
+
+  const onSubmit = async (data) => {
+    try {
+      if (data.email === TEMP_USER && data.password === TEMP_PW) {
+        await signIn(data.email, data.password);
+        openSnackbarSuccess("Berhasil Login");
+        console.log("Authentication successful!");
+      } else {
+        throw new Error("Email atau password tidak sesuai");
+      }
+    } catch (error) {
+      openSnackbarError("Email atau password tidak sesuai");
+      console.error("Authentication failed:", error);
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
