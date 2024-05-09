@@ -1,12 +1,6 @@
 import GambarLogin from "../../assets/gambar-login.png";
-import {
-  ButtonWithLeftIcon,
-  MedimumCheckbox,
-  PrimaryButton,
-  TextInput,
-} from "../../components";
+import { PrimaryButton, TextInput } from "../../components";
 import { Card, CardFooter, Image } from "@nextui-org/react";
-import GoogleIcon from "../../assets/google.png";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 

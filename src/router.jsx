@@ -1,13 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "./screens/login";
-import App from "./App";
-import WrapCenter from "./components/WrapCenter";
 import Register from "./screens/register";
+import Home from "./screens/home";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
+    element: <Home />,
   },
   {
     path: "/login",

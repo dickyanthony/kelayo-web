@@ -8,18 +8,19 @@ import {
 } from "../../components";
 import { Card, CardFooter, Image } from "@nextui-org/react";
 import GoogleIcon from "../../assets/google.png";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 const TEMP_USER = "nusantarabyte@support.com";
 const TEMP_PW = "nusantarabyte";
 export default function Login() {
   const { openSnackbarSuccess, openSnackbarError } = UseSnackbar();
+  const navigate = useNavigate();
   const { handleSubmit, control } = useForm();
   const onSubmit = (values) => {
     if (values.email === TEMP_USER && values.kataSandi === TEMP_PW) {
       openSnackbarSuccess("Berhasil Login");
-      redirect("/");
+      navigate("/");
     } else openSnackbarError("Email atau password tidak sesuai");
   };
   return (
