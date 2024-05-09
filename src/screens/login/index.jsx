@@ -19,9 +19,8 @@ export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm();
-  console.log(useAuth());
+
   const onSubmit = async (data) => {
-    console.log("data===>", data);
     try {
       if (data.email === TEMP_USER && data.kataSandi === TEMP_PW) {
         await login(data.email, data.password);
@@ -32,7 +31,6 @@ export default function Login() {
       }
     } catch (error) {
       openSnackbarError("Email atau password tidak sesuai");
-      console.error("Authentication failed:", error);
     }
   };
   return (
