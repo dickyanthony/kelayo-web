@@ -16,17 +16,17 @@ const TEMP_USER = "nusantarabyte@support.com";
 const TEMP_PW = "nusantarabyte";
 export default function Login() {
   const { openSnackbarSuccess, openSnackbarError } = UseSnackbar();
-  const { signIn } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm();
-
+  console.log(useAuth());
   const onSubmit = async (data) => {
     console.log("data===>", data);
     try {
       if (data.email === TEMP_USER && data.kataSandi === TEMP_PW) {
-        await signIn(data.email, data.password);
+        await login(data.email, data.password);
+        navigate("/");
         openSnackbarSuccess("Berhasil Login");
-        console.log("Authentication successful!");
       } else {
         throw new Error("Email atau password tidak sesuai");
       }

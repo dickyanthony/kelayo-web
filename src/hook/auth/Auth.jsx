@@ -13,7 +13,7 @@ const authReducer = (state, action) => {
   }
 };
 
-const useAuth = () => {
+const AuthProvider = ({ children }) => {
   const [authState, dispatch] = useReducer(authReducer, {
     isAuthenticated: false,
   });
@@ -21,23 +21,19 @@ const useAuth = () => {
   const login = () => dispatch({ type: "LOGIN" });
   const logout = () => dispatch({ type: "LOGOUT" });
 
-  return { authState, login, logout };
-};
-
-const AuthProvider = ({ children }) => {
-  const { authState } = useAuth();
-
   return (
-    <AuthContext.Provider value={authState}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ authState, login, logout }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
-const useAuthState = () => {
-  const authState = useContext(AuthContext);
-  if (authState === undefined) {
-    throw new Error("useAuthState must be used within an AuthProvider");
+const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
   }
-  return authState;
+  return context;
 };
 
-export { AuthProvider, useAuth, useAuthState };
+export { AuthProvider, useAuth };

@@ -1,18 +1,17 @@
-import { useLocation, Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hook/auth/Auth";
-import { useEffect } from "react";
 
-export default function RequireAuth({ children }) {
+const RequireAuth = ({ children }) => {
   const {
     authState: { isAuthenticated },
   } = useAuth();
   const location = useLocation();
-
-  console.log("auth===>", useAuth());
-
+  console.log(useAuth());
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   } else {
     return children;
   }
-}
+};
+
+export default RequireAuth;
