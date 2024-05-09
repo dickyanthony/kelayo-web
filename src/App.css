@@ -2,9 +2,9 @@
   box-sizing: border-box;
 }
 #root {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   width: 100%;
 
   margin: 0;

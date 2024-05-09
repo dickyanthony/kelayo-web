@@ -13,7 +13,7 @@ export function PrimaryButton(props) {
 
 export function ButtonWithLeftIcon(props) {
   const { icon, children, containerStyle, ...restProps } = props;
-  const superSmall = useMediaQuery({ maxWidth: "700px" });
+  const superSmall = useMediaQuery({ maxWidth: "730px" });
   const cutText = (text, maxLength) => {
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + "...";

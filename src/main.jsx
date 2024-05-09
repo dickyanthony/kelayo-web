@@ -7,7 +7,7 @@ import { AuthProvider } from "./hook/auth/Auth.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <NextUIProvider>
+    <NextUIProvider className="h-full">
       {/* <AuthProvider> */}
       <App />
       {/* </AuthProvider> */}
