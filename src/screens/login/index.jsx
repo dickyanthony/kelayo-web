@@ -21,8 +21,9 @@ export default function Login() {
   const { handleSubmit, control } = useForm();
 
   const onSubmit = async (data) => {
+    console.log("data===>", data);
     try {
-      if (data.email === TEMP_USER && data.password === TEMP_PW) {
+      if (data.email === TEMP_USER && data.kataSandi === TEMP_PW) {
         await signIn(data.email, data.password);
         openSnackbarSuccess("Berhasil Login");
         console.log("Authentication successful!");
