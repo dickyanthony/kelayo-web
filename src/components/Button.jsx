@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/*global some_unused_var*/
 import React from "react";
 import { Button } from "@nextui-org/react";
 import { useMediaQuery } from "react-responsive";
