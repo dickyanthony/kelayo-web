@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -10,13 +9,16 @@ import {
   Dropdown,
   DropdownMenu,
   Avatar,
+  Image,
 } from "@nextui-org/react";
+
+import RoundedLogoNoname from "../assets/rounded-kelayo-noname.png";
 
 export default function App() {
   return (
-    <Navbar>
+    <Navbar style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
       <NavbarBrand>
-        {/* <Logo /> */}
+        <Image src={RoundedLogoNoname} width={50} height={50} />
         <p className="font-bold text-inherit">KELAYO</p>
       </NavbarBrand>
 

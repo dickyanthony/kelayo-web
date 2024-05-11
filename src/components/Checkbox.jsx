@@ -1,4 +1,3 @@
-import React from "react";
 import { Checkbox as NextCheckbox } from "@nextui-org/react";
 
 export function SmallCheckbox(props) {

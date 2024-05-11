@@ -1,9 +1,15 @@
 // import React from "react";
 // import { useMediaQuery } from "react-responsive";
 
-const WrapVHCenter = ({ children }) => {
+const WrapVHCenter = ({ children, className = "" }) => {
   // const medium = useMediaQuery({ maxWidth: "671px" });
-  return <div className="w-full h-full flex justify-center">{children}</div>;
+  return (
+    <div className={`w-full h-auto flex justify-center ${className}`}>
+      <div className="max-w-screen-xl flex flex-col items-center justify-center">
+        {children}
+      </div>
+    </div>
+  );
 };
 
 export default WrapVHCenter;

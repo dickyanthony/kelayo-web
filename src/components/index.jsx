@@ -5,6 +5,9 @@ import WrapVHCenter from "./WrapVHCenter";
 import WrapHCenter from "./WrapHCenter";
 import UseSnackbar from "./Snackbar";
 import NavBar from "./NavBar";
+import CategoryMenu from "./CategoryMenu";
+import TourCard from "./TourCard";
+import Footer from "./Footer";
 export {
   TextInput,
   SmallCheckbox,
@@ -16,4 +19,7 @@ export {
   ButtonWithLeftIcon,
   UseSnackbar,
   NavBar,
+  CategoryMenu,
+  TourCard,
+  Footer,
 };
