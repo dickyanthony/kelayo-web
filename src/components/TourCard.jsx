@@ -91,17 +91,18 @@ export default function CategoryMenu() {
           <CardFooter className="text-small justify-between flex-col items-start">
             <b className="mt-2 mb-2 text-primary-text">{item.title}</b>
             <p className="text-default-500 text-start">{item.description}</p>
-            <div className="flex flex-row justify-between w-full mt-4">
+            <div className="flex flex-col w-full mt-4 min-[400px]:flex-row justify-between">
               <div className="flex flex-row">
                 <Image
+                  className="min-w-2 min-h-2"
                   src={LocationLogo}
                   alt="location"
                   width={12}
                   height={12}
                 />
-                <p className="ml-2 text-default-500 text-sm">{item.location}</p>
+                <p className="ml-2 text-default-500 text-xs">{item.location}</p>
               </div>
-              <p className="text-default-500 text-sm">{item.range}</p>
+              <p className="text-default-500 text-xs">{item.range}</p>
             </div>
           </CardFooter>
         </Card>

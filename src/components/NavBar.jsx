@@ -14,33 +14,45 @@ import {
 
 import RoundedLogoNoname from "../assets/rounded-kelayo-noname.png";
 
-export default function App() {
+export default function NavBar(props) {
+  const { className = "" } = props;
   return (
-    <Navbar style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
-      <NavbarBrand>
+    <Navbar
+      className={`${className}`}
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+    >
+      <NavbarBrand className="">
         <Image src={RoundedLogoNoname} width={50} height={50} />
-        <p className="font-bold text-inherit">KELAYO</p>
+        <p className="font-semibold text-inherit text-white ml-2">KELAYO</p>
       </NavbarBrand>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent
+        className="hidden sm:flex flex-grow-0 gap-14"
+        justify="center"
+      >
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link className="text-gray-200 text-sm" href="#">
             Beranda
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="#" aria-current="page" color="primary">
+          <Link
+            className="text-gray-200 text-sm"
+            href="#"
+            aria-current="page"
+            color="primary"
+          >
             Pemesanan
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link className="text-gray-200 text-sm" color="foreground" href="#">
             Tentang Kami
           </Link>
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent as="div" justify="end">
+      <NavbarContent className="" as="div" justify="end">
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
