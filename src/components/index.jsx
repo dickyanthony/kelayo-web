@@ -8,6 +8,8 @@ import NavBar from "./NavBar";
 import CategoryMenu from "./CategoryMenu";
 import TourCard from "./TourCard";
 import Footer from "./Footer";
+import TabTourist from "./TabTourist";
+import CustomPagination from "./CustomPagination";
 export {
   TextInput,
   SmallCheckbox,
@@ -22,4 +24,6 @@ export {
   CategoryMenu,
   TourCard,
   Footer,
+  TabTourist,
+  CustomPagination,
 };

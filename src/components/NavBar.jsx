@@ -3,7 +3,6 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
   DropdownItem,
   DropdownTrigger,
   Dropdown,
@@ -13,6 +12,7 @@ import {
 } from "@nextui-org/react";
 
 import RoundedLogoNoname from "../assets/rounded-kelayo-noname.png";
+import { NavLink } from "react-router-dom";
 
 export default function NavBar(props) {
   const { className = "" } = props;
@@ -31,24 +31,49 @@ export default function NavBar(props) {
         justify="center"
       >
         <NavbarItem>
-          <Link className="text-gray-200 text-sm" href="#">
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending text-white"
+                : isActive
+                ? "active border-b-2 border-primary-text text-white"
+                : "text-white"
+            }
+            to="/"
+          >
             Beranda
-          </Link>
+          </NavLink>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link
-            className="text-gray-200 text-sm"
-            href="#"
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending text-white"
+                : isActive
+                ? "active border-b-2 border-primary-text text-white"
+                : "text-white"
+            }
+            to="/login"
             aria-current="page"
             color="primary"
           >
             Pemesanan
-          </Link>
+          </NavLink>
         </NavbarItem>
         <NavbarItem>
-          <Link className="text-gray-200 text-sm" color="foreground" href="#">
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending text-white"
+                : isActive
+                ? "active border-b-2 border-primary-text text-white"
+                : "text-white"
+            }
+            color="foreground"
+            to="/tes"
+          >
             Tentang Kami
-          </Link>
+          </NavLink>
         </NavbarItem>
       </NavbarContent>
 
@@ -74,7 +99,7 @@ export default function NavBar(props) {
             <DropdownItem key="tes">tes</DropdownItem>
             <DropdownItem key="tes">tes</DropdownItem>
             <DropdownItem key="logout" color="danger">
-              Keluar{" "}
+              Keluar
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>

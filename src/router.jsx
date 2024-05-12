@@ -4,6 +4,7 @@ import Register from "./screens/register";
 import Home from "./screens/home";
 import RequireAuth from "./screens/RequireAuth";
 import { WrapHCenter, WrapVHCenter } from "./components";
+import TouristDestination from "./screens/touristDestination";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,14 @@ const router = createBrowserRouter([
       <WrapVHCenter>
         <Register />
       </WrapVHCenter>
+    ),
+  },
+  {
+    path: "/tourist-destination",
+    element: (
+      // <RequireAuth>
+      <TouristDestination />
+      // </RequireAuth>
     ),
   },
 ]);
