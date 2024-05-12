@@ -6,18 +6,18 @@ import BluePhone from "../assets/blue-phone.png";
 export default function Footer() {
   return (
     <div className="w-full h-auto mt-14 py-4 px-4 flex flex-col items-center">
-      <div className="w-4/5 h-[1px] border-primary-text border-t-2 mb-14 opacity-40" />
-      <div className="grid grid-cols-1 w-4/5 sm:grid-cols-2">
+      <div className="w-full h-[1px] border-primary-text border-t-2 mb-7 opacity-40" />
+      <div className="grid grid-cols-1 w-ful sm:grid-cols-2">
         <div className="pl-8">
           <Image
-            width="50%"
+            width="70%"
             alt="footer-logo"
             //   className="w-full object-cover h-[140px]"
             src={RoundedKelayo}
           />
         </div>
         <div className="pr-8">
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-4 mt-8">
             <Image
               className="min-w-3 min-h-3"
               src={BlueLocation}
@@ -42,8 +42,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="w-4/5 h-[1px] border-primary-text border-t-2 mb-8 mt-4 opacity-10" />
-      <div className="grid grid-cols max-w-screen-lg w-4/5 sm:grid-cols-2">
+      <div className="w-full h-[1px] border-primary-text border-t-2 mb-8 mt-4 opacity-10" />
+      <div className="grid grid-cols max-w-screen-lg w-full sm:grid-cols-2">
         <div className="flex flex-row gap-4">
           <p className="text-default-800 text-sm">Tentang Kami</p>
           <p className="text-default-800 text-sm">Hubungi Kami</p>

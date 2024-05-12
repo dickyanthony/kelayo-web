@@ -2,22 +2,16 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
   DatePicker,
-  Dropdown,
   Image,
   Input,
   Select,
 } from "@nextui-org/react";
-import {
-  CategoryMenu,
-  Footer,
-  NavBar,
-  TourCard,
-  WrapHCenter,
-} from "../../components";
+import { CategoryMenu, Footer, NavBar, WrapHCenter } from "../../components";
 import Home1 from "../../assets/home-1.png";
-
+import Airplane from "../../assets/airplane.png";
+import Line from "../../assets/line.png";
+import InfoEvent from "./InfoEvent";
 export default function Home() {
   return (
     <>
@@ -34,17 +28,17 @@ export default function Home() {
             src={Home1}
             height={150}
           />
-          <CardBody className="!border-transparent justify-between before:bg-white/10 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large w-[calc(100%_-_30%)] shadow-small ml-1 z-10">
-            <div className="text-base font-bold text-white min sm:text-4xl lg:text-6xl">
+          <CardBody className="!border-transparent justify-between before:bg-white/10 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large w-[calc(100%_-_32%)] ml-1 z-10">
+            <div className="text-base font-bold text-white min-[746px]:text-4xl lg:text-6xl">
               KELAYO: KELANA
             </div>
-            <div className="text-base font-bold text-white sm:text-4xl lg:text-6xl">
+            <div className="text-base font-bold text-white min-[746px]:text-4xl lg:text-6xl">
               NGAYOGYAKARTA
             </div>
-            <div className="text-sm font-bold text-white md:mt-4 md:mb-4 sm:text-2xl">
+            <div className="text-sm font-bold text-white md:mt-4 md:mb-4 min-[764px]:text-2xl">
               Rasakan Pengalaman Berwisata yang
             </div>
-            <div className="text-sm font-bold text-white mb-2 sm:mb-4 lg:mb-8 sm:text-xl lg:text-2xl">
+            <div className="text-sm font-bold text-white mb-2 min-[764px]:mb-4 lg:mb-8 min-[764px]:text-xl lg:text-2xl">
               Berbeda Bersama <span className="text-primary-text">KELAYO</span>
             </div>
             <div className="flex flex-row bg-white/10">
@@ -79,13 +73,33 @@ export default function Home() {
           </CardBody>
         </Card>
         <WrapHCenter className="p-6">
-          <div className="text-[#181E4B] mb-4">KATEGORI</div>
+          <div className="text-[#181E4B] mb-4 font-bold">KATEGORI</div>
           <div className="text-xl font-bold mb-10 text-primary-text sm:text-4xl text-center">
             Kami Memberikan Solusi Perjalanan Wisatamu
           </div>
           <CategoryMenu />
-
-          <TourCard />
+        </WrapHCenter>
+        <Card className="border-none flex items-center justify-center min-h-72 sm:min-h-56">
+          <Image
+            alt="home"
+            className="w-screen filter brightness-75 min-h-72 sm:min-h-56"
+            src={Airplane}
+            height={150}
+          />
+          <CardBody className="!border-transparent justify-center items-center before:bg-white/10 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large w-[calc(100%_-_30%)] ml-1 z-10">
+            <div className="font-bold text-white max-[478px]:text-base sm:text-2xl lg:text-4xl xl:text-5xl text-center w-3/6 mb-4">
+              Buat Liburanmu Lebih Menyenangkan
+            </div>
+            <Image
+              alt="line"
+              className="w-20 mt-2 ml-40 max-[478px]:ml-14 lg:w-32 xl:w-72 xl:ml-[500px] "
+              src={Line}
+              height={10}
+            />
+          </CardBody>
+        </Card>
+        <WrapHCenter>
+          <InfoEvent />
           <Footer />
         </WrapHCenter>
       </div>

@@ -70,7 +70,7 @@ export default function CategoryMenu() {
   ];
 
   return (
-    <div className="gap-y-4 gap-x-12 w-4/5 grid grid-cols-2 sm:grid-cols-3">
+    <div className="gap-y-4 gap-x-12 w-4/5 grid grid-cols-1 min-[268px]:grid-cols-2 sm:grid-cols-3">
       {list.map((item, index) => (
         <Card
           shadow="sm"
