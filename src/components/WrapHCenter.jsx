@@ -4,8 +4,8 @@
 const WrapVHCenter = ({ children, className = "" }) => {
   // const medium = useMediaQuery({ maxWidth: "671px" });
   return (
-    <div className={`w-full h-auto flex justify-center ${className}`}>
-      <div className="max-w-screen-xl flex flex-col items-center justify-center">
+    <div className={`w-4/5 h-auto flex justify-center ${className}`}>
+      <div className="w-4/5 max-w-screen-lg flex flex-col items-center justify-center">
         {children}
       </div>
     </div>

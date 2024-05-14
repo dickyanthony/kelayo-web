@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { WrapHCenter } from ".";
+import "../css/SliderStyle.css";
 
 export default function CustomCarousel(props) {
   const { listImage = [], title = "" } = props;
@@ -13,7 +14,7 @@ export default function CustomCarousel(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
     appendDots: (dots) => (
       <div
         style={{
@@ -22,33 +23,36 @@ export default function CustomCarousel(props) {
           textAlign: "center",
         }}
       >
-        <ul style={{ margin: "0", width: "100%" }}> {dots} </ul>
+        <ul
+          style={{
+            margin: "0",
+            padding: "0",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {dots}
+        </ul>
       </div>
     ),
     customPaging: () => (
-      <button
-        style={{
-          width: "20px",
-          height: "5px",
-          margin: "0 5px",
-          borderRadius: "5px",
-          backgroundColor: "rgba(255, 255, 255, 0.5)",
-        }}
-      ></button>
+      <div className="ft-slick__dots--custom">
+        <div className="loading" />
+      </div>
     ),
   };
 
   return (
     <div
       style={{
-        minWidth: "99.1vw",
+        minWidth: "100vw",
         width: "100%",
         maxHeight: "calc(100vh - 200px)",
       }}
     >
       <Slider
         style={{
-          minWidth: "99.1vw",
+          minWidth: "100vw",
           width: "100%",
           maxHeight: "calc(100vh - 200px)",
           overflow: "hidden",
@@ -60,7 +64,7 @@ export default function CustomCarousel(props) {
             <img
               src={slide}
               alt={index}
-              style={{ minWidth: "99.1vw", maxHeight: "calc(100vh - 200px)" }}
+              style={{ minWidth: "100vw", maxHeight: "calc(100vh - 200px)" }}
             />
             <div
               style={{

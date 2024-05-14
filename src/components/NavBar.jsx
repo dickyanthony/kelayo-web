@@ -15,11 +15,11 @@ import RoundedLogoNoname from "../assets/rounded-kelayo-noname.png";
 import { NavLink } from "react-router-dom";
 
 export default function NavBar(props) {
-  const { className = "" } = props;
+  const { className = "", style = "" } = props;
   return (
     <Navbar
       className={`${className}`}
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", ...style }}
     >
       <NavbarBrand className="">
         <Image src={RoundedLogoNoname} width={50} height={50} />

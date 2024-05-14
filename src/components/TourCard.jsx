@@ -5,7 +5,7 @@ export default function CategoryMenu(props) {
   const { list } = props;
 
   return (
-    <div className="gap-y-6 gap-x-12 grid grid-cols-1 min-[268px]:grid-cols-2 sm:grid-cols-3">
+    <div className="gap-y-6 gap-x-8 grid grid-cols-1 min-[432px]:grid-cols-2 sm:gap-x-12 sm:grid-cols-3">
       {list.map((item, index) => (
         <Card
           shadow="sm"
