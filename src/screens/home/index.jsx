@@ -7,7 +7,7 @@ import {
   Input,
   Select,
 } from "@nextui-org/react";
-import { CategoryMenu, Footer, NavBar, WrapHCenter } from "../../components";
+import { CategoryMenu, Footer, NavBar, WrapHCenterXL } from "../../components";
 import Home1 from "../../assets/home-1.png";
 import Airplane from "../../assets/airplane.png";
 import Line from "../../assets/line.png";
@@ -72,13 +72,13 @@ export default function Home() {
             </Button>
           </CardBody>
         </Card>
-        <WrapHCenter className="p-6">
+        <WrapHCenterXL className="p-6">
           <div className="text-[#181E4B] mb-4 font-bold">KATEGORI</div>
           <div className="text-xl font-bold mb-10 text-primary-text sm:text-4xl text-center">
             Kami Memberikan Solusi Perjalanan Wisatamu
           </div>
           <CategoryMenu />
-        </WrapHCenter>
+        </WrapHCenterXL>
         <Card className="border-none flex items-center justify-center min-h-72 sm:min-h-56">
           <Image
             alt="home"
@@ -98,10 +98,10 @@ export default function Home() {
             />
           </CardBody>
         </Card>
-        <WrapHCenter>
+        <WrapHCenterXL>
           <InfoEvent />
           <Footer />
-        </WrapHCenter>
+        </WrapHCenterXL>
       </div>
     </>
   );
