@@ -10,7 +10,7 @@ import {
 import Nature1 from "../../assets/nature/nature-1.jpg";
 import Nature2 from "../../assets/nature/nature-2.jpg";
 import Nature3 from "../../assets/nature/nature-3.jpg";
-import Carousel from "react-carousel";
+
 export default function TouristDestination() {
   const [selectedTabComponent, setSelectedTabComponent] =
     useState("wisata-alam");
