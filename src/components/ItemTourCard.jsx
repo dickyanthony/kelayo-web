@@ -2,10 +2,12 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import LocationLogo from "../assets/location.png";
 
 const ItemTourCard = (props) => {
-  const { list } = props;
+  const { list, className = "" } = props;
 
   return (
-    <div className="gap-y-6 gap-x-8 grid grid-cols-1 min-[432px]:grid-cols-2 sm:gap-x-12 sm:grid-cols-3">
+    <div
+      className={`gap-y-6 gap-x-8 grid grid-cols-1 min-[432px]:grid-cols-2 sm:gap-x-8 sm:grid-cols-3 ${className}`}
+    >
       {list.map((item, index) => (
         <Card
           shadow="sm"

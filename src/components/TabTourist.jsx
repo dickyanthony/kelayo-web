@@ -72,6 +72,10 @@ export default function TabTourist(props) {
   const { setSelectedTab } = props;
   const [selected, setSelected] = React.useState("photos");
 
+  const onSubmitFilter = (data) => {
+    console.log("Data===>", data);
+  };
+
   return (
     <div className="flex w-full flex-col mt-16">
       <Tabs
@@ -107,13 +111,21 @@ export default function TabTourist(props) {
           <CustomPagination />
         </Tab>
         <Tab key="lainnya" title="Lainnya">
-          <Card>
-            <CardBody className="flex items-center justify-center">
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum.
-            </CardBody>
-          </Card>
-          <FilterPrice />
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+            <div className="order-2 sm:order-1">
+              <Card>
+                <CardBody className="flex items-center justify-center">
+                  <ItemTourCard
+                    list={list}
+                    className="grid !grid-cols-1 md:!grid-cols-2"
+                  />
+                </CardBody>
+              </Card>
+            </div>
+            <div className="order-1 sm:order-2 flex justify-center">
+              <FilterPrice submitFilter={onSubmitFilter} />
+            </div>
+          </div>
           <CustomPagination />
         </Tab>
       </Tabs>

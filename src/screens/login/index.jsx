@@ -15,10 +15,10 @@ import { useAuth } from "../../hook/auth/Auth";
 const TEMP_USER = "nusantarabyte@support.com";
 const TEMP_PW = "nusantarabyte";
 export default function Login() {
+  const { handleSubmit, control } = useForm();
   const { openSnackbarSuccess, openSnackbarError } = UseSnackbar();
   const { login } = useAuth();
   const navigate = useNavigate();
-  const { handleSubmit, control } = useForm();
 
   const onSubmit = async (data) => {
     try {

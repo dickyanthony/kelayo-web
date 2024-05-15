@@ -18,6 +18,7 @@ import CustomDateRangePicker from "./CustomDateRangePicker";
 import FilterPrice from "./FilterPrice";
 import CustomDatePicker from "./CustomDatePicker";
 import CustomSelect from "./CustomSelect";
+import CustomSlider from "./CustomSlider";
 export {
   TextInput,
   SmallCheckbox,
@@ -42,4 +43,5 @@ export {
   FilterPrice,
   CustomDatePicker,
   CustomSelect,
+  CustomSlider,
 };
