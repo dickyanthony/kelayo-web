@@ -11,6 +11,14 @@ import Nature1 from "../../assets/nature/nature-1.jpg";
 import Nature2 from "../../assets/nature/nature-2.jpg";
 import Nature3 from "../../assets/nature/nature-3.jpg";
 
+import Culture1 from "../../assets/culture/culture-1.jpg";
+import Culture2 from "../../assets/culture/culture-2.jpg";
+import Culture3 from "../../assets/culture/culture-3.jpg";
+
+import Culinary1 from "../../assets/culinary/culinary-1.jpg";
+import Culinary2 from "../../assets/culinary/culinary-2.jpg";
+import Culinary3 from "../../assets/culinary/culinary-3.jpg";
+
 export default function TouristDestination() {
   const [selectedTabComponent, setSelectedTabComponent] =
     useState("wisata-alam");
@@ -22,13 +30,22 @@ export default function TouristDestination() {
         carouselList = { image: [Nature1, Nature2, Nature3], title: "NATURE" };
         break;
       case "wisata-budaya":
-        carouselList = { image: [], title: "CULTURE & HISTORY" };
+        carouselList = {
+          image: [Culture1, Culture2, Culture3],
+          title: "CULTURE & HISTORY",
+        };
         break;
       case "wisata-kuliner":
-        carouselList = { image: [], title: "FOOD & CULINARY" };
+        carouselList = {
+          image: [Culinary1, Culinary2, Culinary3],
+          title: "FOOD & CULINARY",
+        };
         break;
       case "lainnya":
-        carouselList = { image: [], title: "NATURE" };
+        carouselList = {
+          image: [Nature1, Culture1, Culinary1],
+          title: "KELAYO",
+        };
         break;
       default:
         carouselList = { image: [], title: "KELAYO" };
@@ -43,7 +60,7 @@ export default function TouristDestination() {
     );
   };
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <NavBar className="absolute" style={{ width: "100vw" }} />
 
       <div
@@ -52,10 +69,10 @@ export default function TouristDestination() {
       >
         <RenderCarousel />
       </div>
+
       <WrapHCenter className="p-6 !w-auto">
         <div className="flex flex-col w-full justify-center items-center">
           <TabTourist setSelectedTab={(e) => setSelectedTabComponent(e)} />
-
           <Footer />
         </div>
       </WrapHCenter>

@@ -7,11 +7,17 @@ import WrapHCenterXL from "./WrapHCenterXL";
 import UseSnackbar from "./Snackbar";
 import NavBar from "./NavBar";
 import CategoryMenu from "./CategoryMenu";
-import TourCard from "./TourCard";
+import ItemTourCard from "./ItemTourCard";
 import Footer from "./Footer";
 import TabTourist from "./TabTourist";
 import CustomPagination from "./CustomPagination";
 import CustomCarousel from "./CustomCarousel";
+import ItemLodgingReservation from "./ItemLodgingReservation";
+import BookingPrice from "./BookingPrice";
+import CustomDateRangePicker from "./CustomDateRangePicker";
+import FilterPrice from "./FilterPrice";
+import CustomDatePicker from "./CustomDatePicker";
+import CustomSelect from "./CustomSelect";
 export {
   TextInput,
   SmallCheckbox,
@@ -25,9 +31,15 @@ export {
   UseSnackbar,
   NavBar,
   CategoryMenu,
-  TourCard,
+  ItemTourCard,
   Footer,
   TabTourist,
   CustomPagination,
   CustomCarousel,
+  ItemLodgingReservation,
+  BookingPrice,
+  CustomDateRangePicker,
+  FilterPrice,
+  CustomDatePicker,
+  CustomSelect,
 };

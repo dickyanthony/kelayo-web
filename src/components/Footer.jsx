@@ -17,7 +17,7 @@ export default function Footer() {
           />
         </div>
         <div className="pr-8">
-          <div className="flex flex-row gap-4 mt-8">
+          <div className="flex flex-row gap-3 mt-8">
             <Image
               className="min-w-3 min-h-3"
               src={BlueLocation}
@@ -30,7 +30,7 @@ export default function Footer() {
               Sleman
             </p>
           </div>
-          <div className="flex flex-row gap-4 mt-2">
+          <div className="flex flex-row gap-3 mt-2">
             <Image
               className="min-w-3 min-h-3"
               src={BluePhone}

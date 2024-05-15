@@ -17,7 +17,7 @@ const list = [
     img: MenuPenginapan,
     description:
       "Cari penginapan favorit dan ternyamanmu disini. Badan fit, liburan tenang",
-    to: "/",
+    to: "/lodging-reservation",
   },
   {
     title: "Penyewaan Trasnportasi",

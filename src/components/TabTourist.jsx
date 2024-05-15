@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import CustomPagination from "./CustomPagination";
-import { TourCard } from ".";
+import { FilterPrice, ItemTourCard } from ".";
 const list = [
   {
     title: "Pantai Kesirat",
@@ -73,7 +73,7 @@ export default function TabTourist(props) {
   const [selected, setSelected] = React.useState("photos");
 
   return (
-    <div className="flex w-full flex-col mt-20">
+    <div className="flex w-full flex-col mt-16">
       <Tabs
         aria-label="Options"
         selectedKey={selected}
@@ -85,7 +85,7 @@ export default function TabTourist(props) {
         <Tab key="wisata-alam" title="Wisata Alam">
           <Card>
             <CardBody className="flex items-center justify-center">
-              <TourCard list={list} />
+              <ItemTourCard list={list} />
             </CardBody>
           </Card>
           <CustomPagination />
@@ -93,7 +93,7 @@ export default function TabTourist(props) {
         <Tab key="wisata-budaya" title="Wisata Budaya">
           <Card>
             <CardBody className="flex items-center justify-center">
-              <TourCard list={list} />
+              <ItemTourCard list={list} />
             </CardBody>
           </Card>
           <CustomPagination />
@@ -101,7 +101,7 @@ export default function TabTourist(props) {
         <Tab key="wisata-kuliner" title="Wisata Kuliner">
           <Card>
             <CardBody className="flex items-center justify-center">
-              <TourCard list={list} />
+              <ItemTourCard list={list} />
             </CardBody>
           </Card>
           <CustomPagination />
@@ -113,6 +113,7 @@ export default function TabTourist(props) {
               officia deserunt mollit anim id est laborum.
             </CardBody>
           </Card>
+          <FilterPrice />
           <CustomPagination />
         </Tab>
       </Tabs>

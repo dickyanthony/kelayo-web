@@ -18,6 +18,7 @@ export default function NavBar(props) {
   const { className = "", style = "" } = props;
   return (
     <Navbar
+      maxWidth="xl"
       className={`${className}`}
       style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", ...style }}
     >

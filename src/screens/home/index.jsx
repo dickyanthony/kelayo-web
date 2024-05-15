@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardBody,
   DatePicker,
@@ -12,6 +11,7 @@ import Home1 from "../../assets/home-1.png";
 import Airplane from "../../assets/airplane.png";
 import Line from "../../assets/line.png";
 import InfoEvent from "./InfoEvent";
+import CurvedLine from "../../assets/curved-line.png";
 export default function Home() {
   return (
     <>
@@ -29,6 +29,7 @@ export default function Home() {
             height={150}
           />
           <CardBody className="!border-transparent justify-between before:bg-white/10 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large w-[calc(100%_-_32%)] ml-1 z-10">
+            <Image width={80} height={70} src={CurvedLine} alt="curved-line" />
             <div className="text-base font-bold text-white min-[746px]:text-4xl lg:text-6xl">
               KELAYO: KELANA
             </div>
@@ -46,22 +47,62 @@ export default function Home() {
                 label="Jenis Wisata"
                 variant="bordered"
                 defaultValue=""
-                className="max-w-xs !border-none"
+                style={{ border: "none" }}
+                className="max-w-xs !border-none !border-0 !focus:border-transparent !border-transparent"
+                classNames={
+                  {
+                    // base: "max-w-full sm:max-w-[15rem] h-10 !border-none !border-0 !border-transparent",
+                    // input:
+                    //   "text-small !border-none !border-0 !border-transparent",
+                    // mainWrapper:
+                    //   "h-full font-normal text-default-500 bg-default-400/20 !border-none !focus:border-transparent !border-0",
+                    // innerWrapper:
+                    //   "h-full font-normal text-default-500 bg-default-400/20 !border-none !focus:border-transparent !border-0",
+                    // listbox:
+                    //   "h-full font-normal text-default-500 bg-default-400/20 !border-none !focus:border-transparent !border-0",
+                    // listboxWrapper:
+                    //   "h-full font-normal text-default-500 bg-default-400/20 !border-none !focus:border-transparent !border-0",
+                  }
+                }
               />
               <Input
                 label="Jenis Wisata"
                 variant="bordered"
-                defaultValue="junior@nextui.org"
-                className="max-w-xs bg-opacity-0 !border-none"
+                className="max-w-xs !border-none !focus:border-transparent"
+                classNames={{
+                  base: "max-w-full sm:max-w-[15rem] h-10",
+                  mainWrapper: "h-full",
+                  input: "text-small",
+                  inputWrapper:
+                    "h-full font-normal text-default-500 bg-default-400/20 !border-none !focus:border-transparent",
+                }}
               />
               <DatePicker
+                style={{
+                  border: "none",
+                  borderColor: "transparent",
+                  backgroundColor: "transparent",
+                }}
                 label="Jenis Wisata"
-                variant="bordered"
-                className="max-w-xs !border-none"
+                variant="underlined"
+                className="max-w-xs !border-none !border-0 !border-transparent !focus:border-transparent !bg-transparent"
+                classNames={{
+                  base: "max-w-full sm:max-w-[15rem] h-10 !border-none !border-transparent !border-0 !bg-transparent",
+                  mainWrapper:
+                    "h-full !border-none !border-0 !border-transparent !bg-transparent",
+                  inputWrapper:
+                    "h-full font-normal text-default-500 bg-default-400/20 !border-none !border-transparent !focus:border-transparent !border-0 !bg-transparent !border-y-0",
+                  innerWrapper:
+                    "h-full font-normal text-default-500 bg-default-400/20 !border-none !border-transparent !focus:border-transparent !border-0 !bg-transparent",
+                  calendar:
+                    "text-small !border-0 !border-none !border-transparent !bg-transparent",
+                  calendarContent:
+                    "h-full font-normal text-default-500 bg-default-400/20 !border-none !border-transparent !focus:border-transparent !border-0 !bg-transparent",
+                }}
               />
             </div>
-            <p className="text-tiny text-white/80">Available soon.</p>
-            <Button
+
+            {/* <Button
               className="text-tiny text-white bg-black/20"
               variant="flat"
               color="default"
@@ -69,7 +110,7 @@ export default function Home() {
               size="sm"
             >
               Notify me
-            </Button>
+            </Button> */}
           </CardBody>
         </Card>
         <WrapHCenterXL className="p-6">
