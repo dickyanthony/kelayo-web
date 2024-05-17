@@ -6,6 +6,7 @@ import RequireAuth from "./screens/RequireAuth";
 import { WrapHCenter, WrapVHCenter } from "./components";
 import TouristDestination from "./screens/touristDestination";
 import LodgingReservation from "./screens/lodgingReservation";
+import TourGuide from "./screens/tourGuide";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
     element: (
       // <RequireAuth>
       <LodgingReservation />
+      // </RequireAuth>
+    ),
+  },
+  {
+    path: "/tour-guide",
+    element: (
+      // <RequireAuth>
+      <TourGuide />
       // </RequireAuth>
     ),
   },

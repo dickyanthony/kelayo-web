@@ -31,7 +31,7 @@ const list = [
     img: MenuPemanduWisata,
     description:
       "Temukan pemandu wisatamu disini untuk kesan dan pengalaman perjalanan yang menyenangkan",
-    to: "/",
+    to: "/tour-guide",
   },
   {
     title: "Rekan Wisata",

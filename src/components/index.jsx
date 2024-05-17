@@ -19,6 +19,7 @@ import FilterPrice from "./FilterPrice";
 import CustomDatePicker from "./CustomDatePicker";
 import CustomSelect from "./CustomSelect";
 import CustomSlider from "./CustomSlider";
+import ItemTourGuide from "./ItemTourGuide";
 export {
   TextInput,
   SmallCheckbox,
@@ -44,4 +45,5 @@ export {
   CustomDatePicker,
   CustomSelect,
   CustomSlider,
+  ItemTourGuide,
 };

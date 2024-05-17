@@ -27,18 +27,18 @@ export default function TouristDestination() {
     let carouselList = { image: [], title: "" };
     switch (selectedTabComponent) {
       case "wisata-alam":
-        carouselList = { image: [Nature1, Nature2, Nature3], title: "NATURE" };
+        carouselList = { image: [Nature1, Nature2, Nature3], title: "ALAM" };
         break;
       case "wisata-budaya":
         carouselList = {
           image: [Culture1, Culture2, Culture3],
-          title: "CULTURE & HISTORY",
+          title: "BUDAYA & SEJARAH",
         };
         break;
       case "wisata-kuliner":
         carouselList = {
           image: [Culinary1, Culinary2, Culinary3],
-          title: "FOOD & CULINARY",
+          title: "MAKANAN & KULINER",
         };
         break;
       case "lainnya":
