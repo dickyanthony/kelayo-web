@@ -18,11 +18,11 @@ const ItemFeature = (item) => {
   );
 };
 export default function ItemLodgingReservation(props) {
-  const { item, onPress } = props;
+  const { item, onPress, isPressable = true } = props;
 
   return (
     <Card
-      isPressable
+      isPressable={isPressable}
       onPress={() => onPress(item)}
       isBlurred
       className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   BookingPrice,
   CustomPagination,
@@ -9,7 +10,6 @@ import {
 import AnjumaBackpacker from "../../assets/lodgingReservation/anjuma-backpacker.png";
 import JogjaUnitPogung from "../../assets/lodgingReservation/jogja-unit-pogung.png";
 import UmahBuDee from "../../assets/lodgingReservation/umah-bu-dee.png";
-import { useState } from "react";
 const DATA = [
   {
     id: 1,
@@ -48,7 +48,7 @@ const DATA = [
 
 export default function LodgingReservation() {
   const [bookingDetail, setBookingDetail] = useState();
-  console;
+
   return (
     <div className="w-full ">
       <NavBar />

@@ -1,3 +1,5 @@
+import React from "react";
+import { useForm } from "react-hook-form";
 import { Card, Image } from "@nextui-org/react";
 import { useParams } from "react-router-dom";
 import CheckIcon from "../../assets/check-icon.png";
@@ -10,8 +12,6 @@ import {
   WrapHCenterXL,
 } from "../../components";
 import Mesyah from "../../assets/mesyah-dwi-nastiya.png";
-import { useForm } from "react-hook-form";
-import React from "react";
 
 const DETAIL = {
   name: "MEYSYAH DWI NASTIYA",

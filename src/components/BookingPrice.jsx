@@ -5,8 +5,10 @@ import { formatNumberWithSeparator } from "../utils/numberConverter";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { PrimaryButton } from "./Button";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 export default function BookingPrice(props) {
   const { detail } = props;
+  const navigate = useNavigate();
   const [dateRange, setDateRange] = useState({ start: null, end: null });
   const [dateDifference, setDateDifference] = useState(0);
   useEffect(() => {
@@ -64,7 +66,11 @@ export default function BookingPrice(props) {
       <Divider />
 
       <CardFooter className="flex justify-center">
-        <PrimaryButton>Pesan</PrimaryButton>
+        <PrimaryButton
+          onPress={() => navigate(`/lodging-reservation/${detail.id}`)}
+        >
+          Pesan
+        </PrimaryButton>
       </CardFooter>
     </Card>
   );

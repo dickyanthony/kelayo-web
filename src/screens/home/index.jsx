@@ -12,7 +12,7 @@ import Airplane from "../../assets/airplane.png";
 import Line from "../../assets/line.png";
 import InfoEvent from "./InfoEvent";
 import CurvedLine from "../../assets/curved-line.png";
-export default function Home() {
+const Home = () => {
   return (
     <>
       <div className="w-full ">
@@ -146,4 +146,6 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+export default Home;

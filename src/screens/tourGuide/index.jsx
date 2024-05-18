@@ -1,27 +1,27 @@
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { ItemTourGuide, NavBar, WrapHCenter } from "../../components";
 import TourGuideHeader from "../../assets/tour-guide-header.png";
-
+import Mesyah from "../../assets/mesyah-dwi-nastiya.png";
 const DATA = [
   {
     id: 1,
     name: "Meysyah Dwi",
-    onClick: () => {},
+    image: Mesyah,
   },
   {
     id: 2,
     name: "Azhar Ammar",
-    onClick: () => {},
+    image: Mesyah,
   },
   {
     id: 3,
     name: "Mutiara Nabila",
-    onClick: () => {},
+    image: Mesyah,
   },
   {
     id: 4,
     name: "Jhony Fonsen",
-    onClick: () => {},
+    image: Mesyah,
   },
 ];
 
