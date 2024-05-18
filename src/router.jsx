@@ -10,7 +10,8 @@ import LodgingReservationDetail from "./screens/lodgingReservation/LodgingReserv
 import TourGuide from "./screens/tourGuide";
 import TourGuideDetail from "./screens/tourGuide/TourGuideDetail";
 import RentTransportation from "./screens/rentTransportation";
-
+import RentTransportationDetail from "./screens/rentTransportation/rentTransportationDetail";
+import RentTransportationForm from "./screens/rentTransportation/rentTransportationForm";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -72,7 +73,15 @@ const router = createBrowserRouter([
     path: "/rent-transportation/:id",
     element: (
       // <RequireAuth>
-      <LodgingReservationDetail />
+      <RentTransportationDetail />
+      // </RequireAuth>
+    ),
+  },
+  {
+    path: "/rent-transportation-form/:id",
+    element: (
+      // <RequireAuth>
+      <RentTransportationForm />
       // </RequireAuth>
     ),
   },

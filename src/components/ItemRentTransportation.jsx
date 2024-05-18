@@ -1,40 +1,42 @@
-import { Card, CardFooter, Image, Button } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
+import { Card, CardFooter, Image, Button, CardBody } from "@nextui-org/react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ItemRentTransportation = (props) => {
-  const { list, className } = props;
+  const {
+    item,
+    showPrice = false,
+    isPressable = true,
+    className = "",
+    imageClass = "",
+  } = props;
+  const { id } = useParams();
+
   const navigate = useNavigate();
+  let url = id
+    ? `/rent-transportation-form/${item.id}`
+    : `/rent-transportation/${item.id}`;
   return (
-    <div
-      className={`gap-y-6 gap-x-8 grid grid-cols-1 min-[432px]:grid-cols-2 sm:gap-x-8 sm:grid-cols-3 ${className}`}
+    <Card
+      className={className}
+      shadow="sm"
+      isPressable={isPressable}
+      onPress={() => navigate(url)}
     >
-      {list.map((item, index) => {
-        return (
-          <Card key={index} isFooterBlurred radius="lg" className="border-none">
-            <Image
-              alt={item.name}
-              className="object-cover"
-              height={300}
-              src={item.image}
-              width={300}
-            />
-            <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-              <p className="text-sm font-bold text-primary-text">{item.name}</p>
-              <Button
-                onClick={() => navigate(`/rent-transportaiton/${item.id}`)}
-                className="text-tiny  text-white bg-black/20"
-                variant="flat"
-                color="default"
-                radius="lg"
-                size="sm"
-              >
-                Cek
-              </Button>
-            </CardFooter>
-          </Card>
-        );
-      })}
-    </div>
+      <CardBody className="overflow-visible p-0">
+        <Image
+          shadow="sm"
+          radius="lg"
+          width="100%"
+          alt={item.name}
+          className={`w-full object-cover h-[180px] ${imageClass}`}
+          src={item.image}
+        />
+      </CardBody>
+      <CardFooter className="text-small justify-between">
+        <b>{item.name}</b>
+        {showPrice && <p className="text-default-500">{item.price}</p>}
+      </CardFooter>
+    </Card>
   );
 };
 

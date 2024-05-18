@@ -60,7 +60,13 @@ export default function TabRentTransportation(props) {
         <Tab key="car-rental" title="Rentar Mobil">
           <Card>
             <CardBody className="flex items-center justify-center">
-              <ItemRentTransportation list={DATA_CAR} />
+              <div
+                className={`gap-y-6 gap-x-8 grid grid-cols-1 min-[432px]:grid-cols-2 sm:gap-x-8 sm:grid-cols-3 `}
+              >
+                {DATA_CAR.map((item, index) => {
+                  return <ItemRentTransportation key={index} item={item} />;
+                })}
+              </div>
             </CardBody>
           </Card>
           <CustomPagination />
@@ -68,7 +74,13 @@ export default function TabRentTransportation(props) {
         <Tab key="motor-rental" title="Rental Motor">
           <Card>
             <CardBody className="flex items-center justify-center">
-              <ItemRentTransportation list={DATA_MOTOR} />
+              <div
+                className={`gap-y-6 gap-x-8 grid grid-cols-1 min-[432px]:grid-cols-2 sm:gap-x-8 sm:grid-cols-3 `}
+              >
+                {DATA_MOTOR.map((item, index) => {
+                  return <ItemRentTransportation key={index} item={item} />;
+                })}
+              </div>
             </CardBody>
           </Card>
           <CustomPagination />
