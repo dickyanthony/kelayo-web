@@ -9,6 +9,7 @@ import LodgingReservation from "./screens/lodgingReservation";
 import LodgingReservationDetail from "./screens/lodgingReservation/LodgingReservationDetail";
 import TourGuide from "./screens/tourGuide";
 import TourGuideDetail from "./screens/tourGuide/TourGuideDetail";
+import RentTransportation from "./screens/rentTransportation";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,22 @@ const router = createBrowserRouter([
   },
   {
     path: "/lodging-reservation/:id",
+    element: (
+      // <RequireAuth>
+      <LodgingReservationDetail />
+      // </RequireAuth>
+    ),
+  },
+  {
+    path: "/rent-transportation",
+    element: (
+      // <RequireAuth>
+      <RentTransportation />
+      // </RequireAuth>
+    ),
+  },
+  {
+    path: "/rent-transportation/:id",
     element: (
       // <RequireAuth>
       <LodgingReservationDetail />

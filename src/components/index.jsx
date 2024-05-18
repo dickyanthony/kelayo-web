@@ -20,6 +20,8 @@ import CustomDatePicker from "./CustomDatePicker";
 import CustomSelect from "./CustomSelect";
 import CustomSlider from "./CustomSlider";
 import ItemTourGuide from "./ItemTourGuide";
+import ItemRentTransportation from "./ItemRentTransportation";
+import TabRentTransportation from "./TabRentTransportation";
 export {
   TextInput,
   SmallCheckbox,
@@ -46,4 +48,6 @@ export {
   CustomSelect,
   CustomSlider,
   ItemTourGuide,
+  ItemRentTransportation,
+  TabRentTransportation,
 };

@@ -1,7 +1,7 @@
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
-const ItemTourGuide = (props) => {
+const ItemRentTransportation = (props) => {
   const { list, className } = props;
   const navigate = useNavigate();
   return (
@@ -14,14 +14,14 @@ const ItemTourGuide = (props) => {
             <Image
               alt={item.name}
               className="object-cover"
-              height={200}
+              height={300}
               src={item.image}
-              width={200}
+              width={300}
             />
             <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-              <p className="text-tiny font-bold text-white/95">{item.name}</p>
+              <p className="text-sm font-bold text-primary-text">{item.name}</p>
               <Button
-                onClick={() => navigate(`/tour-guide/${item.id}`)}
+                onClick={() => navigate(`/rent-transportaiton/${item.id}`)}
                 className="text-tiny  text-white bg-black/20"
                 variant="flat"
                 color="default"
@@ -38,4 +38,4 @@ const ItemTourGuide = (props) => {
   );
 };
 
-export default ItemTourGuide;
+export default ItemRentTransportation;

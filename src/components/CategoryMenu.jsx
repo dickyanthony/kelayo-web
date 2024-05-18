@@ -24,7 +24,7 @@ const list = [
     img: MenuPenyewaanTransportasi,
     description:
       "Carilah transportasi pilihanmu untuk mengelilingi indah dan nyamannya Yogyakarta",
-    to: "/",
+    to: "/rent-transportation",
   },
   {
     title: "Pemandu Wisata",
