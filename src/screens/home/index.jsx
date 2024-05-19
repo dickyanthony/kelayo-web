@@ -1,17 +1,10 @@
-import {
-  Card,
-  CardBody,
-  DatePicker,
-  Image,
-  Input,
-  Select,
-} from "@nextui-org/react";
-import { CategoryMenu, Footer, NavBar, WrapHCenterXL } from "../../components";
-import Home1 from "../../assets/home-1.png";
-import Airplane from "../../assets/airplane.png";
-import Line from "../../assets/line.png";
-import InfoEvent from "./InfoEvent";
-import CurvedLine from "../../assets/curved-line.png";
+import { Card, CardBody, DatePicker, Image, Input, Select } from '@nextui-org/react';
+import { CategoryMenu, Footer, NavBar, WrapHCenterXL } from '../../components';
+import Home1 from '../../assets/home-1.png';
+import Airplane from '../../assets/airplane.png';
+import Line from '../../assets/line.png';
+import InfoEvent from './InfoEvent';
+import CurvedLine from '../../assets/curved-line.png';
 const Home = () => {
   return (
     <>
@@ -42,7 +35,7 @@ const Home = () => {
             <div className="text-sm font-bold text-white mb-2 min-[764px]:mb-4 lg:mb-8 min-[764px]:text-xl lg:text-2xl">
               Berbeda Bersama <span className="text-primary-text">KELAYO</span>
             </div>
-            <div className="flex flex-row bg-white/10">
+            {/* <div className="flex flex-row bg-white/10">
               <Select
                 label="Jenis Wisata"
                 variant="bordered"
@@ -100,7 +93,7 @@ const Home = () => {
                     "h-full font-normal text-default-500 bg-default-400/20 !border-none !border-transparent !focus:border-transparent !border-0 !bg-transparent",
                 }}
               />
-            </div>
+            </div> */}
 
             {/* <Button
               className="text-tiny text-white bg-black/20"
