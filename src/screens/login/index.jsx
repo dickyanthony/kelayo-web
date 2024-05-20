@@ -1,19 +1,19 @@
-import GambarLogin from "../../assets/gambar-login.png";
+import GambarLogin from '../../assets/gambar-login.png';
 import {
   ButtonWithLeftIcon,
   MedimumCheckbox,
   PrimaryButton,
   TextInput,
   UseSnackbar,
-} from "../../components";
-import { Card, CardFooter, Image } from "@nextui-org/react";
-import GoogleIcon from "../../assets/google.png";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { useAuth } from "../../hook/auth/Auth";
+} from '../../components';
+import { Card, CardFooter, Image } from '@nextui-org/react';
+import GoogleIcon from '../../assets/google.png';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useAuth } from '../../hook/auth/Auth';
 
-const TEMP_USER = "nusantarabyte@support.com";
-const TEMP_PW = "nusantarabyte";
+const TEMP_USER = 'nusantarabyte@support.com';
+const TEMP_PW = 'nusantarabyte';
 export default function Login() {
   const { handleSubmit, control } = useForm();
   const { openSnackbarSuccess, openSnackbarError } = UseSnackbar();
@@ -24,13 +24,13 @@ export default function Login() {
     try {
       if (data.email === TEMP_USER && data.kataSandi === TEMP_PW) {
         await login(data.email, data.password);
-        navigate("/");
-        openSnackbarSuccess("Berhasil Login");
+        navigate('/');
+        openSnackbarSuccess('Berhasil Login');
       } else {
-        throw new Error("Email atau password tidak sesuai");
+        throw new Error('Email atau password tidak sesuai');
       }
     } catch (error) {
-      openSnackbarError("Email atau password tidak sesuai");
+      openSnackbarError('Email atau password tidak sesuai');
     }
   };
   return (
@@ -46,21 +46,15 @@ export default function Login() {
         <Card className="w-full md:w-[579px] md:h-[646px] h-full flex flex-col justify-center items-center md:ml-4">
           <div className="w-4/6 flex flex-wrap justify-center flex-col gap-4">
             <div className="text-2xl font-bold mt-4 md:mb-0">Masuk</div>
+            <TextInput type="email" label="Email" name="email" control={control} />
             <TextInput
-              type="email"
-              label="Email"
-              name="email"
-              control={control}
-            />
-            <TextInput
+              passwordInput
               type="password"
               label="Kata Sandi"
               name="kataSandi"
               control={control}
             />
-            <MedimumCheckbox className="mb-4 md:mb-12">
-              Ingatkan saya
-            </MedimumCheckbox>
+            <MedimumCheckbox className="mb-4 md:mb-12">Ingatkan saya</MedimumCheckbox>
             <PrimaryButton
               isLoading={false}
               onClick={handleSubmit(onSubmit)}
@@ -68,9 +62,7 @@ export default function Login() {
             >
               Login
             </PrimaryButton>
-            <div className="text-center overflow-hidden text-ellipsis">
-              atau masuk dengan
-            </div>
+            <div className="text-center overflow-hidden text-ellipsis">atau masuk dengan</div>
             <ButtonWithLeftIcon
               className="border-black w-full h-14 text-md"
               icon={
@@ -87,9 +79,9 @@ export default function Login() {
             </ButtonWithLeftIcon>
             <CardFooter className="justify-center">
               <div>
-                Belum punya akun?{" "}
+                Belum punya akun?{' '}
                 <span className="underline text-secondary-text hover:cursor-pointer">
-                  <Link to={"/register"}>Daftar</Link>
+                  <Link to={'/register'}>Daftar</Link>
                 </span>
               </div>
             </CardFooter>

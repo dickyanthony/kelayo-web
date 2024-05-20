@@ -1,8 +1,8 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { Card, Image } from "@nextui-org/react";
-import { useParams } from "react-router-dom";
-import CheckIcon from "../../assets/check-icon.png";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Card, Image } from '@nextui-org/react';
+import { useParams } from 'react-router-dom';
+import CheckIcon from '../../assets/check-icon.png';
 import {
   CustomDateRangePicker,
   CustomSelect,
@@ -10,42 +10,43 @@ import {
   NavBar,
   PrimaryButton,
   WrapHCenterXL,
-} from "../../components";
-import Mesyah from "../../assets/mesyah-dwi-nastiya.png";
+  CardReview,
+} from '../../components';
+import Mesyah from '../../assets/mesyah-dwi-nastiya.png';
 
 const DETAIL = {
-  name: "MEYSYAH DWI NASTIYA",
+  name: 'MEYSYAH DWI NASTIYA',
   age: 20,
-  status: "Mahasiswa",
-  domisili: "Caturtunggal, Kecamatan Depok, Kabupaten Sleman",
+  status: 'Mahasiswa',
+  domisili: 'Caturtunggal, Kecamatan Depok, Kabupaten Sleman',
   description:
-    "Meysyah merupakan salah seorang mahasiswa antropoogi budaya yang telah tinggal di Yogyakarta selama tiga tahun dan telah terjun pada kepemanduan wisata sejak pertengahan 2023 di salah satu agen wisata bersepeda di pusat Kota Yogyakarta. Meysya cukup berpengalaman dan cukup kompeten dalam melakukan pendampingan wisata dalam jelajah daerah legendaris di yogaykarta. Dia beberapa kali menhadi asisten pemandu wisata pada agen perjalanan wisata tersebut.",
-  competition: ["Wisata Sejarah", "Wisata Kuliner"],
+    'Meysyah merupakan salah seorang mahasiswa antropoogi budaya yang telah tinggal di Yogyakarta selama tiga tahun dan telah terjun pada kepemanduan wisata sejak pertengahan 2023 di salah satu agen wisata bersepeda di pusat Kota Yogyakarta. Meysya cukup berpengalaman dan cukup kompeten dalam melakukan pendampingan wisata dalam jelajah daerah legendaris di yogaykarta. Dia beberapa kali menhadi asisten pemandu wisata pada agen perjalanan wisata tersebut.',
+  competition: ['Wisata Sejarah', 'Wisata Kuliner'],
   image: Mesyah,
   review: [
     {
       id: 1,
       image: Mesyah,
-      name: "Muhammad Alif",
-      date: "28 Oktober 2023",
+      name: 'Muhammad Alif',
+      date: '28 Oktober 2023',
       description:
-        "Pemandu sangat ramah dan informatif terhadap destinasi-destinasi yang disinggahi. Bahkan pemandu juga menjelaskan terkait jalan dan apapaun yang kita lewati",
+        'Pemandu sangat ramah dan informatif terhadap destinasi-destinasi yang disinggahi. Bahkan pemandu juga menjelaskan terkait jalan dan apapaun yang kita lewati',
     },
     {
       id: 2,
       image: Mesyah,
-      name: "Muhammad Alif",
-      date: "28 Oktober 2023",
+      name: 'Muhammad Alif',
+      date: '28 Oktober 2023',
       description:
-        "Pemandu sangat ramah dan informatif terhadap destinasi-destinasi yang disinggahi. Bahkan pemandu juga menjelaskan terkait jalan dan apapaun yang kita lewati",
+        'Pemandu sangat ramah dan informatif terhadap destinasi-destinasi yang disinggahi. Bahkan pemandu juga menjelaskan terkait jalan dan apapaun yang kita lewati',
     },
     {
       id: 3,
       image: Mesyah,
-      name: "Muhammad Alif",
-      date: "28 Oktober 2023",
+      name: 'Muhammad Alif',
+      date: '28 Oktober 2023',
       description:
-        "Pemandu sangat ramah dan informatif terhadap destinasi-destinasi yang disinggahi. Bahkan pemandu juga menjelaskan terkait jalan dan apapaun yang kita lewati",
+        'Pemandu sangat ramah dan informatif terhadap destinasi-destinasi yang disinggahi. Bahkan pemandu juga menjelaskan terkait jalan dan apapaun yang kita lewati',
     },
   ],
 };
@@ -94,45 +95,11 @@ const CardDescription = ({ detail }) => {
   );
 };
 
-const CardReview = ({ detail }) => {
-  return (
-    <Card className="p-6 mt-4">
-      <div className="font-semibold text-center mb-4">
-        LIHAT PENILAIAN DARI PENGUNJUNG
-      </div>
-      {(detail.review || []).map((item, index) => {
-        return (
-          <React.Fragment key={index}>
-            <div className="flex flex-row">
-              <Image
-                className="max-w-[25px] max-h-[25px]"
-                width={25}
-                height={25}
-                radius="full"
-                src={item.image}
-                alt={item.name}
-              />
-              <div className="ml-4">
-                <div className="font-semibold text-xs">{item.name}</div>
-                <div className="font-semibold text-xs text-black/60">
-                  {item.date}
-                </div>
-                <p className="text-xs text-black/90 mt-1">{item.description}</p>
-              </div>
-            </div>
-            <div className="w-full h-[2px] border-primary-text/50 border-t-1 my-4"></div>
-          </React.Fragment>
-        );
-      })}
-    </Card>
-  );
-};
-
 const TourGuideDetail = () => {
   const { id } = useParams();
   const { handleSubmit, control } = useForm();
   const onSubmit = async (data) => {
-    console.log("data===>", data);
+    console.log('data===>', data);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -143,25 +110,18 @@ const TourGuideDetail = () => {
             <div className="flex flex-col gap-4 w-fit order-1 sm:order-none">
               <CardInfo detail={DETAIL} />
               <Card className="p-4 items-center">
-                <CustomDateRangePicker
-                  className="mb-4"
-                  name="dateRange"
-                  control={control}
-                />
+                <CustomDateRangePicker className="mb-4" name="dateRange" control={control} />
                 <CustomSelect
                   label="Tipe"
                   className="mb-4"
                   name="type"
                   options={[
-                    { label: "Private", value: "private" },
-                    { label: "Kelompok", value: "kelompok" },
+                    { label: 'Private', value: 'private' },
+                    { label: 'Kelompok', value: 'kelompok' },
                   ]}
                   control={control}
                 />
-                <PrimaryButton
-                  className="max-w-[290px]"
-                  onPress={handleSubmit(onSubmit)}
-                >
+                <PrimaryButton className="max-w-[290px]" onPress={handleSubmit(onSubmit)}>
                   Sambungkan
                 </PrimaryButton>
               </Card>

@@ -1,51 +1,49 @@
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
-import MenuWisata from "../assets/menu-wisata.png";
-import MenuPenginapan from "../assets/menu-penginapan.png";
-import MenuPenyewaanTransportasi from "../assets/menu-penyewaan-transportasi.png";
-import MenuPemanduWisata from "../assets/menu-pemandu-wisata.png";
-import MenuRekanWisata from "../assets/menu-rekan-wisata.png";
-import { useNavigate } from "react-router-dom";
+import { Card, CardBody, CardFooter, Image } from '@nextui-org/react';
+import MenuWisata from '../assets/menu-wisata.png';
+import MenuPenginapan from '../assets/menu-penginapan.png';
+import MenuPenyewaanTransportasi from '../assets/menu-penyewaan-transportasi.png';
+import MenuPemanduWisata from '../assets/menu-pemandu-wisata.png';
+import MenuRekanWisata from '../assets/menu-rekan-wisata.png';
+import { useNavigate } from 'react-router-dom';
 const list = [
   {
-    title: "Destinasi Wisata",
+    title: 'Destinasi Wisata',
     img: MenuWisata,
-    description: "Jelajahi berbagai jenis destinasi wisata di Yogyakarta",
-    to: "/tourist-destination",
+    description: 'Jelajahi berbagai jenis destinasi wisata di Yogyakarta',
+    to: '/tourist-destination',
   },
   {
-    title: "Pemesanan Penginapan",
+    title: 'Pemesanan Penginapan',
     img: MenuPenginapan,
-    description:
-      "Cari penginapan favorit dan ternyamanmu disini. Badan fit, liburan tenang",
-    to: "/lodging-reservation",
+    description: 'Cari penginapan favorit dan ternyamanmu disini. Badan fit, liburan tenang',
+    to: '/lodging-reservation',
   },
   {
-    title: "Penyewaan Trasnportasi",
+    title: 'Penyewaan Trasnportasi',
     img: MenuPenyewaanTransportasi,
-    description:
-      "Carilah transportasi pilihanmu untuk mengelilingi indah dan nyamannya Yogyakarta",
-    to: "/rent-transportation",
+    description: 'Carilah transportasi pilihanmu untuk mengelilingi indah dan nyamannya Yogyakarta',
+    to: '/rent-transportation',
   },
   {
-    title: "Pemandu Wisata",
+    title: 'Pemandu Wisata',
     img: MenuPemanduWisata,
     description:
-      "Temukan pemandu wisatamu disini untuk kesan dan pengalaman perjalanan yang menyenangkan",
-    to: "/tour-guide",
+      'Temukan pemandu wisatamu disini untuk kesan dan pengalaman perjalanan yang menyenangkan',
+    to: '/tour-guide',
   },
-  {
-    title: "Rekan Wisata",
-    img: MenuRekanWisata,
-    description:
-      "Temukan rekan perjalananmu untuk menambah relasi dan kesan yang menyenangkan",
-    to: "/",
-  },
+  // {
+  //   title: "Rekan Wisata",
+  //   img: MenuRekanWisata,
+  //   description:
+  //     "Temukan rekan perjalananmu untuk menambah relasi dan kesan yang menyenangkan",
+  //   to: "/",
+  // },
 ];
 export default function CategoryMenu() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-5/5 grid grid-cols-1 min-[268px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 justify-items-center items-center mb-16 gap-4 relative z-30 mt-14">
+    <div className="w-5/5 grid grid-cols-1 min-[268px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 justify-items-center items-center mb-16 gap-4 relative z-30 mt-14">
       {list.map((item, index) => (
         <div
           key={index}
@@ -70,12 +68,8 @@ export default function CategoryMenu() {
           >
             <CardBody className="overflow-visible p-0 !flex-grow-0  h-[40px] min-[481px]:h-[65px] items-center"></CardBody>
             <CardFooter className="text-small flex-col justify-between relative">
-              <b className="font-semibold mb-2 text-sm sm:text-lg">
-                {item.title}
-              </b>
-              <p className="text-[#181E4B] text-xs sm:text-base">
-                {item.description}
-              </p>
+              <b className="font-semibold mb-2 text-sm sm:text-lg">{item.title}</b>
+              <p className="text-[#181E4B] text-xs sm:text-base">{item.description}</p>
             </CardFooter>
           </Card>
         </div>

@@ -1,79 +1,88 @@
-import React from "react";
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
-import CustomPagination from "./CustomPagination";
-import { FilterPrice, ItemTourCard } from ".";
+import React from 'react';
+import { Tabs, Tab, Card, CardBody } from '@nextui-org/react';
+import CustomPagination from './CustomPagination';
+import Nature1 from '../assets/nature/nature-1.jpg';
+import { FilterPrice, ItemTourCard } from '.';
 const list = [
   {
-    title: "Pantai Kesirat",
-    img: "/images/fruit-1.jpeg",
+    id: 1,
+    title: 'Pantai Kesirat',
+    img: Nature1,
     description:
-      "Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng",
-    location: "Yogyakarta",
-    range: "20 Km",
+      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
+    location: 'Yogyakarta',
+    range: '20 Km',
   },
   {
-    title: "Pantai Parangtritis",
-    img: "/images/fruit-2.jpeg",
+    id: 2,
+    title: 'Pantai Parangtritis',
+    img: Nature1,
     description:
-      "Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng",
-    location: "Yogyakarta",
-    range: "20 Km",
+      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
+    location: 'Yogyakarta',
+    range: '20 Km',
   },
   {
-    title: "Pantai Parangkusumo",
-    img: "/images/fruit-3.jpeg",
+    id: 3,
+    title: 'Pantai Parangkusumo',
+    img: Nature1,
     description:
-      "Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng",
-    location: "Yogyakarta",
-    range: "20 Km",
+      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
+    location: 'Yogyakarta',
+    range: '20 Km',
   },
   {
-    title: "Gunung Api Purba Nglanggeran",
-    img: "/images/fruit-4.jpeg",
+    id: 4,
+    title: 'Gunung Api Purba Nglanggeran',
+    img: Nature1,
     description:
-      "Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng",
-    location: "Yogyakarta",
-    range: "20 Km",
+      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
+    location: 'Yogyakarta',
+    range: '20 Km',
   },
   {
-    title: "Tebing dan Pantai Siung",
-    img: "/images/fruit-5.jpeg",
+    id: 5,
+    title: 'Tebing dan Pantai Siung',
+    img: Nature1,
     description:
-      "Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng",
-    location: "Yogyakarta",
-    range: "20 Km",
+      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
+    location: 'Yogyakarta',
+    range: '20 Km',
   },
   {
-    title: "Goa Cerme",
-    img: "/images/fruit-6.jpeg",
+    id: 6,
+    title: 'Goa Cerme',
+    img: Nature1,
     description:
-      "Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng",
-    location: "Yogyakarta",
-    range: "20 Km",
+      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
+    location: 'Yogyakarta',
+    range: '20 Km',
   },
   {
-    title: "Bukit Kalitalang",
-    img: "/images/fruit-7.jpeg",
+    id: 7,
+    title: 'Bukit Kalitalang',
+    img: Nature1,
     description:
-      "Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng",
-    location: "Yogyakarta",
-    range: "20 Km",
+      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
+    location: 'Yogyakarta',
+    range: '20 Km',
   },
   {
-    title: "Ledoksambi",
-    img: "/images/fruit-8.jpeg",
+    id: 8,
+    title: 'Ledoksambi',
+    img: Nature1,
     description:
-      "Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng",
-    location: "Yogyakarta",
-    range: "20 Km",
+      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
+    location: 'Yogyakarta',
+    range: '20 Km',
   },
 ];
 export default function TabTourist(props) {
   const { setSelectedTab } = props;
-  const [selected, setSelected] = React.useState("photos");
+  const [selected, setSelected] = React.useState('photos');
 
   const onSubmitFilter = (data) => {
-    console.log("Data===>", data);
+    console.log('Data===>', data);
   };
 
   return (
@@ -115,10 +124,7 @@ export default function TabTourist(props) {
             <div className="order-2 sm:order-1">
               <Card>
                 <CardBody className="flex items-center justify-center">
-                  <ItemTourCard
-                    list={list}
-                    className="grid !grid-cols-1 md:!grid-cols-2"
-                  />
+                  <ItemTourCard list={list} className="grid !grid-cols-1 md:!grid-cols-2" />
                 </CardBody>
               </Card>
             </div>

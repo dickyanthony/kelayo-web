@@ -1,27 +1,29 @@
-import TextInput from "./TextInput";
-import { SmallCheckbox, MedimumCheckbox, LargeCheckbox } from "./Checkbox";
-import { PrimaryButton, ButtonWithLeftIcon } from "./Button";
-import WrapVHCenter from "./WrapVHCenter";
-import WrapHCenter from "./WrapHCenter";
-import WrapHCenterXL from "./WrapHCenterXL";
-import UseSnackbar from "./Snackbar";
-import NavBar from "./NavBar";
-import CategoryMenu from "./CategoryMenu";
-import ItemTourCard from "./ItemTourCard";
-import Footer from "./Footer";
-import TabTourist from "./TabTourist";
-import CustomPagination from "./CustomPagination";
-import CustomCarousel from "./CustomCarousel";
-import ItemLodgingReservation from "./ItemLodgingReservation";
-import BookingPrice from "./BookingPrice";
-import CustomDateRangePicker from "./CustomDateRangePicker";
-import FilterPrice from "./FilterPrice";
-import CustomDatePicker from "./CustomDatePicker";
-import CustomSelect from "./CustomSelect";
-import CustomSlider from "./CustomSlider";
-import ItemTourGuide from "./ItemTourGuide";
-import ItemRentTransportation from "./ItemRentTransportation";
-import TabRentTransportation from "./TabRentTransportation";
+import TextInput from './TextInput';
+import { SmallCheckbox, MedimumCheckbox, LargeCheckbox } from './Checkbox';
+import { PrimaryButton, ButtonWithLeftIcon } from './Button';
+import WrapVHCenter from './WrapVHCenter';
+import WrapHCenter from './WrapHCenter';
+import WrapHCenterXL from './WrapHCenterXL';
+import UseSnackbar from './Snackbar';
+import NavBar from './NavBar';
+import CategoryMenu from './CategoryMenu';
+import ItemTourCard from './ItemTourCard';
+import Footer from './Footer';
+import TabTourist from './TabTourist';
+import CustomPagination from './CustomPagination';
+import CustomCarousel from './CustomCarousel';
+import ItemLodgingReservation from './ItemLodgingReservation';
+import BookingPrice from './BookingPrice';
+import CustomDateRangePicker from './CustomDateRangePicker';
+import FilterPrice from './FilterPrice';
+import CustomDatePicker from './CustomDatePicker';
+import CustomSelect from './CustomSelect';
+import CustomSlider from './CustomSlider';
+import ItemTourGuide from './ItemTourGuide';
+import ItemRentTransportation from './ItemRentTransportation';
+import TabRentTransportation from './TabRentTransportation';
+import CardReview from './CardReview';
+import Map from './Map';
 export {
   TextInput,
   SmallCheckbox,
@@ -50,4 +52,6 @@ export {
   ItemTourGuide,
   ItemRentTransportation,
   TabRentTransportation,
+  CardReview,
+  Map,
 };
