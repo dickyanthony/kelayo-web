@@ -11,7 +11,7 @@ import {
   Avatar,
   Image,
   Button,
-  Divider,
+  DropdownSection,
 } from '@nextui-org/react';
 import {
   ChevronDown,
@@ -147,18 +147,12 @@ export default function NavBar(props) {
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem
-              isReadOnly
-              key="profile"
-              className="h-14 gap-2"
-              classNames={{ title: '!opacity-100' }}
-            >
-              <p className="font-semibold ">Nusantara Byte</p>
-              <p className="text-slate-500">nusantarabyte@support.com</p>
-            </DropdownItem>
-            <DropdownItem>
-              <Divider />
-            </DropdownItem>
+            <DropdownSection showDivider>
+              <DropdownItem isReadOnly key="profile" className="h-14 gap-2">
+                <p className="font-semibold ">Nusantara Byte</p>
+                <p className="text-slate-500">nusantarabyte@support.com</p>
+              </DropdownItem>
+            </DropdownSection>
 
             <DropdownItem className="sm:hidden" key="beranda" onPress={() => navigate('/')}>
               Beranda
@@ -194,7 +188,12 @@ export default function NavBar(props) {
             <DropdownItem className="sm:hidden" key="tentang-kami" onPress={() => navigate('/')}>
               Tentang Kami
             </DropdownItem>
-            <DropdownItem className="text-danger" key="logout" color="danger">
+            <DropdownItem
+              className="text-danger"
+              key="logout"
+              color="danger"
+              onPress={() => navigate('/login')}
+            >
               Keluar
             </DropdownItem>
           </DropdownMenu>
