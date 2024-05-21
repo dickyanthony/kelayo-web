@@ -1,8 +1,9 @@
-import { Image } from "@nextui-org/react";
-import RoundedKelayo from "../assets/rounded-kelayo-logo.png";
-import BlueLocation from "../assets/blue-location.png";
-import BluePhone from "../assets/blue-phone.png";
-
+import { Image } from '@nextui-org/react';
+import RoundedKelayo from '../assets/rounded-kelayo-logo.png';
+import BlueLocation from '../assets/blue-location.png';
+import BluePhone from '../assets/blue-phone.png';
+import BlueInstagram from '../assets/blue-instagram.svg';
+import BlueFb from '../assets/blue-fb.svg';
 export default function Footer() {
   return (
     <div className="w-full h-auto mt-14 py-4 px-4 flex flex-col items-center">
@@ -10,7 +11,7 @@ export default function Footer() {
       <div className="grid grid-cols-1 w-ful sm:grid-cols-2">
         <div className="pl-8">
           <Image
-            width="70%"
+            width="60%"
             alt="footer-logo"
             //   className="w-full object-cover h-[140px]"
             src={RoundedKelayo}
@@ -26,19 +27,23 @@ export default function Footer() {
               height={24}
             />
             <p className="text-default-800 text-xs">
-              Jalan Kaliurang KM.5, Caturtunggal, Kecamatan Depok, Kabupaten
-              Sleman
+              Jalan Kaliurang KM.5, Caturtunggal, Kecamatan Depok, Kabupaten Sleman
             </p>
           </div>
           <div className="flex flex-row gap-3 mt-2">
+            <Image className="min-w-3 min-h-3" src={BluePhone} alt="phone" width={24} height={24} />
+            <p className="text-default-800 text-xs">081234567890</p>
+          </div>
+          <div className="flex flex-row gap-4 mt-4 items-center">
+            <p className="text-default-600 text-xs ml-1">Social Media</p>
             <Image
               className="min-w-3 min-h-3"
-              src={BluePhone}
+              src={BlueInstagram}
               alt="phone"
               width={24}
               height={24}
             />
-            <p className="text-default-800 text-xs">081234567890</p>
+            <Image className="min-w-3 min-h-3" src={BlueFb} alt="phone" width={24} height={24} />
           </div>
         </div>
       </div>
