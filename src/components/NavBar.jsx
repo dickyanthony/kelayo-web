@@ -1,3 +1,4 @@
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   Navbar,
   NavbarBrand,
@@ -9,66 +10,120 @@ import {
   DropdownMenu,
   Avatar,
   Image,
-} from "@nextui-org/react";
-
-import RoundedLogoNoname from "../assets/rounded-kelayo-noname.png";
-import { NavLink } from "react-router-dom";
-
+  Button,
+  Divider,
+} from '@nextui-org/react';
+import {
+  ChevronDown,
+  Lock,
+  Activity,
+  Flash,
+  Server,
+  TagUser,
+  Scale,
+} from '../assets/NavBarIcon.jsx';
+import RoundedLogoNoname from '../assets/rounded-kelayo-noname.png';
+const icons = {
+  chevron: <ChevronDown fill="currentColor" size={16} />,
+  scale: <Scale className="text-warning" fill="currentColor" size={30} />,
+  lock: <Lock className="text-success" fill="currentColor" size={30} />,
+  activity: <Activity className="text-secondary" fill="currentColor" size={30} />,
+  flash: <Flash className="text-primary" fill="currentColor" size={30} />,
+  server: <Server className="text-success" fill="currentColor" size={30} />,
+  user: <TagUser className="text-danger" fill="currentColor" size={30} />,
+};
 export default function NavBar(props) {
-  const { className = "", style = "" } = props;
+  const { className = '', style = '' } = props;
+  const navigate = useNavigate();
   return (
     <Navbar
       maxWidth="xl"
       className={`${className}`}
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", ...style }}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', ...style }}
     >
       <NavbarBrand className="">
         <Image src={RoundedLogoNoname} width={50} height={50} />
         <p className="font-semibold text-inherit text-white ml-2">KELAYO</p>
       </NavbarBrand>
 
-      <NavbarContent
-        className="hidden sm:flex flex-grow-0 gap-14"
-        justify="center"
-      >
+      <NavbarContent className="hidden sm:flex flex-grow-0 gap-14" justify="center">
         <NavbarItem>
           <NavLink
             className={({ isActive, isPending }) =>
               isPending
-                ? "pending text-white"
+                ? 'pending text-white'
                 : isActive
-                ? "active border-b-2 border-primary-text text-white"
-                : "text-white"
+                ? 'active border-b-2 border-primary-text text-white'
+                : 'text-white'
             }
             to="/"
           >
             Beranda
           </NavLink>
         </NavbarItem>
-        <NavbarItem isActive>
-          <NavLink
-            className={({ isActive, isPending }) =>
-              isPending
-                ? "pending text-white"
-                : isActive
-                ? "active border-b-2 border-primary-text text-white"
-                : "text-white"
-            }
-            to="/login"
-            aria-current="page"
-            color="primary"
+        <Dropdown>
+          <NavbarItem>
+            <DropdownTrigger>
+              <Button
+                disableRipple
+                className="p-0 bg-transparent data-[hover=true]:bg-transparent text-white font-medium"
+                endContent={icons.chevron}
+                radius="sm"
+                variant="light"
+              >
+                Fitur
+              </Button>
+            </DropdownTrigger>
+          </NavbarItem>
+          <DropdownMenu
+            aria-label="ACME features"
+            className="w-[340px]"
+            itemClasses={{
+              base: 'gap-4',
+            }}
           >
-            Pemesanan
-          </NavLink>
-        </NavbarItem>
+            <DropdownItem
+              key="autoscaling"
+              description="Jelajahi berbagai jenis destinasi wisata di Yogyakarta"
+              startContent={icons.scale}
+              onPress={() => navigate('/tourist-destination')}
+            >
+              Destinasi Wisata
+            </DropdownItem>
+            <DropdownItem
+              key="usage_metrics"
+              description="Cari penginapan favorit dan ternyamanmu disini. Badan fit, liburan tenang"
+              startContent={icons.activity}
+              onPress={() => navigate('/lodging-reservation')}
+            >
+              Pemesanan Penginapan
+            </DropdownItem>
+            <DropdownItem
+              key="production_ready"
+              description="Carilah transportasi pilihanmu untuk mengelilingi indah dan nyamannya Yogyakarta"
+              startContent={icons.flash}
+              onPress={() => navigate('/rent-transportation')}
+            >
+              Penyewaan Transportasi
+            </DropdownItem>
+            <DropdownItem
+              key="99_uptime"
+              description="Temukan pemandu wisatamu disini untuk kesan dan pengalaman perjalanan yang menyenangkan"
+              startContent={icons.user}
+              onPress={() => navigate('/tour-guide')}
+            >
+              Pemandu Wisata
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
         <NavbarItem>
           <NavLink
             className={({ isActive, isPending }) =>
               isPending
-                ? "pending text-white"
+                ? 'pending text-white'
                 : isActive
-                ? "active border-b-2 border-primary-text text-white"
-                : "text-white"
+                ? 'active border-b-2 border-primary-text text-white'
+                : 'text-white'
             }
             color="foreground"
             to="/tes"
@@ -92,14 +147,54 @@ export default function NavBar(props) {
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold">Masuk sebagai</p>
-              <p className="font-semibold">nusantarabyte@support.com</p>
+            <DropdownItem
+              isReadOnly
+              key="profile"
+              className="h-14 gap-2"
+              classNames={{ title: '!opacity-100' }}
+            >
+              <p className="font-semibold ">Nusantara Byte</p>
+              <p className="text-slate-500">nusantarabyte@support.com</p>
             </DropdownItem>
-            <DropdownItem key="tes">tes</DropdownItem>
-            <DropdownItem key="tes">tes</DropdownItem>
-            <DropdownItem key="tes">tes</DropdownItem>
-            <DropdownItem key="logout" color="danger">
+            <DropdownItem>
+              <Divider />
+            </DropdownItem>
+
+            <DropdownItem className="sm:hidden" key="beranda" onPress={() => navigate('/')}>
+              Beranda
+            </DropdownItem>
+            <DropdownItem
+              className="sm:hidden"
+              key="destinasi-wisata"
+              onPress={() => navigate('/tourist-destination')}
+            >
+              Destinasi Wisata
+            </DropdownItem>
+            <DropdownItem
+              className="sm:hidden"
+              key="pemesanan-penginapan"
+              onPress={() => navigate('/lodging-reservation')}
+            >
+              Pemesanan Penginapan
+            </DropdownItem>
+            <DropdownItem
+              className="sm:hidden"
+              key="penyewaan-transportasi"
+              onPress={() => navigate('/rent-transportation')}
+            >
+              Penyewaan Transportasi
+            </DropdownItem>
+            <DropdownItem
+              className="sm:hidden"
+              key="pemandu-wisata"
+              onPress={() => navigate('/tour-guide')}
+            >
+              Pemandu Wisata
+            </DropdownItem>
+            <DropdownItem className="sm:hidden" key="tentang-kami" onPress={() => navigate('/')}>
+              Tentang Kami
+            </DropdownItem>
+            <DropdownItem className="text-danger" key="logout" color="danger">
               Keluar
             </DropdownItem>
           </DropdownMenu>
