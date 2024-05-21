@@ -24,6 +24,7 @@ import ItemRentTransportation from './ItemRentTransportation';
 import TabRentTransportation from './TabRentTransportation';
 import CardReview from './CardReview';
 import Map from './Map';
+import Page404 from './Page404';
 export {
   TextInput,
   SmallCheckbox,
@@ -54,4 +55,5 @@ export {
   TabRentTransportation,
   CardReview,
   Map,
+  Page404,
 };
