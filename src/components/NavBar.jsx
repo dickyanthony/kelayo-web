@@ -23,6 +23,7 @@ import {
   Scale,
 } from '../assets/NavBarIcon.jsx';
 import RoundedLogoNoname from '../assets/rounded-kelayo-noname.png';
+import { useAuth } from '../hook/auth/Auth.jsx';
 const icons = {
   chevron: <ChevronDown fill="currentColor" size={16} />,
   scale: <Scale className="text-warning" fill="currentColor" size={30} />,
@@ -35,6 +36,7 @@ const icons = {
 export default function NavBar(props) {
   const { className = '', style = '' } = props;
   const navigate = useNavigate();
+  const { logout } = useAuth();
   return (
     <Navbar
       maxWidth="xl"
@@ -188,12 +190,7 @@ export default function NavBar(props) {
             <DropdownItem className="sm:hidden" key="tentang-kami" onPress={() => navigate('/')}>
               Tentang Kami
             </DropdownItem>
-            <DropdownItem
-              className="text-danger"
-              key="logout"
-              color="danger"
-              onPress={() => navigate('/login')}
-            >
+            <DropdownItem className="text-danger" key="logout" color="danger" onPress={logout}>
               Keluar
             </DropdownItem>
           </DropdownMenu>

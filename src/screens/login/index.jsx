@@ -1,3 +1,9 @@
+import { useRef } from 'react';
+import { Card, CardFooter, Image } from '@nextui-org/react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useAuth } from '../../hook/auth/Auth';
+import { loginAPI } from '../../api/users';
 import GambarLogin from '../../assets/gambar-login.png';
 import {
   ButtonWithLeftIcon,
@@ -6,11 +12,7 @@ import {
   TextInput,
   UseSnackbar,
 } from '../../components';
-import { Card, CardFooter, Image } from '@nextui-org/react';
 import GoogleIcon from '../../assets/google.png';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { useAuth } from '../../hook/auth/Auth';
 
 const TEMP_USER = 'nusantarabyte@support.com';
 const TEMP_PW = 'nusantarabyte';
@@ -18,20 +20,18 @@ export default function Login() {
   const { handleSubmit, control } = useForm();
   const { openSnackbarSuccess, openSnackbarError } = UseSnackbar();
   const { login } = useAuth();
+  const signal = useRef();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    try {
-      if (data.email === TEMP_USER && data.kataSandi === TEMP_PW) {
-        await login(data.email, data.password);
+    const params = { email: data.email, password: data.kataSandi };
+    loginAPI(params, signal.current?.signal)
+      .then((res) => {
         navigate('/');
-        openSnackbarSuccess('Berhasil Login');
-      } else {
-        throw new Error('Email atau password tidak sesuai');
-      }
-    } catch (error) {
-      openSnackbarError('Email atau password tidak sesuai');
-    }
+        login(res);
+        openSnackbarSuccess('Login Berhasil');
+      })
+      .catch((err) => openSnackbarError(err));
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

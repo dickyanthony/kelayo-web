@@ -13,6 +13,7 @@
     "@internationalized/date": "^3.5.3",
     "@nextui-org/react": "^2.3.6",
     "autoprefixer": "^10.4.19",
+    "axios": "^1.7.2",
     "framer-motion": "^11.1.9",
     "leaflet": "^1.9.4",
     "localforage": "^1.10.0",
