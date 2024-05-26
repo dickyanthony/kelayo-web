@@ -37,6 +37,8 @@ export default function NavBar(props) {
   const { className = '', style = '' } = props;
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const userInfo = JSON.parse(localStorage.getItem('user'));
+
   return (
     <Navbar
       maxWidth="xl"
@@ -151,8 +153,8 @@ export default function NavBar(props) {
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownSection showDivider>
               <DropdownItem isReadOnly key="profile" className="h-14 gap-2">
-                <p className="font-semibold ">Nusantara Byte</p>
-                <p className="text-slate-500">nusantarabyte@support.com</p>
+                <p className="font-semibold ">{userInfo?.name ?? 'Guest'}</p>
+                <p className="text-slate-500">{userInfo?.email ?? ''}</p>
               </DropdownItem>
             </DropdownSection>
 

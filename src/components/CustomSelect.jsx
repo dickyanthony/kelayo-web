@@ -1,9 +1,9 @@
-import { Select, SelectItem } from "@nextui-org/react";
-import React from "react";
-import { Controller } from "react-hook-form";
+import { Select, SelectItem } from '@nextui-org/react';
+import React from 'react';
+import { Controller } from 'react-hook-form';
 
 const CustomSelect = (props) => {
-  const { label = "", name, control, options = [], ...restProps } = props;
+  const { label = '', name, control, options = [], ...restProps } = props;
 
   return (
     <Controller
