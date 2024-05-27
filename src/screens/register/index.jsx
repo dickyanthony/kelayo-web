@@ -47,50 +47,50 @@ export default function Register() {
           />
         </Card>
         <Card className="w-full md:w-[579px] md:h-[646px] h-full flex flex-col justify-center items-center md:ml-4">
-          <div className="w-4/6 flex flex-wrap justify-center flex-col gap-4">
+          <div className="w-5/6 flex flex-wrap justify-center flex-col gap-4">
             <div className="text-2xl font-bold mt-4 md:mb-0">Daftar</div>
-
-            <TextInput label="Nama" name="nama" control={control} />
-            <TextInput label="Username" name="username" control={control} />
-            <TextInput type="email" label="Email" name="email" control={control} />
-            <TextInput
-              passwordInput
-              type="password"
-              label="Kata Sandi"
-              name="kataSandi"
-              control={control}
-            />
-            <TextInput
-              passwordInput
-              type="password"
-              label="Konfirmasi Kata Sandi"
-              name="konfirmasiKataSandi"
-              control={control}
-            />
-            <CustomSelect
-              className="w-full"
-              options={[
-                { label: 'Laki-laki', value: '1' },
-                { label: 'Perempuan', value: '2' },
-              ]}
-              control={control}
-              label="Gender"
-              name="gender"
-            />
-            <CustomSelect
-              className="w-full"
-              options={[
-                { label: 'Normal', value: 'normal' },
-                { label: 'Info Destinasi Wisata', value: 'destinasi_wisata' },
-                { label: 'Penyedia Penginapan', value: 'penyedia_penginapan' },
-                { label: 'Penyedia Transportasi', value: 'penyedia_transportasi' },
-                { label: 'Pemandu Wisata', value: 'pemandu_wisata' },
-              ]}
-              control={control}
-              label="Role"
-              name="role"
-            />
-
+            <div className="grid gap-4 sm:grid-cols-2">
+              <TextInput label="Nama" name="nama" control={control} />
+              <TextInput label="Username" name="username" control={control} />
+              <TextInput type="email" label="Email" name="email" control={control} />
+              <TextInput
+                passwordInput
+                type="password"
+                label="Kata Sandi"
+                name="kataSandi"
+                control={control}
+              />
+              <TextInput
+                passwordInput
+                type="password"
+                label="Konfirmasi Kata Sandi"
+                name="konfirmasiKataSandi"
+                control={control}
+              />
+              <CustomSelect
+                className="w-full"
+                options={[
+                  { label: 'Laki-laki', value: '1' },
+                  { label: 'Perempuan', value: '2' },
+                ]}
+                control={control}
+                label="Gender"
+                name="gender"
+              />
+              <CustomSelect
+                className="w-full"
+                options={[
+                  { label: 'Normal', value: 'normal' },
+                  { label: 'Info Destinasi Wisata', value: 'destinasi_wisata' },
+                  { label: 'Penyedia Penginapan', value: 'penyedia_penginapan' },
+                  { label: 'Penyedia Transportasi', value: 'penyedia_transportasi' },
+                  { label: 'Pemandu Wisata', value: 'pemandu_wisata' },
+                ]}
+                control={control}
+                label="Role"
+                name="role"
+              />
+            </div>
             <PrimaryButton className="h-14 text-md w-full mt-4" onClick={handleSubmit(onSubmit)}>
               Daftar
             </PrimaryButton>

@@ -27,8 +27,22 @@ const createAxiosInstance = () => {
 
 const axiosInstance = createAxiosInstance();
 
+const checkServerConnection = async () => {
+  try {
+    await axiosInstance.get('/');
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const apiCall = async ({ url, method = 'get', data = null, params = null, signal }) => {
   try {
+    const isConnected = await checkServerConnection();
+    if (!isConnected) {
+      throw new Error('Server is not connected');
+    }
+
     const response = await axiosInstance({
       url,
       method,
@@ -38,6 +52,6 @@ export const apiCall = async ({ url, method = 'get', data = null, params = null,
     });
     return response.data;
   } catch (error) {
-    throw error.response ? error.response.data : new Error('Network error');
+    throw error.response ? error.response.data : 'Network error';
   }
 };
