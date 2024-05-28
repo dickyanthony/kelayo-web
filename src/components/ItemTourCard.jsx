@@ -17,14 +17,16 @@ const ItemTourCard = (props) => {
           onPress={() => navigate(`/tourist-destination/${item.id}`)}
         >
           <CardBody className="overflow-visible p-0">
-            <Image
-              shadow="sm"
-              radius="lg"
-              width="100%"
-              alt={item.title}
-              className="w-full object-cover h-[140px]"
-              src={item.img}
-            />
+            <div className="relative max-h-[180px] w-full">
+              <Image
+                shadow="sm"
+                radius="lg"
+                width="100%"
+                alt={item.title}
+                className="object-cover h-[180px] w-full"
+                src={item.image1}
+              />
+            </div>
           </CardBody>
           <CardFooter className="text-small justify-between flex-col items-start">
             <b className="mt-2 mb-2 text-primary-text">{item.title}</b>
@@ -40,7 +42,7 @@ const ItemTourCard = (props) => {
                 />
                 <p className="ml-2 text-default-500 text-xs">{item.location}</p>
               </div>
-              <p className="text-default-500 text-xs">{item.range}</p>
+              <p className="text-default-500 text-xs">{item.range ?? 0} Km</p>
             </div>
           </CardFooter>
         </Card>

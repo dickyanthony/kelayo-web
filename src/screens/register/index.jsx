@@ -15,7 +15,10 @@ export default function Register() {
   const signal = useRef();
 
   const onSubmit = async (data) => {
-    if (data.kataSandi !== data.konfirmasiKataSandi) openSnackbarError('Password tidak sama');
+    if (data.kataSandi !== data.konfirmasiKataSandi) {
+      openSnackbarError('Password tidak sama');
+      return;
+    }
     const params = {
       nama: data.nama,
       username: data.username,

@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Image, Card } from '@nextui-org/react';
 import Slider from 'react-slick';
-import { CardReview, Map, NavBar, WrapHCenterXL } from '../../components';
+import { CardReview, Map, NavBar, UseSnackbar, WrapHCenterXL } from '../../components';
 import Nature1 from '../../assets/nature/nature-1.jpg';
 import Nature2 from '../../assets/nature/nature-2.jpg';
 import Nature3 from '../../assets/nature/nature-3.jpg';
@@ -10,8 +10,11 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './ImageSlider.css';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import { useParams } from 'react-router-dom';
+import { getDetailTouristDestinationAPI } from '../../api/touristDestination';
+import { formatNumberWithSeparator } from '../../utils/numberConverter';
 const ImageSlider = ({ detail }) => {
-  const images = [detail.parentImage, ...detail.childImage];
+  const images = [detail.image1, detail.image2, detail.image3];
 
   const settings = {
     customPaging: function (i) {
@@ -31,11 +34,18 @@ const ImageSlider = ({ detail }) => {
   };
 
   return (
-    <div className="image-slider slider-container mb-16" style={{ width: '100%' }}>
+    <div
+      className="image-slider slider-container mb-16 lg:min-w-[340px] max-h-[200px]"
+      style={{ width: '100%' }}
+    >
       <Slider {...settings}>
         {images.map((item, index) => (
           <div key={index} className="flex justify-center">
-            <Image src={item} alt={`item-${index}`} className="w-4/5" />
+            <Image
+              src={item}
+              alt={`item-${index}`}
+              className="w-4/5 object-cover lg:min-w-[340px] max-h-[200px]"
+            />
           </div>
         ))}
       </Slider>
@@ -44,6 +54,8 @@ const ImageSlider = ({ detail }) => {
 };
 
 const TouristDestinationDetail = () => {
+  const { id } = useParams();
+  const { openSnackbarError } = UseSnackbar();
   const [detail, setDetail] = useState({
     title: 'Pantai Kesirat',
     location: 'Kabupaten Gunung Kidul',
@@ -70,18 +82,46 @@ const TouristDestinationDetail = () => {
       },
     ],
   });
+
+  const signal = useRef();
+  useEffect(() => {
+    if (id) {
+      getDetail();
+    }
+  }, [id]);
+
+  const createBlobURL = (imageData) => {
+    const blob = new Blob([new Uint8Array(imageData)], { type: 'image/jpeg' });
+    return URL.createObjectURL(blob);
+  };
+
+  const getDetail = () => {
+    getDetailTouristDestinationAPI(id, signal.current?.signal)
+      .then((res) => {
+        const modifiedDetail = {
+          ...res,
+          image1: res.image1 ? createBlobURL(res.image1.data) : null,
+          image2: res.image2 ? createBlobURL(res.image2.data) : null,
+          image3: res.image3 ? createBlobURL(res.image3.data) : null,
+          image4: res.image4 ? createBlobURL(res.image4.data) : null,
+        };
+        console.log('modify==>', modifiedDetail);
+        setDetail(modifiedDetail);
+      })
+      .catch((err) => openSnackbarError(err));
+  };
   return (
     <div className="w-full ">
       <NavBar className="z-50" />
       <WrapHCenterXL>
         <Card className="p-8 mt-4 max-w-screen-lg">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-screen-lg">
+          <div className="grid grid-cols-1 min-[727px]:grid-cols-2 gap-4 max-w-screen-lg">
             <ImageSlider detail={detail} />
             <div>
               <div className="font-bold text-2xl">{detail.title}</div>
               <div className="w-full h-2 border-b-1 border-black/75" />
               <div className="text-xl">{detail.location}</div>
-              <div>HTM: Rp{detail.price}/Orang</div>
+              <div>HTM: Rp{formatNumberWithSeparator(detail.price)}/Orang</div>
               <div className="mt-4 max-w-screen-lg text-sm">{detail.description}</div>
             </div>
           </div>
@@ -97,9 +137,7 @@ const TouristDestinationDetail = () => {
             </div>
           </div>
         </Card>
-        <div className="max-w-screen-lg min-w-full">
-          <CardReview detail={detail} />
-        </div>
+        <div className="max-w-screen-lg min-w-full">{/* <CardReview detail={detail} /> */}</div>
       </WrapHCenterXL>
     </div>
   );

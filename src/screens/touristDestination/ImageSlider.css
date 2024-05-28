@@ -2,16 +2,22 @@
 
 /* CSS for custom thumbnails */
 .image-slider .custom-thumbnail {
-  width: 100px; /* Adjust width as needed */
-  height: 75px; /* Adjust height as needed */
+  max-width: 100px;
+  max-height: 75px;
+  min-width: 100px;
+  min-height: 75px;
   display: block;
   overflow: hidden;
   margin: 0 5px; /* Adjust margin as needed */
+  margin-left: -4px;
 }
 
 .image-slider .custom-thumbnail-image {
-  width: 100%;
-  height: 100%;
+  max-width: 100px;
+  max-height: 75px;
+  min-width: 100px;
+  min-height: 75px;
+
   object-fit: cover;
 }
 

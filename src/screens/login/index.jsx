@@ -14,8 +14,8 @@ import {
 } from '../../components';
 import GoogleIcon from '../../assets/google.png';
 
-const TEMP_USER = 'nusantarabyte@support.com';
-const TEMP_PW = 'nusantarabyte';
+// const TEMP_USER = 'nusantarabyte@support.com';
+// const TEMP_PW = 'nusantarabyte';
 export default function Login() {
   const { handleSubmit, control } = useForm();
   const { openSnackbarSuccess, openSnackbarError } = UseSnackbar();
