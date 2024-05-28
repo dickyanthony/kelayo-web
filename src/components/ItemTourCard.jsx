@@ -11,6 +11,7 @@ const ItemTourCard = (props) => {
     >
       {list.map((item, index) => (
         <Card
+          className="max-w-[309px]"
           shadow="sm"
           key={index}
           isPressable
@@ -29,7 +30,7 @@ const ItemTourCard = (props) => {
             </div>
           </CardBody>
           <CardFooter className="text-small justify-between flex-col items-start">
-            <b className="mt-2 mb-2 text-primary-text">{item.title}</b>
+            <b className="mt-2 mb-2 text-primary-text text-left">{item.title}</b>
             <p className="text-default-500 text-start line-clamp-3">{item.description}</p>
             <div className="flex flex-col w-full mt-4 min-[400px]:flex-row justify-between">
               <div className="flex flex-row">
@@ -40,7 +41,9 @@ const ItemTourCard = (props) => {
                   width={12}
                   height={12}
                 />
-                <p className="ml-2 text-default-500 text-xs">{item.location}</p>
+                <p className="ml-2 text-default-500 text-xs line-clamp-1 text-left overflow-hidden">
+                  {item.location}
+                </p>
               </div>
               <p className="text-default-500 text-xs">{item.range ?? 0} Km</p>
             </div>

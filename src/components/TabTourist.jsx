@@ -1,89 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Tabs, Tab, Card, CardBody } from '@nextui-org/react';
+import { Tabs, Tab, Card, CardBody, Spacer } from '@nextui-org/react';
 import useSnackbar from './Snackbar';
 import CustomPagination from './CustomPagination';
 import Nature1 from '../assets/nature/nature-1.jpg';
-import { FilterPrice, ItemTourCard } from '.';
+import { CustomCard, EmptyState, FilterPrice, ItemTourCard } from '.';
 import { getListTouristDestinationAPI } from '../api/touristDestination';
-const list = [
-  {
-    id: 1,
-    title: 'Pantai Kesirat',
-    img: Nature1,
-    description:
-      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
-    location: 'Yogyakarta',
-    range: '20 Km',
-  },
-  {
-    id: 2,
-    title: 'Pantai Parangtritis',
-    img: Nature1,
-    description:
-      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
-    location: 'Yogyakarta',
-    range: '20 Km',
-  },
-  {
-    id: 3,
-    title: 'Pantai Parangkusumo',
-    img: Nature1,
-    description:
-      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
-    location: 'Yogyakarta',
-    range: '20 Km',
-  },
-  {
-    id: 4,
-    title: 'Gunung Api Purba Nglanggeran',
-    img: Nature1,
-    description:
-      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
-    location: 'Yogyakarta',
-    range: '20 Km',
-  },
-  {
-    id: 5,
-    title: 'Tebing dan Pantai Siung',
-    img: Nature1,
-    description:
-      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
-    location: 'Yogyakarta',
-    range: '20 Km',
-  },
-  {
-    id: 6,
-    title: 'Goa Cerme',
-    img: Nature1,
-    description:
-      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
-    location: 'Yogyakarta',
-    range: '20 Km',
-  },
-  {
-    id: 7,
-    title: 'Bukit Kalitalang',
-    img: Nature1,
-    description:
-      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
-    location: 'Yogyakarta',
-    range: '20 Km',
-  },
-  {
-    id: 8,
-    title: 'Ledoksambi',
-    img: Nature1,
-    description:
-      'Kematerin ini dikenal pula dengan sebutan “ jeron beteng “. karena wilayahnya mencakup area di dalam benteng',
-    location: 'Yogyakarta',
-    range: '20 Km',
-  },
-];
+
 export default function TabTourist(props) {
   const { setSelectedTab } = props;
   const { openSnackbarError } = useSnackbar();
   const [selected, setSelected] = React.useState('wisata-alam');
-  const [touristDestinationList, setTouristDestinationList] = useState([]);
+  const [touristDestinationList, setTouristDestinationList] = useState({
+    totalData: 0,
+    totalPage: 0,
+    listData: [],
+  });
+  const [loading, setLoading] = useState(false);
+
   const signal = useRef();
   useEffect(() => {
     getList();
@@ -95,7 +28,9 @@ export default function TabTourist(props) {
   };
 
   const getList = () => {
-    const params = { type: selected };
+    setLoading(true);
+    const params = {};
+    if (selected !== 'lainnya') params.type = selected;
     getListTouristDestinationAPI(params, signal.current?.signal)
       .then((res) => {
         const modifiedListData = res.listData.map((item) => {
@@ -107,13 +42,112 @@ export default function TabTourist(props) {
 
           return newItem;
         });
-        setTouristDestinationList(modifiedListData);
+        setTouristDestinationList({
+          totalPage: res.totalPage,
+          totalData: res.totalData,
+          listData: modifiedListData,
+        });
       })
-      .catch((err) => openSnackbarError(err));
+      .catch((err) => openSnackbarError(err))
+      .finally(() => setLoading(false));
   };
 
   const onSubmitFilter = (data) => {
     console.log('Data===>', data);
+  };
+
+  const ImageSkeleton = () => {
+    return (
+      <div className="flex w-full">
+        <CustomCard />
+        <Spacer x={4} />
+        <CustomCard />
+        <Spacer x={4} />
+        <CustomCard />
+      </div>
+    );
+  };
+
+  const RenderTab = () => {
+    switch (selected) {
+      case 'wisata_alam':
+        return (
+          <>
+            <Card>
+              <CardBody className="flex items-center justify-center">
+                {loading ? (
+                  <ImageSkeleton />
+                ) : (
+                  <ItemTourCard list={touristDestinationList.listData} />
+                )}
+                {touristDestinationList.listData.length === 0 && !loading && <EmptyState />}
+              </CardBody>
+            </Card>
+            <CustomPagination initial={1} totalPage={touristDestinationList.totalPage} />
+          </>
+        );
+      case 'wisata_budaya':
+        return (
+          <>
+            <Card>
+              <CardBody className="flex items-center justify-center">
+                {loading ? (
+                  <ImageSkeleton />
+                ) : (
+                  <ItemTourCard list={touristDestinationList.listData} />
+                )}
+                {touristDestinationList.listData.length === 0 && !loading && <EmptyState />}
+              </CardBody>
+            </Card>
+            <CustomPagination initial={1} totalPage={touristDestinationList.totalPage} />
+          </>
+        );
+      case 'wisata_kuliner':
+        return (
+          <>
+            <Card>
+              <CardBody className="flex items-center justify-center">
+                {loading ? (
+                  <ImageSkeleton />
+                ) : (
+                  <ItemTourCard list={touristDestinationList.listData} />
+                )}
+                {touristDestinationList.listData.length === 0 && !loading && <EmptyState />}
+              </CardBody>
+            </Card>
+            <CustomPagination initial={1} totalPage={touristDestinationList.totalPage} />
+          </>
+        );
+
+      case 'lainnya':
+        return (
+          <>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+              <div className="flex-grow order-2 sm:order-1">
+                <Card className="min-w-full">
+                  <CardBody className="flex items-center justify-center">
+                    {loading ? (
+                      <ImageSkeleton />
+                    ) : (
+                      <ItemTourCard
+                        list={touristDestinationList.listData}
+                        className="grid !grid-cols-1 md:!grid-cols-2"
+                      />
+                    )}
+                    {touristDestinationList.listData.length === 0 && !loading && <EmptyState />}
+                  </CardBody>
+                </Card>
+              </div>
+              <div className="order-1 sm:order-2 flex justify-center">
+                <FilterPrice submitFilter={onSubmitFilter} />
+              </div>
+            </div>
+            <CustomPagination initial={1} totalPage={touristDestinationList.totalPage} />
+          </>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
@@ -127,46 +161,16 @@ export default function TabTourist(props) {
         }}
       >
         <Tab key="wisata_alam" title="Wisata Alam">
-          <Card>
-            <CardBody className="flex items-center justify-center">
-              <ItemTourCard list={touristDestinationList} />
-            </CardBody>
-          </Card>
-          <CustomPagination />
+          {RenderTab()}
         </Tab>
         <Tab key="wisata_budaya" title="Wisata Budaya">
-          <Card>
-            <CardBody className="flex items-center justify-center">
-              <ItemTourCard list={touristDestinationList} />
-            </CardBody>
-          </Card>
-          <CustomPagination />
+          {RenderTab()}
         </Tab>
         <Tab key="wisata_kuliner" title="Wisata Kuliner">
-          <Card>
-            <CardBody className="flex items-center justify-center">
-              <ItemTourCard list={touristDestinationList} />
-            </CardBody>
-          </Card>
-          <CustomPagination />
+          {RenderTab()}
         </Tab>
         <Tab key="lainnya" title="Lainnya">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-            <div className="flex-grow order-2 sm:order-1">
-              <Card className="min-w-full">
-                <CardBody className="flex items-center justify-center">
-                  <ItemTourCard
-                    list={touristDestinationList}
-                    className="grid !grid-cols-1 md:!grid-cols-2"
-                  />
-                </CardBody>
-              </Card>
-            </div>
-            <div className="order-1 sm:order-2 flex justify-center">
-              <FilterPrice submitFilter={onSubmitFilter} />
-            </div>
-          </div>
-          <CustomPagination />
+          {RenderTab()}
         </Tab>
       </Tabs>
     </div>

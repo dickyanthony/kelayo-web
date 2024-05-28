@@ -105,7 +105,6 @@ const TouristDestinationDetail = () => {
           image3: res.image3 ? createBlobURL(res.image3.data) : null,
           image4: res.image4 ? createBlobURL(res.image4.data) : null,
         };
-        console.log('modify==>', modifiedDetail);
         setDetail(modifiedDetail);
       })
       .catch((err) => openSnackbarError(err));
@@ -120,12 +119,12 @@ const TouristDestinationDetail = () => {
             <div>
               <div className="font-bold text-2xl">{detail.title}</div>
               <div className="w-full h-2 border-b-1 border-black/75" />
-              <div className="text-xl">{detail.location}</div>
+              <div className="text-xl mb-2">{detail.location}</div>
               <div>HTM: Rp{formatNumberWithSeparator(detail.price)}/Orang</div>
               <div className="mt-4 max-w-screen-lg text-sm">{detail.description}</div>
             </div>
           </div>
-          <div className="w-full h-2 border-b-1 border-black my-4" />
+          <div className="w-full h-2 border-b-1 border-black my-8" />
           <div className="grid grid-cols-1 sm:grid-cols-2 mt-4 mb-4 gap-4 justify-items-center min-h-[350px]">
             <Map />
             <div className="flex flex-row gap-2 items-center">
