@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Card, Image } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
@@ -11,10 +11,12 @@ import {
   PrimaryButton,
   WrapHCenterXL,
   CardReview,
+  UseSnackbar,
 } from '../../components';
 import Mesyah from '../../assets/mesyah-dwi-nastiya.png';
+import { getDetailTourGuideAPI } from '../../api/tourGuide';
 
-const DETAIL = {
+const DUMMY_DETAIL = {
   name: 'MEYSYAH DWI NASTIYA',
   age: 20,
   status: 'Mahasiswa',
@@ -72,12 +74,13 @@ const CardCompetition = ({ detail }) => {
     <Card className="p-6">
       <div className="flex flex-row items-center gap-3">
         <div className="font-semibold">Kompetensi:</div>
-        {detail.competition.map((item) => {
+        {detail.competition.length === 0 && '-'}
+        {(detail?.competition || []).map((item, index) => {
           return (
-            <>
+            <div key={index} className="flex items-center">
               <Image width={18} src={CheckIcon} alt="check" />
               <div className="text-xs font-light">{item}</div>
-            </>
+            </div>
           );
         })}
       </div>
@@ -90,14 +93,46 @@ const CardDescription = ({ detail }) => {
     <Card className="p-6 mt-4">
       <div className="font-semibold">Kenali Pemandu Wisatamu</div>
       <div className="w-full h-[2px] border-primary-text/50 border-t-1 my-2"></div>
-      <p className="text-xs text-black/80">{detail.description}</p>
+      <p className="text-xs text-black/80">{detail?.description ?? ''}</p>
     </Card>
   );
 };
 
 const TourGuideDetail = () => {
   const { id } = useParams();
+  const { openSnackbarError } = UseSnackbar();
   const { handleSubmit, control } = useForm();
+  const [loading, setLoading] = useState(true);
+  const [detail, setDetail] = useState(null);
+  const signal = useRef();
+
+  useEffect(() => {
+    if (id) getDetail();
+  }, [id]);
+
+  const createBlobURL = (imageData) => {
+    const blob = new Blob([new Uint8Array(imageData)], { type: 'image/jpeg' });
+    return URL.createObjectURL(blob);
+  };
+
+  const getDetail = () => {
+    setLoading(true);
+    getDetailTourGuideAPI(id, signal.current?.signal)
+      .then((res) => {
+        const modifiedRes = {
+          ...res,
+          competition: JSON.parse(res.competition),
+        };
+        if (res.image) modifiedRes.image = createBlobURL(res.image.data);
+
+        setDetail(modifiedRes);
+      })
+      .catch((err) => openSnackbarError(err))
+      .finally(() => setLoading(false));
+  };
+
+  // const test = ['a', 'b'];
+  // console.log(JSON.PAR(test));
   const onSubmit = async (data) => {
     console.log('data===>', data);
   };
@@ -106,32 +141,34 @@ const TourGuideDetail = () => {
       <div className="w-full">
         <NavBar />
         <WrapHCenterXL>
-          <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <div className="flex flex-col gap-4 w-fit order-1 sm:order-none">
-              <CardInfo detail={DETAIL} />
-              <Card className="p-4 items-center">
-                <CustomDateRangePicker className="mb-4" name="dateRange" control={control} />
-                <CustomSelect
-                  label="Tipe"
-                  className="mb-4"
-                  name="type"
-                  options={[
-                    { label: 'Private', value: 'private' },
-                    { label: 'Kelompok', value: 'kelompok' },
-                  ]}
-                  control={control}
-                />
-                <PrimaryButton className="max-w-[290px]" onPress={handleSubmit(onSubmit)}>
-                  Sambungkan
-                </PrimaryButton>
-              </Card>
+          {!loading && (
+            <div className="flex flex-col sm:flex-row gap-4 mt-4">
+              <div className="flex flex-col gap-4 w-fit order-1 sm:order-none">
+                <CardInfo detail={detail} />
+                <Card className="p-4 items-center">
+                  <CustomDateRangePicker className="mb-4" name="dateRange" control={control} />
+                  <CustomSelect
+                    label="Tipe"
+                    className="mb-4"
+                    name="type"
+                    options={[
+                      { label: 'Private', value: 'private' },
+                      { label: 'Kelompok', value: 'kelompok' },
+                    ]}
+                    control={control}
+                  />
+                  <PrimaryButton className="max-w-[290px]" onPress={handleSubmit(onSubmit)}>
+                    Sambungkan
+                  </PrimaryButton>
+                </Card>
+              </div>
+              <div className="flex flex-col gap-2 order-2 sm:order-none">
+                <CardCompetition detail={detail} />
+                <CardDescription detail={detail} />
+                <CardReview detail={DUMMY_DETAIL} />
+              </div>
             </div>
-            <div className="flex flex-col gap-2 order-2 sm:order-none">
-              <CardCompetition detail={DETAIL} />
-              <CardDescription detail={DETAIL} />
-              <CardReview detail={DETAIL} />
-            </div>
-          </div>
+          )}
           <Footer />
         </WrapHCenterXL>
       </div>

@@ -4,6 +4,7 @@ import {
   CustomPagination,
   Footer,
   ItemLodgingReservation,
+  LodgingReservationSkeleton,
   NavBar,
   UseSnackbar,
   WrapHCenterXL,
@@ -52,17 +53,23 @@ export default function LodgingReservation() {
   const { openSnackbarError } = UseSnackbar();
 
   const signal = useRef();
-  const [lodgingReservationList, setLodgingReservationList] = useState([]);
+  const [lodgingReservationList, setLodgingReservationList] = useState({
+    totalData: 0,
+    totalPage: 0,
+    listData: [],
+  });
   const [bookingDetail, setBookingDetail] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getList();
   }, []);
 
   const getList = () => {
+    setLoading(true);
     getListLodgingReservationAPI(signal.current?.signal)
       .then((res) => {
-        const data = res.map((item) => {
+        const data = (res.listData || []).map((item) => {
           const imageBlob = new Blob([new Uint8Array(item.image.data)], { type: 'image/jpeg' });
           const url = URL.createObjectURL(imageBlob);
           return {
@@ -70,9 +77,15 @@ export default function LodgingReservation() {
             image: url,
           };
         });
-        setLodgingReservationList(data);
+        console.log('data==>', data);
+        setLodgingReservationList({
+          totalPage: res.totalPage,
+          totalData: res.totalData,
+          listData: data,
+        });
       })
-      .catch((err) => openSnackbarError(err));
+      .catch((err) => openSnackbarError(err))
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -80,15 +93,21 @@ export default function LodgingReservation() {
       <NavBar />
       <WrapHCenterXL>
         <div className="flex flex-col w-full gap-4 items-center mt-4 sm:flex-row sm:items-start">
-          <div className="flex flex-col gap-3 order-2 sm:order-1">
-            {lodgingReservationList.map((item) => (
-              <ItemLodgingReservation key={item.id} item={item} onPress={setBookingDetail} />
-            ))}
-            <CustomPagination />
-          </div>
-          <div className="order-1 sm:order-2">
-            <BookingPrice detail={bookingDetail} />
-          </div>
+          {loading ? (
+            <LodgingReservationSkeleton count={3} />
+          ) : (
+            <>
+              <div className="flex flex-col gap-3 order-2 sm:order-1">
+                {(lodgingReservationList.listData || []).map((item) => (
+                  <ItemLodgingReservation key={item.id} item={item} onPress={setBookingDetail} />
+                ))}
+                <CustomPagination totalPage={lodgingReservationList.totalPage} />
+              </div>
+              <div className="order-1 sm:order-2">
+                <BookingPrice detail={bookingDetail} />
+              </div>
+            </>
+          )}
         </div>
         <Footer />
       </WrapHCenterXL>

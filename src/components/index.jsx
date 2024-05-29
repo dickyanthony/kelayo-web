@@ -27,6 +27,8 @@ import Map from './Map';
 import Page404 from './Page404';
 import CustomCard from './CustomCard';
 import EmptyState from './EmptyState';
+import LodgingReservationSkeleton from './LodgingReservationSkeleton';
+
 export {
   TextInput,
   SmallCheckbox,
@@ -60,4 +62,5 @@ export {
   Page404,
   CustomCard,
   EmptyState,
+  LodgingReservationSkeleton,
 };

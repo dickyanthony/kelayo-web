@@ -5,7 +5,7 @@ const CardReview = ({ detail }) => {
   return (
     <Card className="p-6 mt-4 min-w-full">
       <div className="font-semibold text-center mb-4">LIHAT PENILAIAN DARI PENGUNJUNG</div>
-      {(detail.review || []).map((item, index) => {
+      {(detail?.review || []).map((item, index) => {
         return (
           <React.Fragment key={index}>
             <div className="flex flex-row">

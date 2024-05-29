@@ -39,7 +39,7 @@ export default function ItemLodgingReservation(props) {
               <div className="flex flex-col gap-0">
                 <h3 className="font-semibold text-primary-text">{item.title}</h3>
                 <div className="flex flex-wrap w-full items-center mb-4 mt-2">
-                  {item.isFreeWif === 1 && (
+                  {item.isFreeWifi === 1 && (
                     <ItemFeature featureTitle="Wifi Gratis" featureImage={WifiLogo} />
                   )}
                   {item.isFreeWaterElectric === 1 && (

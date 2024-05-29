@@ -7,3 +7,12 @@ export const getListLodgingReservationAPI = async (signal) => {
     signal,
   });
 };
+
+export const getDetailLodgingReservationAPI = async (id, signal) => {
+  return apiCall({
+    url: `/lodging-reservation/get/${id}`,
+    method: 'get',
+    data: null,
+    signal,
+  });
+};

@@ -60,9 +60,7 @@ export default function TabRentTransportation(props) {
         <Tab key="car-rental" title="Rental Mobil">
           <Card>
             <CardBody className="flex items-center justify-center">
-              <div
-                className={`gap-y-6 gap-x-8 grid grid-cols-1 min-[432px]:grid-cols-2 sm:gap-x-8 sm:grid-cols-3 `}
-              >
+              <div className="w-full gap-y-8 gap-x-2 grid grid-cols-1 min-[432px]:grid-cols-2 sm:grid-cols-3">
                 {DATA_CAR.map((item, index) => {
                   return <ItemRentTransportation key={index} item={item} />;
                 })}
@@ -74,9 +72,7 @@ export default function TabRentTransportation(props) {
         <Tab key="motor-rental" title="Rental Motor">
           <Card>
             <CardBody className="flex items-center justify-center">
-              <div
-                className={`gap-y-6 gap-x-8 grid grid-cols-1 min-[432px]:grid-cols-2 sm:gap-x-8 sm:grid-cols-3 `}
-              >
+              <div className="w-full gap-y-8 gap-x-2 grid grid-cols-1 min-[432px]:grid-cols-2 sm:grid-cols-3">
                 {DATA_MOTOR.map((item, index) => {
                   return <ItemRentTransportation key={index} item={item} />;
                 })}

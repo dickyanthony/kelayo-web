@@ -4,6 +4,7 @@ import {
   BookingPrice,
   Footer,
   ItemLodgingReservation,
+  LodgingReservationSkeleton,
   NavBar,
   PrimaryButton,
   TextInput,
@@ -12,6 +13,8 @@ import {
 import JogjaUnitPogung from '../../assets/lodgingReservation/jogja-unit-pogung.png';
 import { Accordion, AccordionItem } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
+import { getDetailLodgingReservationAPI } from '../../api/lodgingReservation';
+import { useEffect, useRef, useState } from 'react';
 const item = {
   id: 1,
   image: JogjaUnitPogung,
@@ -27,6 +30,35 @@ const item = {
 const LodgingReservationDetail = () => {
   const { id } = useParams();
   const { handleSubmit, control } = useForm();
+
+  const [loading, setLoading] = useState(true);
+  const [detail, setDetail] = useState(null);
+  const signal = useRef();
+
+  useEffect(() => {
+    if (id) getDetail();
+  }, [id]);
+
+  const createBlobURL = (imageData) => {
+    const blob = new Blob([new Uint8Array(imageData)], { type: 'image/jpeg' });
+    return URL.createObjectURL(blob);
+  };
+
+  const getDetail = () => {
+    setLoading(true);
+    getDetailLodgingReservationAPI(id, signal.current?.signal)
+      .then((res) => {
+        const modifiedRes = {
+          ...res,
+        };
+        if (res.image) modifiedRes.image = createBlobURL(res.image.data);
+
+        setDetail(modifiedRes);
+      })
+      .catch((err) => openSnackbarError(err))
+      .finally(() => setLoading(false));
+  };
+
   const onSubmit = async (data) => {};
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -35,10 +67,14 @@ const LodgingReservationDetail = () => {
         <WrapHCenterXL>
           <div className="w-full">
             <div className="flex flex-col w-full gap-4 justify-between items-center my-4 sm:flex-row sm:items-start">
-              <ItemLodgingReservation key={item.id} item={item} isPressable={false} />
-
-              <BookingPrice detail={item} />
+              {!loading ? (
+                <ItemLodgingReservation key={detail.id} item={item} isPressable={false} />
+              ) : (
+                <LodgingReservationSkeleton />
+              )}
+              <BookingPrice detail={detail} />
             </div>
+
             <Accordion selectionMode="multiple" variant="shadow" className="mt-4">
               <AccordionItem key="0" aria-label="Data Diri" title="Data Diri">
                 <div className="grid mb-4 sm:grid-cols-2 gap-4">

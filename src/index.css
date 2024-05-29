@@ -10,3 +10,7 @@ body {
   justify-content: center;
   overflow-x: hidden;
 }
+
+.skeleton-loader {
+  @apply bg-gray-300 dark:bg-gray-700 animate-pulse;
+}
