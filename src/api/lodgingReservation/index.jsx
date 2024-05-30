@@ -1,8 +1,8 @@
 import { apiCall } from '../';
 export const getListLodgingReservationAPI = async (signal) => {
   return apiCall({
-    url: '/lodging-reservation/get',
-    method: 'get',
+    url: '/lodging-reservation',
+    method: 'post',
     data: null,
     signal,
   });
@@ -10,7 +10,7 @@ export const getListLodgingReservationAPI = async (signal) => {
 
 export const getDetailLodgingReservationAPI = async (id, signal) => {
   return apiCall({
-    url: `/lodging-reservation/get/${id}`,
+    url: `/lodging-reservation/${id}`,
     method: 'get',
     data: null,
     signal,

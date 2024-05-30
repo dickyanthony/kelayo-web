@@ -11,8 +11,8 @@ const useSnackbar = () => {
 
   const openSnackbarError = (message = 'Error') => {
     let msg = message;
-
-    if ((msg = 'ERR_CANCELED')) {
+    console.log('msg==>', msg);
+    if (msg === 'ERR_CANCELED') {
       return;
     }
     if (msg === '403') {

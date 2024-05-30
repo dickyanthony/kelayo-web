@@ -11,6 +11,15 @@ export function PrimaryButton(props) {
   );
 }
 
+export function SecondaryButton(props) {
+  const { children, ...restProps } = props;
+  return (
+    <Button color="secondary" {...restProps}>
+      {children}
+    </Button>
+  );
+}
+
 export function ButtonWithLeftIcon(props) {
   const { icon, children, containerStyle, ...restProps } = props;
   const superSmall = useMediaQuery({ maxWidth: '730px' });

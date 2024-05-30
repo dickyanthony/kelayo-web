@@ -1,22 +1,29 @@
 import { Card, CardFooter, CardHeader, Divider } from '@nextui-org/react';
-import { PrimaryButton } from './Button';
+import { PrimaryButton, SecondaryButton } from './Button';
 import TextInput from './TextInput';
 import CustomDatePicker from './CustomDatePicker';
 import { useForm } from 'react-hook-form';
 import CustomSelect from './CustomSelect';
 import CustomSlider from './CustomSlider';
-import { useEffect } from 'react';
 
 const FilterPrice = (props) => {
   const { submitFilter, className, min, max } = props;
-  const { handleSubmit, control, setValue } = useForm();
+  const { handleSubmit, control, reset, getValues } = useForm();
 
   const onSubmit = async (data) => {
     submitFilter(data);
   };
-  useEffect(() => {
-    setValue('filterHarga', [min, max]);
-  }, [min, max]);
+
+  const handleReset = () => {
+    reset({
+      jenisWisata: '',
+      wisata: '',
+      tanggal: null,
+      filterHarga: [min, max],
+    });
+    onSubmit(getValues());
+  };
+
   return (
     <Card
       className={`max-w-[400px] h-auto min-w-full sm:min-w-[250px] md:min-w-[250px] lg:min-w-[385px] ${className}`}
@@ -51,7 +58,6 @@ const FilterPrice = (props) => {
               name="tanggal"
               control={control}
             />
-
             <CustomSlider
               name="filterHarga"
               label="Filter Harga"
@@ -65,11 +71,13 @@ const FilterPrice = (props) => {
           </div>
         </CardHeader>
         <Divider />
-
-        <CardFooter className="flex justify-center">
+        <CardFooter className="flex justify-center gap-2">
           <PrimaryButton type="submit" onClick={handleSubmit(onSubmit)}>
             Cari
           </PrimaryButton>
+          <SecondaryButton type="button" onClick={handleReset}>
+            Reset
+          </SecondaryButton>
         </CardFooter>
       </form>
     </Card>

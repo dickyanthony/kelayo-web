@@ -18,6 +18,8 @@ const TourGuide = () => {
   };
 
   const getList = () => {
+    if (signal.current) signal.current.abort();
+    signal.current = new AbortController();
     setLoading(true);
     getListTourGuideAPI({}, signal.current?.signal)
       .then((res) => {

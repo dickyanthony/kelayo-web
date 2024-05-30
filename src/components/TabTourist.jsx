@@ -29,9 +29,13 @@ export default function TabTourist(props) {
   };
 
   const getList = () => {
+    if (signal.current) signal.current.abort();
+    signal.current = new AbortController();
     setLoading(true);
     const params = {};
     if (selected !== 'lainnya') params.type = selected;
+    let maxPrice = 0;
+
     getListTouristDestinationAPI(params, signal.current?.signal)
       .then((res) => {
         const modifiedListData = res.listData.map((item) => {
@@ -44,11 +48,10 @@ export default function TabTourist(props) {
           return newItem;
         });
         if (modifiedListData.length > 0) {
-          const maxPrice = res.listData.reduce(function (prev, current) {
+          maxPrice = res.listData.reduce(function (prev, current) {
             return prev && prev.price > current.price ? prev : current;
           }).price;
           console.log('max==>', maxPrice);
-          setPrice({ min: 0, max: maxPrice });
         }
         setTouristDestinationList({
           totalPage: res.totalPage,
@@ -56,6 +59,7 @@ export default function TabTourist(props) {
           listData: modifiedListData,
         });
       })
+      .then(() => setPrice({ min: 0, max: maxPrice }))
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
@@ -87,7 +91,7 @@ export default function TabTourist(props) {
           listData: modifiedListData,
         });
       })
-      .catch((err) => openSnackbarError('err==>', err))
+      .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
 
