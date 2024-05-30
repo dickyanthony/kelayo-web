@@ -1,18 +1,22 @@
-import { Card, CardFooter, CardHeader, Divider } from "@nextui-org/react";
-import { PrimaryButton } from "./Button";
-import TextInput from "./TextInput";
-import CustomDatePicker from "./CustomDatePicker";
-import { useForm } from "react-hook-form";
-import CustomSelect from "./CustomSelect";
-import CustomSlider from "./CustomSlider";
+import { Card, CardFooter, CardHeader, Divider } from '@nextui-org/react';
+import { PrimaryButton } from './Button';
+import TextInput from './TextInput';
+import CustomDatePicker from './CustomDatePicker';
+import { useForm } from 'react-hook-form';
+import CustomSelect from './CustomSelect';
+import CustomSlider from './CustomSlider';
+import { useEffect } from 'react';
 
 const FilterPrice = (props) => {
-  const { submitFilter, className } = props;
-  const { handleSubmit, control } = useForm();
+  const { submitFilter, className, min, max } = props;
+  const { handleSubmit, control, setValue } = useForm();
 
   const onSubmit = async (data) => {
     submitFilter(data);
   };
+  useEffect(() => {
+    setValue('filterHarga', [min, max]);
+  }, [min, max]);
   return (
     <Card
       className={`max-w-[400px] h-auto min-w-full sm:min-w-[250px] md:min-w-[250px] lg:min-w-[385px] ${className}`}
@@ -26,9 +30,9 @@ const FilterPrice = (props) => {
             <CustomSelect
               className="max-w-xs"
               options={[
-                { label: "Wisata Alam", value: "wisata_alam" },
-                { label: "Wisata Budaya", value: "wisata_budaya" },
-                { label: "Wisata Kuliner", value: "wisata_kuliner" },
+                { label: 'Wisata Alam', value: 'wisata_alam' },
+                { label: 'Wisata Budaya', value: 'wisata_budaya' },
+                { label: 'Wisata Kuliner', value: 'wisata_kuliner' },
               ]}
               control={control}
               label="Jenis Wisata"
@@ -49,13 +53,12 @@ const FilterPrice = (props) => {
             />
 
             <CustomSlider
-              name="filterharga"
+              name="filterHarga"
               label="Filter Harga"
               step={50}
-              minValue={0}
-              maxValue={1000}
-              defaultValue={[100, 500]}
-              formatOptions={{ style: "currency", currency: "IDR" }}
+              min={min}
+              max={max}
+              formatOptions={{ style: 'currency', currency: 'IDR' }}
               className="max-w-xs"
               control={control}
             />
@@ -64,7 +67,9 @@ const FilterPrice = (props) => {
         <Divider />
 
         <CardFooter className="flex justify-center">
-          <PrimaryButton onClick={handleSubmit(onSubmit)}>Cari</PrimaryButton>
+          <PrimaryButton type="submit" onClick={handleSubmit(onSubmit)}>
+            Cari
+          </PrimaryButton>
         </CardFooter>
       </form>
     </Card>

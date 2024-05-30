@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Card, CardFooter, Image } from '@nextui-org/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -19,11 +19,13 @@ import GoogleIcon from '../../assets/google.png';
 export default function Login() {
   const { handleSubmit, control } = useForm();
   const { openSnackbarSuccess, openSnackbarError } = UseSnackbar();
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const signal = useRef();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const params = { email: data.email, password: data.kataSandi };
     loginAPI(params, signal.current?.signal)
       .then((res) => {
@@ -31,7 +33,8 @@ export default function Login() {
         login(res);
         openSnackbarSuccess('Login Berhasil');
       })
-      .catch((err) => openSnackbarError(err));
+      .catch((err) => openSnackbarError(err))
+      .finally(() => setLoading(false));
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -56,7 +59,7 @@ export default function Login() {
             />
             <MedimumCheckbox className="mb-4 md:mb-12">Ingatkan saya</MedimumCheckbox>
             <PrimaryButton
-              isLoading={false}
+              isLoading={loading}
               onClick={handleSubmit(onSubmit)}
               className="h-14 text-md w-full"
             >

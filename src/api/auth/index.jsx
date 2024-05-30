@@ -1,8 +1,8 @@
-import { apiCall } from '../';
+import { apiCall } from '..';
 
 export const loginAPI = async (params, signal) => {
   return apiCall({
-    url: '/users/login',
+    url: '/auth/login',
     method: 'post',
     data: params,
     signal,
@@ -11,7 +11,7 @@ export const loginAPI = async (params, signal) => {
 
 export const registerAPI = async (params, signal) => {
   return apiCall({
-    url: '/users/register',
+    url: '/auth/register',
     method: 'post',
     data: params,
     signal,

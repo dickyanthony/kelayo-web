@@ -1,15 +1,16 @@
-import { useState } from "react";
-import { Input } from "@nextui-org/react";
-import { EyeFilledIcon } from "../assets/EyeFilledIcon";
-import { EyeSlashFilledIcon } from "../assets/EyeSlashedFilledIcon";
-import { Controller, useFormContext } from "react-hook-form";
+import { useState } from 'react';
+import { Input } from '@nextui-org/react';
+import { EyeFilledIcon } from '../assets/EyeFilledIcon';
+import { EyeSlashFilledIcon } from '../assets/EyeSlashedFilledIcon';
+import { Controller, useFormContext } from 'react-hook-form';
 
 export default function TextInput(props) {
   const {
-    type = "text",
-    label = "",
-    name = "",
+    type = 'text',
+    label = '',
+    name = '',
     passwordInput = false,
+    required = false,
     control,
     ...restProps
   } = props;
@@ -22,16 +23,13 @@ export default function TextInput(props) {
       <Controller
         name={name}
         control={control}
-        rules={{ required: true }}
+        rules={{ required: required }}
         render={({ field }) => (
           <Input
             label={label}
+            required={required}
             endContent={
-              <button
-                className="focus:outline-none"
-                type="button"
-                onClick={toggleVisibility}
-              >
+              <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
                 {isVisible ? (
                   <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
                 ) : (
@@ -39,7 +37,7 @@ export default function TextInput(props) {
                 )}
               </button>
             }
-            type={isVisible ? "text" : "password"}
+            type={isVisible ? 'text' : 'password'}
             name={name}
             id={name}
             {...restProps}
@@ -55,9 +53,10 @@ export default function TextInput(props) {
       <Controller
         name={name}
         control={control}
-        rules={{ required: true }}
+        rules={{ required: required }}
         render={({ field }) => (
           <Input
+            required={required}
             type={type}
             label={label}
             name={name}

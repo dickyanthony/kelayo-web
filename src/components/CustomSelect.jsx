@@ -3,17 +3,18 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 
 const CustomSelect = (props) => {
-  const { label = '', name, control, options = [], ...restProps } = props;
+  const { label = '', name, required = false, control, options = [], ...restProps } = props;
 
   return (
     <Controller
       name={name}
       control={control}
-      rules={{ required: true }}
+      rules={{ required: required }}
       render={({ field }) => (
         <Select
           label={label}
           name={name}
+          required={required}
           selectedKeys={field.value ? [field.value] : []}
           className="max-w-xs"
           onChange={(e) => {

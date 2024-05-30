@@ -1,6 +1,6 @@
-import React from "react";
-import { Button } from "@nextui-org/react";
-import { useMediaQuery } from "react-responsive";
+import React from 'react';
+import { Button } from '@nextui-org/react';
+import { useMediaQuery } from 'react-responsive';
 
 export function PrimaryButton(props) {
   const { children, ...restProps } = props;
@@ -13,10 +13,10 @@ export function PrimaryButton(props) {
 
 export function ButtonWithLeftIcon(props) {
   const { icon, children, containerStyle, ...restProps } = props;
-  const superSmall = useMediaQuery({ maxWidth: "730px" });
+  const superSmall = useMediaQuery({ maxWidth: '730px' });
   const cutText = (text, maxLength) => {
     if (text.length > maxLength) {
-      return text.substring(0, maxLength) + "...";
+      return text.substring(0, maxLength) + '...';
     }
     return text;
   };

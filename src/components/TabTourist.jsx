@@ -15,6 +15,7 @@ export default function TabTourist(props) {
     totalPage: 0,
     listData: [],
   });
+  const [price, setPrice] = useState({ min: 0, max: 0 });
   const [loading, setLoading] = useState(false);
 
   const signal = useRef();
@@ -42,6 +43,13 @@ export default function TabTourist(props) {
 
           return newItem;
         });
+        if (modifiedListData.length > 0) {
+          const maxPrice = res.listData.reduce(function (prev, current) {
+            return prev && prev.price > current.price ? prev : current;
+          }).price;
+          console.log('max==>', maxPrice);
+          setPrice({ min: 0, max: maxPrice });
+        }
         setTouristDestinationList({
           totalPage: res.totalPage,
           totalData: res.totalData,
@@ -53,7 +61,34 @@ export default function TabTourist(props) {
   };
 
   const onSubmitFilter = (data) => {
-    console.log('Data===>', data);
+    console.log('data==>', data);
+    setLoading(true);
+    const params = {};
+
+    if (data.wisata) params.name = data.wisata;
+    if (data.jenisWisata) params.type = data.jenisWisata;
+    if (data.wisata) params.name = data.wisata;
+    if (data.filterHarga) params.minPrice = data.filterHarga[0];
+    if (data.filterHarga) params.maxPrice = data.filterHarga[1];
+    getListTouristDestinationAPI(params, signal.current?.signal)
+      .then((res) => {
+        const modifiedListData = res.listData.map((item) => {
+          const newItem = { ...item };
+
+          if (item.image1) {
+            newItem.image1 = createBlobURL(item.image1.data);
+          }
+
+          return newItem;
+        });
+        setTouristDestinationList({
+          totalPage: res.totalPage,
+          totalData: res.totalData,
+          listData: modifiedListData,
+        });
+      })
+      .catch((err) => openSnackbarError(err))
+      .finally(() => setLoading(false));
   };
 
   const ImageSkeleton = () => {
@@ -67,7 +102,7 @@ export default function TabTourist(props) {
       </div>
     );
   };
-
+  console.log('price==>', price);
   const RenderTab = () => {
     switch (selected) {
       case 'wisata_alam':
@@ -139,7 +174,7 @@ export default function TabTourist(props) {
                 </Card>
               </div>
               <div className="order-1 sm:order-2 flex justify-center">
-                <FilterPrice submitFilter={onSubmitFilter} />
+                <FilterPrice submitFilter={onSubmitFilter} min={price.min} max={price.max} />
               </div>
             </div>
             <CustomPagination initial={1} totalPage={touristDestinationList.totalPage} />
