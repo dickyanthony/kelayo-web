@@ -66,6 +66,8 @@ export default function LodgingReservation() {
   }, []);
 
   const getList = () => {
+    if (signal.current) signal.current.abort();
+    signal.current = new AbortController();
     setLoading(true);
     getListLodgingReservationAPI(signal.current?.signal)
       .then((res) => {
@@ -77,7 +79,6 @@ export default function LodgingReservation() {
             image: url,
           };
         });
-
         setLodgingReservationList({
           totalPage: res.totalPage,
           totalData: res.totalData,
@@ -98,9 +99,14 @@ export default function LodgingReservation() {
           ) : (
             <>
               <div className="flex flex-col gap-3 order-2 sm:order-1">
+                {/* {lodgingReservationList.listData.length !== 0 &&
+                  (lodgingReservationList.listData || []).map((item) => (
+                    <ItemLodgingReservation key={item.id} item={item} onPress={setBookingDetail} />
+                  ))} */}
                 {(lodgingReservationList.listData || []).map((item) => (
                   <ItemLodgingReservation key={item.id} item={item} onPress={setBookingDetail} />
                 ))}
+
                 <CustomPagination totalPage={lodgingReservationList.totalPage} />
               </div>
               <div className="order-1 sm:order-2">

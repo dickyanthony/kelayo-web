@@ -34,7 +34,7 @@ const createAxiosInstance = (withToken = false) => {
     },
     (error) => {
       if (axios.isCancel(error)) {
-        console.log('Request was canceled', error.message);
+        console.log('Request was', error.message);
       } else {
         throw error;
       }
@@ -90,8 +90,12 @@ export const apiCall = async ({ url, method = 'get', data = null, params = null,
       params,
       signal,
     });
+    console.log('res==>', res);
     return res.data;
   } catch (error) {
+    if (signal && signal.aborted) {
+      throw 'ERR_CANCELED';
+    }
     if (error.response && error.response.status === 403) {
       throw '403';
     } else {
