@@ -4,7 +4,7 @@ import {
   CustomPagination,
   Footer,
   ItemLodgingReservation,
-  LodgingReservationSkeleton,
+  SkeletonLodgingReservation,
   NavBar,
   UseSnackbar,
   WrapHCenterXL,
@@ -95,7 +95,7 @@ export default function LodgingReservation() {
       <WrapHCenterXL>
         <div className="flex flex-col w-full gap-4 items-center mt-4 sm:flex-row sm:items-start">
           {loading ? (
-            <LodgingReservationSkeleton count={3} />
+            <SkeletonLodgingReservation count={3} />
           ) : (
             <>
               <div className="flex flex-col gap-3 order-2 sm:order-1">

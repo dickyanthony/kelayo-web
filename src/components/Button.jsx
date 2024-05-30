@@ -14,7 +14,7 @@ export function PrimaryButton(props) {
 export function SecondaryButton(props) {
   const { children, ...restProps } = props;
   return (
-    <Button color="secondary" {...restProps}>
+    <Button variant="bordered" color="primary" {...restProps}>
       {children}
     </Button>
   );

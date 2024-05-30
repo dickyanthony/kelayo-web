@@ -17,7 +17,6 @@ const CustomSlider = (props) => {
       control={control}
       rules={{ required: required }}
       render={({ field }) => {
-        console.log('Slider Props:', min, max);
         return (
           <Slider
             name={name}

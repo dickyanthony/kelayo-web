@@ -25,9 +25,10 @@ import TabRentTransportation from './TabRentTransportation';
 import CardReview from './CardReview';
 import Map from './Map';
 import Page404 from './Page404';
-import CustomCard from './CustomCard';
+import CustomCard from './skeleton/CustomCard';
 import EmptyState from './EmptyState';
-import LodgingReservationSkeleton from './LodgingReservationSkeleton';
+import SkeletonLodgingReservation from './skeleton/SkeletonLodgingReservation';
+import SkeletonRentTransportation from './skeleton/SkeletonRentTransportation';
 
 export {
   TextInput,
@@ -62,5 +63,6 @@ export {
   Page404,
   CustomCard,
   EmptyState,
-  LodgingReservationSkeleton,
+  SkeletonLodgingReservation,
+  SkeletonRentTransportation,
 };

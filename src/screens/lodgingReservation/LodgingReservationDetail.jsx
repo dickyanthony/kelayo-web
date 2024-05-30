@@ -4,7 +4,7 @@ import {
   BookingPrice,
   Footer,
   ItemLodgingReservation,
-  LodgingReservationSkeleton,
+  SkeletonLodgingReservation,
   NavBar,
   PrimaryButton,
   TextInput,
@@ -70,7 +70,7 @@ const LodgingReservationDetail = () => {
               {!loading ? (
                 <ItemLodgingReservation key={detail.id} item={item} isPressable={false} />
               ) : (
-                <LodgingReservationSkeleton />
+                <SkeletonLodgingReservation />
               )}
               <BookingPrice detail={detail} />
             </div>

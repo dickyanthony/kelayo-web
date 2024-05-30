@@ -1,9 +1,9 @@
 import { apiCall } from '../';
-export const getListLodgingReservationAPI = async (signal) => {
+export const getListLodgingReservationAPI = async (params, signal) => {
   return apiCall({
     url: '/lodging-reservation',
     method: 'post',
-    data: null,
+    data: params,
     signal,
   });
 };

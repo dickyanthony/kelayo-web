@@ -72,12 +72,12 @@ const FilterPrice = (props) => {
         </CardHeader>
         <Divider />
         <CardFooter className="flex justify-center gap-2">
-          <PrimaryButton type="submit" onClick={handleSubmit(onSubmit)}>
-            Cari
-          </PrimaryButton>
           <SecondaryButton type="button" onClick={handleReset}>
             Reset
           </SecondaryButton>
+          <PrimaryButton type="submit" onClick={handleSubmit(onSubmit)}>
+            Cari
+          </PrimaryButton>
         </CardFooter>
       </form>
     </Card>

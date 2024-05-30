@@ -1,6 +1,6 @@
 import { Card, CardBody } from '@nextui-org/react';
 
-const LodgingReservationSkeleton = ({ count }) => {
+export default ({ count }) => {
   return (
     <div className="flex flex-col gap-3 w-full">
       {[...Array(count)].map((_, index) => (
@@ -31,5 +31,3 @@ const LodgingReservationSkeleton = ({ count }) => {
     </div>
   );
 };
-
-export default LodgingReservationSkeleton;
