@@ -87,7 +87,7 @@ export default function TabTourist(props) {
           listData: modifiedListData,
         });
       })
-      .catch((err) => openSnackbarError(err))
+      .catch((err) => openSnackbarError('err==>', err))
       .finally(() => setLoading(false));
   };
 

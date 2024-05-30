@@ -52,7 +52,7 @@ const DATA = [
 export default function LodgingReservation() {
   const { openSnackbarError } = UseSnackbar();
 
-  const signal = useRef();
+  const signal = useRef(new AbortController());
   const [lodgingReservationList, setLodgingReservationList] = useState({
     totalData: 0,
     totalPage: 0,
@@ -77,7 +77,7 @@ export default function LodgingReservation() {
             image: url,
           };
         });
-        console.log('data==>', data);
+
         setLodgingReservationList({
           totalPage: res.totalPage,
           totalData: res.totalData,

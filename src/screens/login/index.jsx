@@ -3,7 +3,7 @@ import { Card, CardFooter, Image } from '@nextui-org/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../hook/auth/Auth';
-import { loginAPI } from '../../api/users';
+import { loginAPI } from '../../api/auth';
 import GambarLogin from '../../assets/gambar-login.png';
 import {
   ButtonWithLeftIcon,
@@ -49,13 +49,14 @@ export default function Login() {
         <Card className="w-full md:w-[579px] md:h-[646px] h-full flex flex-col justify-center items-center md:ml-4">
           <div className="w-4/6 flex flex-wrap justify-center flex-col gap-4">
             <div className="text-2xl font-bold mt-4 md:mb-0">Masuk</div>
-            <TextInput type="email" label="Email" name="email" control={control} />
+            <TextInput type="email" label="Email" name="email" control={control} required />
             <TextInput
               passwordInput
               type="password"
               label="Kata Sandi"
               name="kataSandi"
               control={control}
+              required
             />
             <MedimumCheckbox className="mb-4 md:mb-12">Ingatkan saya</MedimumCheckbox>
             <PrimaryButton

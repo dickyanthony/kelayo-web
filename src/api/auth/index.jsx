@@ -1,7 +1,7 @@
-import { apiCall } from '..';
+import { apiAuthCall } from '..';
 
 export const loginAPI = async (params, signal) => {
-  return apiCall({
+  return apiAuthCall({
     url: '/auth/login',
     method: 'post',
     data: params,
@@ -10,7 +10,7 @@ export const loginAPI = async (params, signal) => {
 };
 
 export const registerAPI = async (params, signal) => {
-  return apiCall({
+  return apiAuthCall({
     url: '/auth/register',
     method: 'post',
     data: params,

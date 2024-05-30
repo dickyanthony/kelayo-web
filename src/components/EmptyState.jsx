@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 export default () => {
   const navigate = useNavigate();
   return (
-    <div class="w-full flex items-center flex-wrap justify-center gap-10">
-      <div class="grid gap-4 w-60">
+    <div className="w-full flex items-center flex-wrap justify-center gap-10">
+      <div className="grid gap-4 w-60">
         <svg
-          class="mx-auto"
+          className="mx-auto"
           xmlns="http://www.w3.org/2000/svg"
           width="116"
           height="121"
@@ -77,16 +77,16 @@ export default () => {
           <circle cx="50.4633" cy="23.5641" r="1.02564" fill="#78A3D3" />
         </svg>
         <div>
-          <h2 class="text-center text-black text-base font-semibold leading-relaxed pb-1">
+          <h2 className="text-center text-black text-base font-semibold leading-relaxed pb-1">
             Tidak ada apapun disini
           </h2>
-          <p class="text-center text-black text-sm font-normal leading-snug pb-4">
+          <p className="text-center text-black text-sm font-normal leading-snug pb-4">
             Belum ada data yang tersedia saat ini. Silakan periksa kembali nanti. Terima kasih!
           </p>
-          <div class="flex gap-3">
+          <div className="flex gap-3">
             <button
               onClick={() => navigate('/')}
-              class="w-full px-3 py-2 bg-primary-text/90 hover:bg-primary-text/100 transition-all duration-500 rounded-full text-white text-xs font-semibold leading-4"
+              className="w-full px-3 py-2 bg-primary-text/90 hover:bg-primary-text/100 transition-all duration-500 rounded-full text-white text-xs font-semibold leading-4"
             >
               Beranda
             </button>

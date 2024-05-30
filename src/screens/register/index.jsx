@@ -2,7 +2,7 @@ import { Card, CardFooter, Image } from '@nextui-org/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { CustomSelect, PrimaryButton, TextInput, UseSnackbar } from '../../components';
-import { registerAPI } from '../../api/users/';
+import { registerAPI } from '../../api/auth/';
 import GambarLogin from '../../assets/gambar-login.png';
 import { useRef } from 'react';
 import { useAuth } from '../../hook/auth/Auth';
@@ -62,6 +62,7 @@ export default function Register() {
                 label="Kata Sandi"
                 name="kataSandi"
                 control={control}
+                required
               />
               <TextInput
                 passwordInput
@@ -69,6 +70,7 @@ export default function Register() {
                 label="Konfirmasi Kata Sandi"
                 name="konfirmasiKataSandi"
                 control={control}
+                required
               />
               <CustomSelect
                 className="w-full"
@@ -79,6 +81,7 @@ export default function Register() {
                 control={control}
                 label="Gender"
                 name="gender"
+                required
               />
               <CustomSelect
                 className="w-full"
@@ -92,6 +95,7 @@ export default function Register() {
                 control={control}
                 label="Role"
                 name="role"
+                required
               />
             </div>
             <PrimaryButton className="h-14 text-md w-full mt-4" onClick={handleSubmit(onSubmit)}>
