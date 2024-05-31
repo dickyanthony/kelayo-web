@@ -58,7 +58,7 @@ export default function Login() {
               control={control}
               required
             />
-            <MedimumCheckbox className="mb-4 md:mb-12">Ingatkan saya</MedimumCheckbox>
+            <div className="underline text-end mb-4 md:mb-12">Lupa Password?</div>
             <PrimaryButton
               isLoading={loading}
               onClick={handleSubmit(onSubmit)}

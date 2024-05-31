@@ -8,9 +8,18 @@ export const getListRentTransportationAPI = async (params, signal) => {
   });
 };
 
-export const getDetailRentTransportationAPI = async (id, signal) => {
+export const getDetailRentTransportationAPI = async (params, signal) => {
   return apiCall({
-    url: `/rent-transportation/${id}`,
+    url: `/rent-transportation/${params.id}`,
+    method: 'post',
+    data: params,
+    signal,
+  });
+};
+
+export const getDetailTransportationAPI = async (id, signal) => {
+  return apiCall({
+    url: `/rent-transportation/transportation/${id}`,
     method: 'get',
     data: null,
     signal,

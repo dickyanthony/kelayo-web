@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Tabs, Tab, Card, CardBody } from '@nextui-org/react';
 import CustomPagination from './CustomPagination';
-import { ItemRentTransportation, SkeletonRentTransportation } from '.';
+import { EmptyState, ItemRentTransportation, SkeletonRentTransportation } from '.';
 import Fortuner from '../assets/fortuner.png';
 import Beat from '../assets/beat.png';
 import { getListRentTransportationAPI } from '../api/rentTransportation';
@@ -102,9 +102,11 @@ export default function TabRentTransportation(props) {
               <div className="w-full gap-y-8 gap-x-2 grid grid-cols-1 min-[432px]:grid-cols-2 sm:grid-cols-3">
                 {loading && <SkeletonRentTransportation />}
                 {!loading &&
+                  rentTransportation.listData.length > 0 &&
                   rentTransportation.listData.map((item, index) => {
                     return <ItemRentTransportation key={index} item={item} />;
                   })}
+                {!loading && rentTransportation.listData.length === 0 && <EmptyState />}
               </div>
             </CardBody>
           </Card>
@@ -116,9 +118,11 @@ export default function TabRentTransportation(props) {
               <div className="w-full gap-y-8 gap-x-2 grid grid-cols-1 min-[432px]:grid-cols-2 sm:grid-cols-3">
                 {loading && <SkeletonRentTransportation />}
                 {!loading &&
+                  rentTransportation.listData.length > 0 &&
                   rentTransportation.listData.map((item, index) => {
                     return <ItemRentTransportation key={index} item={item} />;
                   })}
+                {!loading && rentTransportation.listData.length === 0 && <EmptyState />}
               </div>
             </CardBody>
           </Card>

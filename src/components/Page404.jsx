@@ -7,7 +7,6 @@ const Page404 = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <NavBar />
       <WrapVHCenter className="w-full min-h-screen">
         <Image className="w-64 h-52" src={LostTourist} alt="404" />
         <div className="font-bold text-5xl my-6">404 Page</div>
