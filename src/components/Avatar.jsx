@@ -17,7 +17,11 @@ export default (props) => {
     : DefaultFemale;
 
   return (
-    <User avatarProps={{ radius: 'lg', src: avatar }} description={user.email ?? ''} name={name}>
+    <User
+      avatarProps={{ radius: 'lg', src: avatar }}
+      description={user.email ?? ''}
+      name={user.name ?? ''}
+    >
       {user?.email ?? ''}
     </User>
   );

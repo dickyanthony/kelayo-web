@@ -13,14 +13,13 @@ import { EyeIcon } from '../../assets/EyeIcon';
 import { EditIcon } from '../../assets/EditIcon';
 import { DeleteIcon } from '../../assets/DeleteIcon';
 import { Avatar } from '..';
-import { formatNumberWithSeparator } from '../../utils/numberConverter';
 
 import React from 'react';
 const columns = [
   { name: 'PENGGUNA', uid: 'name' },
-  { name: 'JUDUL', uid: 'title' },
-  { name: 'LOKASI', uid: 'location' },
-  { name: 'HARGA', uid: 'price' },
+  { name: 'PEMANDU', uid: 'title' },
+  { name: 'DOMISILI', uid: 'domisili' },
+  { name: 'UMUR', uid: 'age' },
   { name: 'AKSI', uid: 'actions' },
 ];
 
@@ -40,22 +39,6 @@ export default (props) => {
   const renderCell = React.useCallback((tour, columnKey) => {
     const cellValue = tour[columnKey];
 
-    const Type = () => {
-      switch (tour.type) {
-        case 'wisata_alam':
-          return 'Wisata Alam';
-
-        case 'wisata_budaya':
-          return 'Wisata Budaya';
-
-        case 'wisata_kuliner':
-          return 'Wisata Kuliner';
-
-        default:
-          return '';
-      }
-    };
-
     switch (columnKey) {
       case 'name':
         return <Avatar user={tour} name={cellValue} />;
@@ -63,15 +46,13 @@ export default (props) => {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{tour.title}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{Type()}</p>
+            <p className="text-bold text-sm capitalize text-default-400">{tour.status}</p>
           </div>
         );
-      case 'location':
-        return <p className="text-bold text-sm capitalize">{tour.location}</p>;
-      case 'price':
-        return (
-          <p className="text-bold text-sm capitalize">{formatNumberWithSeparator(tour.price)}</p>
-        );
+      case 'domisili':
+        return <p className="text-bold text-sm capitalize">{tour.domisili}</p>;
+      case 'age':
+        return <p className="text-bold text-sm capitalize">{tour.age}</p>;
       case 'actions':
         return (
           <div className="relative flex items-center gap-2">

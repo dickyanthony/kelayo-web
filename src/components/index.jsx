@@ -30,6 +30,10 @@ import EmptyState from './EmptyState';
 import SkeletonLodgingReservation from './skeleton/SkeletonLodgingReservation';
 import SkeletonRentTransportation from './skeleton/SkeletonRentTransportation';
 import TableTouristDestination from './table/TableTouristDestination';
+import TableLodgingReservation from './table/TableLodgingReservation';
+import TableTourGuide from './table/TableTourGuide';
+import TableAccount from './table/TableAccount';
+import TableRentTransportation from './table/TableRentTransportation';
 import Avatar from './Avatar';
 
 export {
@@ -68,5 +72,9 @@ export {
   SkeletonLodgingReservation,
   SkeletonRentTransportation,
   TableTouristDestination,
+  TableLodgingReservation,
+  TableTourGuide,
+  TableAccount,
+  TableRentTransportation,
   Avatar,
 };

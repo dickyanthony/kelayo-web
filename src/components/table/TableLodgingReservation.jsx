@@ -19,42 +19,66 @@ import React from 'react';
 const columns = [
   { name: 'PENGGUNA', uid: 'name' },
   { name: 'JUDUL', uid: 'title' },
-  { name: 'LOKASI', uid: 'location' },
   { name: 'HARGA', uid: 'price' },
+  { name: 'GRATIS AIR & LISTRIK', uid: 'isFreeWaterElectric' },
+  { name: 'GRATIS WIFI', uid: 'isFreeWifi' },
+  { name: 'KAMAR MANDI PRIBADI', uid: 'isPrivateBathroom' },
   { name: 'AKSI', uid: 'actions' },
 ];
+
+const CheckIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="size-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+      />
+    </svg>
+  );
+};
+
+const UncheckIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="size-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636"
+      />
+    </svg>
+  );
+};
 
 export default (props) => {
   const { data = [], loading = false } = props;
   const [page, setPage] = React.useState(1);
-  const rowsPerPage = 4;
+  const rowsPerPage = 1;
 
-  const totalPages = Math.ceil(data.length / rowsPerPage);
-
+  const pages = Math.ceil(data.length / rowsPerPage);
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
+
     return data.slice(start, end);
   }, [page, data]);
 
   const renderCell = React.useCallback((tour, columnKey) => {
     const cellValue = tour[columnKey];
-
-    const Type = () => {
-      switch (tour.type) {
-        case 'wisata_alam':
-          return 'Wisata Alam';
-
-        case 'wisata_budaya':
-          return 'Wisata Budaya';
-
-        case 'wisata_kuliner':
-          return 'Wisata Kuliner';
-
-        default:
-          return '';
-      }
-    };
 
     switch (columnKey) {
       case 'name':
@@ -63,14 +87,29 @@ export default (props) => {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{tour.title}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{Type()}</p>
           </div>
         );
-      case 'location':
-        return <p className="text-bold text-sm capitalize">{tour.location}</p>;
       case 'price':
         return (
           <p className="text-bold text-sm capitalize">{formatNumberWithSeparator(tour.price)}</p>
+        );
+      case 'isFreeWifi':
+        return (
+          <p className="text-bold text-sm capitalize">
+            {tour.isFreeWifi ? <CheckIcon /> : <UncheckIcon />}
+          </p>
+        );
+      case 'isFreeWaterElectric':
+        return (
+          <p className="text-bold text-sm capitalize">
+            {tour.isFreeWaterElectric ? <CheckIcon /> : <UncheckIcon />}
+          </p>
+        );
+      case 'isPrivateBathroom':
+        return (
+          <p className="text-bold text-sm capitalize">
+            {tour.isPrivateBathroom ? <CheckIcon /> : <UncheckIcon />}
+          </p>
         );
       case 'actions':
         return (
@@ -110,8 +149,8 @@ export default (props) => {
             showShadow
             color="primary"
             page={page}
-            total={totalPages}
-            onChange={setPage}
+            total={pages}
+            onChange={(page) => setPage(page)}
           />
         </div>
       }

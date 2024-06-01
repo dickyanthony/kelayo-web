@@ -45,6 +45,8 @@ const LodgingReservationDetail = () => {
   };
 
   const getDetail = () => {
+    if (signal.current) signal.current.abort();
+    signal.current = new AbortController();
     setLoading(true);
     getDetailLodgingReservationAPI(id, signal.current?.signal)
       .then((res) => {
@@ -68,7 +70,7 @@ const LodgingReservationDetail = () => {
           <div className="w-full">
             <div className="flex flex-col w-full gap-4 justify-between items-center my-4 sm:flex-row sm:items-start">
               {!loading ? (
-                <ItemLodgingReservation key={detail.id} item={item} isPressable={false} />
+                <ItemLodgingReservation key={detail?.id} item={item} isPressable={false} />
               ) : (
                 <SkeletonLodgingReservation />
               )}

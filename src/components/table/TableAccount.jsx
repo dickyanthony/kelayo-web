@@ -17,10 +17,10 @@ import { formatNumberWithSeparator } from '../../utils/numberConverter';
 
 import React from 'react';
 const columns = [
-  { name: 'PENGGUNA', uid: 'name' },
-  { name: 'JUDUL', uid: 'title' },
-  { name: 'LOKASI', uid: 'location' },
-  { name: 'HARGA', uid: 'price' },
+  { name: 'NAMA', uid: 'name' },
+  { name: 'EMAIL', uid: 'email' },
+  { name: 'GENDER', uid: 'gender' },
+  { name: 'PERAN', uid: 'role' },
   { name: 'AKSI', uid: 'actions' },
 ];
 
@@ -40,16 +40,25 @@ export default (props) => {
   const renderCell = React.useCallback((tour, columnKey) => {
     const cellValue = tour[columnKey];
 
-    const Type = () => {
-      switch (tour.type) {
-        case 'wisata_alam':
-          return 'Wisata Alam';
+    const Role = () => {
+      switch (tour.role) {
+        case 'admin':
+          return 'Admin';
 
-        case 'wisata_budaya':
-          return 'Wisata Budaya';
+        case 'penyedia_penginapan':
+          return 'Penyedia Penginapan';
 
-        case 'wisata_kuliner':
-          return 'Wisata Kuliner';
+        case 'penyedia_transportasi':
+          return 'Penyedia Transportasi';
+
+        case 'destinasi_wisata':
+          return 'Destinasi Wisata';
+
+        case 'pemandu_wisata':
+          return 'Pemandu Wisata';
+
+        case 'normal':
+          return 'Normal';
 
         default:
           return '';
@@ -59,19 +68,16 @@ export default (props) => {
     switch (columnKey) {
       case 'name':
         return <Avatar user={tour} name={cellValue} />;
-      case 'title':
+      case 'email':
+        return <p className="text-bold text-sm capitalize">{tour.email}</p>;
+      case 'gender':
         return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{tour.title}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{Type()}</p>
-          </div>
+          <p className="text-bold text-sm capitalize">
+            {tour.gender === 1 ? 'Laki-Laki' : 'Perempuan'}
+          </p>
         );
-      case 'location':
-        return <p className="text-bold text-sm capitalize">{tour.location}</p>;
-      case 'price':
-        return (
-          <p className="text-bold text-sm capitalize">{formatNumberWithSeparator(tour.price)}</p>
-        );
+      case 'role':
+        return <p className="text-bold text-sm capitalize">{Role()}</p>;
       case 'actions':
         return (
           <div className="relative flex items-center gap-2">

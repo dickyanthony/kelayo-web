@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  getAllTouristDestinationAPI,
-  getListTouristDestinationByRoleAPI,
-} from '../../../../api/touristDestination';
-import { TableTouristDestination } from '../../../../components';
+  getAllLodgingReservationAPI,
+  getListLodgingReservationByRoleAPI,
+} from '../../../../api/lodgingReservation';
+import { TableLodgingReservation } from '../../../../components';
 import useSnackbar from '../../../../components/Snackbar';
 
 export default (props) => {
   const { user } = props;
   const { openSnackbarError } = useSnackbar();
-  const [touristDestinationList, setTouristDestinationList] = useState([]);
+  const [lodgingReservationList, setLodgingReservationList] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
@@ -26,12 +26,12 @@ export default (props) => {
     const params = {};
     if (user.role !== 'admin') params.id = user.id;
     const api =
-      user.role === 'admin' ? getAllTouristDestinationAPI : getListTouristDestinationByRoleAPI;
+      user.role === 'admin' ? getAllLodgingReservationAPI : getListLodgingReservationByRoleAPI;
     api(params, signal.current?.signal)
-      .then((res) => setTouristDestinationList(res))
+      .then((res) => setLodgingReservationList(res))
 
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
-  return <TableTouristDestination data={touristDestinationList} loading={loading} />;
+  return <TableLodgingReservation data={lodgingReservationList} loading={loading} />;
 };

@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  getAllTouristDestinationAPI,
-  getListTouristDestinationByRoleAPI,
-} from '../../../../api/touristDestination';
-import { TableTouristDestination } from '../../../../components';
+  getAllRentTransportationAPI,
+  getListRentTransportationByRoleAPI,
+} from '../../../../api/rentTransportation';
+import { TableRentTransportation } from '../../../../components';
 import useSnackbar from '../../../../components/Snackbar';
 
 export default (props) => {
   const { user } = props;
   const { openSnackbarError } = useSnackbar();
-  const [touristDestinationList, setTouristDestinationList] = useState([]);
+  const [rentTransportationList, setRentTransportationList] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
@@ -26,12 +26,12 @@ export default (props) => {
     const params = {};
     if (user.role !== 'admin') params.id = user.id;
     const api =
-      user.role === 'admin' ? getAllTouristDestinationAPI : getListTouristDestinationByRoleAPI;
+      user.role === 'admin' ? getAllRentTransportationAPI : getListRentTransportationByRoleAPI;
     api(params, signal.current?.signal)
-      .then((res) => setTouristDestinationList(res))
+      .then((res) => setRentTransportationList(res))
 
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
-  return <TableTouristDestination data={touristDestinationList} loading={loading} />;
+  return <TableRentTransportation data={rentTransportationList} loading={loading} />;
 };

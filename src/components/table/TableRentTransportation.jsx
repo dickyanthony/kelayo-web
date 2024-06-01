@@ -13,14 +13,11 @@ import { EyeIcon } from '../../assets/EyeIcon';
 import { EditIcon } from '../../assets/EditIcon';
 import { DeleteIcon } from '../../assets/DeleteIcon';
 import { Avatar } from '..';
-import { formatNumberWithSeparator } from '../../utils/numberConverter';
 
 import React from 'react';
 const columns = [
   { name: 'PENGGUNA', uid: 'name' },
   { name: 'JUDUL', uid: 'title' },
-  { name: 'LOKASI', uid: 'location' },
-  { name: 'HARGA', uid: 'price' },
   { name: 'AKSI', uid: 'actions' },
 ];
 
@@ -42,14 +39,11 @@ export default (props) => {
 
     const Type = () => {
       switch (tour.type) {
-        case 'wisata_alam':
-          return 'Wisata Alam';
+        case 1:
+          return 'Mobil';
 
-        case 'wisata_budaya':
-          return 'Wisata Budaya';
-
-        case 'wisata_kuliner':
-          return 'Wisata Kuliner';
+        case 2:
+          return 'Motor';
 
         default:
           return '';
@@ -65,12 +59,6 @@ export default (props) => {
             <p className="text-bold text-sm capitalize">{tour.title}</p>
             <p className="text-bold text-sm capitalize text-default-400">{Type()}</p>
           </div>
-        );
-      case 'location':
-        return <p className="text-bold text-sm capitalize">{tour.location}</p>;
-      case 'price':
-        return (
-          <p className="text-bold text-sm capitalize">{formatNumberWithSeparator(tour.price)}</p>
         );
       case 'actions':
         return (
