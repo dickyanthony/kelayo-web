@@ -87,6 +87,7 @@ export default (props) => {
 
   return (
     <Table
+      className="max-w-screen-xl"
       aria-label="Example table with custom cells"
       selectionMode="single"
       showSelectionCheckboxes={false}

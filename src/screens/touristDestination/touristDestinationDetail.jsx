@@ -96,6 +96,8 @@ const TouristDestinationDetail = () => {
   };
 
   const getDetail = () => {
+    if (signal.current) signal.current.abort();
+    signal.current = new AbortController();
     getDetailTouristDestinationAPI(id, signal.current?.signal)
       .then((res) => {
         const modifiedDetail = {

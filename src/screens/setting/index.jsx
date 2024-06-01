@@ -1,10 +1,12 @@
-import { Tabs, Tab, Card, CardBody } from '@nextui-org/react';
+import { Tabs, Tab } from '@nextui-org/react';
 import { useAuth } from '../../hook/auth/Auth';
 import DestinasiWisataList from './dashboard/destinasiWisata/DestinasiWisataList';
 import PemesananPenginapanList from './dashboard/pemesananPenginapan/PemesananPenginapanList';
 import PemanduWisataList from './dashboard/pemanduWisata/PemanduWisataList';
 import AkunList from './dashboard/akun/AkunList';
 import PenyewaanTransportasiList from './dashboard/penyewaanTransportasi/PenyewaanTransportasiList';
+import { NavBar, WrapHCenterXL } from '../../components';
+import ProfilEdit from './dashboard/profile/ProfilEdit';
 
 export default () => {
   const {
@@ -15,7 +17,7 @@ export default () => {
     {
       key: 'profil',
       title: 'Profil',
-      content: null,
+      content: <ProfilEdit />,
     },
   ];
 
@@ -55,17 +57,21 @@ export default () => {
     });
 
   return (
-    // <Table />
-    <div className="flex flex-col px-4">
-      <div className="flex w-full flex-col">
-        <Tabs aria-label="Options" isVertical={false}>
-          {tabData.map(({ key, title, content }) => (
-            <Tab key={key} title={title}>
-              {content}
-            </Tab>
-          ))}
-        </Tabs>
-      </div>
+    <div className="w-full">
+      <NavBar />
+      <WrapHCenterXL>
+        <div className="flex flex-col px-4 mt-4">
+          <div className="flex w-full flex-col">
+            <Tabs aria-label="Options" isVertical={true}>
+              {tabData.map(({ key, title, content }) => (
+                <Tab key={key} title={title}>
+                  {content}
+                </Tab>
+              ))}
+            </Tabs>
+          </div>
+        </div>
+      </WrapHCenterXL>
     </div>
   );
 };
