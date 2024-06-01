@@ -18,6 +18,15 @@ export const getAllUserAPI = async (params, signal) => {
   });
 };
 
+export const updatePasswordAPI = async (params, signal) => {
+  return apiCall({
+    url: `/user/update-password/${params.id}`,
+    method: 'put',
+    data: params,
+    signal,
+  });
+};
+
 export const updateUserProfileAPI = async (params, signal) => {
   const hasImage = params.image instanceof File;
 
@@ -30,9 +39,7 @@ export const updateUserProfileAPI = async (params, signal) => {
   } else {
     data = params;
   }
-  for (const value of params.values()) {
-    console.log('params==>', value);
-  }
+
   return apiCall({
     url: `/user/${params.id}`,
     method: 'put',

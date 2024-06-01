@@ -4,7 +4,7 @@
 import React, { useRef } from 'react';
 import { Card } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { TextInput, UseSnackbar, PrimaryButton } from '../../../../components';
 import { updatePasswordAPI } from '../../../../api/user/userAPI';
 
@@ -12,13 +12,13 @@ export default () => {
   const { id } = useParams();
   const user = JSON.parse(localStorage.getItem('user'));
 
-  const { openSnackbarError } = UseSnackbar();
+  const { openSnackbarSuccess, openSnackbarError } = UseSnackbar();
   const { handleSubmit, control, reset } = useForm();
 
   const signal = useRef();
   const userId = id ?? user.id;
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     if (data.kataSandiBaru !== data.konfirmasiKataSandi) {
       openSnackbarError('Password baru tidak sama');
       return;
@@ -26,22 +26,22 @@ export default () => {
     const params = {
       id: userId,
       password: data.kataSandi,
-      newPassword: data.kataSandiBary,
+      newPassword: data.kataSandiBaru,
     };
 
     updatePasswordAPI(params, signal.current?.signal)
       .then(() => {
-        reset();
+        reset({ kataSandi: '', kataSandiBaru: '', konfirmasiKataSandi: '' });
         openSnackbarSuccess('Kata sandi berhasil diubah');
       })
       .catch((err) => openSnackbarError(err));
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Card className="w-full md:w-[579px] md:h-[528px] h-full flex flex-col items-center md:ml-4">
+    <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+      <Card className="w-full h-auto md:w-[579px] flex flex-col items-center md:ml-4">
         <div className="w-5/6 flex flex-wrap justify-center flex-col gap-4">
-          <div className="text-2xl font-bold mt-4 md:mb-0">Ganti Password</div>
+          <div className="text-2xl text-center font-bold mt-4 md:mb-0">Ganti Password</div>
 
           <div className="grid gap-4 sm:grid-cols-2">
             <TextInput
@@ -69,7 +69,7 @@ export default () => {
               required
             />
           </div>
-          <PrimaryButton className="h-14 text-md w-full mt-4" onClick={handleSubmit(onSubmit)}>
+          <PrimaryButton className="h-10 text-md w-full my-4" onClick={handleSubmit(onSubmit)}>
             Simpan
           </PrimaryButton>
         </div>

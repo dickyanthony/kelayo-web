@@ -90,7 +90,7 @@ export default () => {
     <form method="post" onSubmit={handleSubmit(onSubmit)}>
       <Card className="w-full md:w-[579px] md:h-[528px] h-full flex flex-col items-center md:ml-4">
         <div className="w-5/6 flex flex-wrap justify-center flex-col gap-4">
-          <div className="text-2xl font-bold mt-4 md:mb-0">Edit Profil</div>
+          <div className="text-2xl text-center font-bold mt-4 md:mb-0">Edit Profil</div>
           <div className="w-full flex justify-center items-center my-2 relative">
             <Avatar isBordered color="primary" src={image} className="w-32 h-32 text-larger" />
             <div className="w-32 h-32 rounded-full absolute m-auto flex justify-center text-center items-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer">

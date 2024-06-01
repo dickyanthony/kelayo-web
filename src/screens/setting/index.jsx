@@ -7,6 +7,7 @@ import AkunList from './dashboard/akun/AkunList';
 import PenyewaanTransportasiList from './dashboard/penyewaanTransportasi/PenyewaanTransportasiList';
 import { NavBar, WrapHCenterXL } from '../../components';
 import ProfilEdit from './dashboard/profile/ProfilEdit';
+import GantiPassword from './dashboard/GantiPassword/gantiPassword';
 
 export default () => {
   const {
@@ -18,6 +19,11 @@ export default () => {
       key: 'profil',
       title: 'Profil',
       content: <ProfilEdit />,
+    },
+    {
+      key: 'ganti_password',
+      title: 'Ganti Password',
+      content: <GantiPassword />,
     },
   ];
 
