@@ -29,6 +29,8 @@ import CustomCard from './skeleton/CustomCard';
 import EmptyState from './EmptyState';
 import SkeletonLodgingReservation from './skeleton/SkeletonLodgingReservation';
 import SkeletonRentTransportation from './skeleton/SkeletonRentTransportation';
+import TableTouristDestination from './table/TableTouristDestination';
+import Avatar from './Avatar';
 
 export {
   TextInput,
@@ -65,4 +67,6 @@ export {
   EmptyState,
   SkeletonLodgingReservation,
   SkeletonRentTransportation,
+  TableTouristDestination,
+  Avatar,
 };

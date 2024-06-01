@@ -13,6 +13,7 @@ import RentTransportation from './screens/rentTransportation';
 import RentTransportationDetail from './screens/rentTransportation/rentTransportationDetail';
 import RentTransportationForm from './screens/rentTransportation/rentTransportationForm';
 import TouristDestinationDetail from './screens/touristDestination/touristDestinationDetail';
+import Setting from './screens/setting';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -107,6 +108,14 @@ const router = createBrowserRouter([
     element: (
       <RequireAuth>
         <TourGuideDetail />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting',
+    element: (
+      <RequireAuth>
+        <Setting />
       </RequireAuth>
     ),
   },

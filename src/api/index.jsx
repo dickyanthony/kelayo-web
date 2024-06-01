@@ -90,7 +90,7 @@ export const apiCall = async ({ url, method = 'get', data = null, params = null,
       params,
       signal,
     });
-    console.log('res==>', res);
+
     return res.data;
   } catch (error) {
     if (signal && signal.aborted) {
