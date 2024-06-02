@@ -105,8 +105,8 @@ export default () => {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <TextInput label="Nama" name="name" control={control} />
-            <TextInput label="Username" name="username" control={control} disabled />
-            <TextInput type="email" label="Email" name="email" control={control} disabled />
+            <TextInput label="Username" name="username" control={control} isDisabled />
+            <TextInput type="email" label="Email" name="email" control={control} isDisabled />
           </div>
           <PrimaryButton className="h-14 text-md w-full mt-4" onClick={handleSubmit(onSubmit)}>
             Simpan

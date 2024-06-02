@@ -35,6 +35,8 @@ import TableTourGuide from './table/TableTourGuide';
 import TableAccount from './table/TableAccount';
 import TableRentTransportation from './table/TableRentTransportation';
 import Avatar from './Avatar';
+import MultiCustomSelect from './MultiCustomSelect';
+import TextArea from './TextArea';
 
 export {
   TextInput,
@@ -77,4 +79,6 @@ export {
   TableAccount,
   TableRentTransportation,
   Avatar,
+  MultiCustomSelect,
+  TextArea,
 };

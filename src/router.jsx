@@ -17,6 +17,10 @@ import Setting from './screens/setting';
 import AkunEdit from './screens/setting/dashboard/akun/AkunEdit';
 import AkunDetail from './screens/setting/dashboard/akun/AkunDetail';
 import AkunNew from './screens/setting/dashboard/akun/AkunNew';
+import PemanduWisataEdit from './screens/setting/dashboard/pemanduWisata/PemanduWisataEdit';
+import PemanduWisataDetail from './screens/setting/dashboard/pemanduWisata/PemanduWisataDetail';
+import PemanduWisataNew from './screens/setting/dashboard/pemanduWisata/PemanduWisataNew';
+// import PemanduWisataNew from './screens/setting/dashboard/pemanduWisata/PemanduWisataNew';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -144,6 +148,30 @@ const router = createBrowserRouter([
     element: (
       <RequireAuth>
         <AkunEdit />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/add-tour-guide',
+    element: (
+      <RequireAuth>
+        <PemanduWisataNew />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/detail-tour-guide/:id',
+    element: (
+      <RequireAuth>
+        <PemanduWisataDetail />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/edit-tour-guide/:id',
+    element: (
+      <RequireAuth>
+        <PemanduWisataEdit />
       </RequireAuth>
     ),
   },

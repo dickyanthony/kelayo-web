@@ -2,8 +2,17 @@ import { Select, SelectItem } from '@nextui-org/react';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-const CustomSelect = (props) => {
-  const { label = '', name, required = false, control, options = [], ...restProps } = props;
+const MultiCustomSelect = (props) => {
+  const {
+    label = '',
+    name,
+    required = false,
+    control,
+    options = [],
+    selectionMode = 'multiple',
+    isDisabled = false,
+    ...restProps
+  } = props;
 
   return (
     <Controller
@@ -15,15 +24,14 @@ const CustomSelect = (props) => {
           label={label}
           name={name}
           required={required}
-          selectedKeys={field.value ? [field.value] : []}
+          selectedKeys={field.value || []}
           className="max-w-xs"
-          onChange={(e) => {
-            field.onChange(e);
+          onSelectionChange={(keys) => {
+            field.onChange([...keys]);
           }}
+          selectionMode={selectionMode}
           {...restProps}
-          defaultSelectedKeys="all"
-          {...field}
-          disabled
+          isDisabled={isDisabled}
         >
           {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
@@ -36,4 +44,4 @@ const CustomSelect = (props) => {
   );
 };
 
-export default CustomSelect;
+export default MultiCustomSelect;

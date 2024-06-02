@@ -33,3 +33,34 @@ export const getDetailTourGuideAPI = async (id, signal) => {
     signal,
   });
 };
+
+export const updateTourGuideAPI = async (params, signal) => {
+  const hasImage = params.image instanceof File;
+
+  let data;
+  if (hasImage) {
+    data = new FormData();
+    Object.keys(params).forEach((key) => {
+      data.append(key, params[key]);
+    });
+  } else {
+    data = params;
+  }
+
+  return apiCall({
+    url: `/tour-guide/${params.id}`,
+    method: 'put',
+    data,
+    signal,
+    headers: hasImage ? { 'Content-Type': 'multipart/form-data' } : undefined,
+  });
+};
+
+export const deleteTourGuideAPI = async (params, signal) => {
+  return apiCall({
+    url: `/tour-guide/${params.id}`,
+    method: 'delete',
+    data: params,
+    signal,
+  });
+};

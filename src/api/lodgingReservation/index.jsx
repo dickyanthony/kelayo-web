@@ -33,3 +33,12 @@ export const getDetailLodgingReservationAPI = async (id, signal) => {
     signal,
   });
 };
+
+export const deleteLodgingReservationAPI = async (params, signal) => {
+  return apiCall({
+    url: `/lodging-reservation/${params.id}`,
+    method: 'delete',
+    data: params,
+    signal,
+  });
+};

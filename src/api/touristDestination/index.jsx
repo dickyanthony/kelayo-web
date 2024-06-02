@@ -33,3 +33,12 @@ export const getDetailTouristDestinationAPI = async (id, signal) => {
     signal,
   });
 };
+
+export const deleteTouristDestinationAPI = async (params, signal) => {
+  return apiCall({
+    url: `/tourist-destination/${params.id}`,
+    method: 'delete',
+    data: params,
+    signal,
+  });
+};

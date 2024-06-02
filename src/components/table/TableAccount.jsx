@@ -14,7 +14,6 @@ import { EyeIcon } from '../../assets/EyeIcon';
 import { EditIcon } from '../../assets/EditIcon';
 import { DeleteIcon } from '../../assets/DeleteIcon';
 import { Avatar, UseSnackbar } from '..';
-import { formatNumberWithSeparator } from '../../utils/numberConverter';
 
 import { useNavigate } from 'react-router-dom';
 import { deleteUserAPI } from '../../api/user/userAPI';
@@ -131,7 +130,7 @@ export default (props) => {
 
   return (
     <Table
-      className="max-w-screen-xl"
+      className="max-w-screen-xl md:min-w-[1034px]"
       aria-label="Example table with custom cells"
       selectionMode="single"
       showSelectionCheckboxes={false}

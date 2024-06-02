@@ -42,3 +42,12 @@ export const getDetailTransportationAPI = async (id, signal) => {
     signal,
   });
 };
+
+export const deleteRentTransportationAPI = async (params, signal) => {
+  return apiCall({
+    url: `/rent-transportation/${params.id}`,
+    method: 'delete',
+    data: params,
+    signal,
+  });
+};

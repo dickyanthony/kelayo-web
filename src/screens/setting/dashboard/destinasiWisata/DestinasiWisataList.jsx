@@ -3,7 +3,7 @@ import {
   getAllTouristDestinationAPI,
   getListTouristDestinationByRoleAPI,
 } from '../../../../api/touristDestination';
-import { TableTouristDestination } from '../../../../components';
+import { PrimaryButton, TableTouristDestination } from '../../../../components';
 import useSnackbar from '../../../../components/Snackbar';
 
 export default (props) => {
@@ -33,5 +33,17 @@ export default (props) => {
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
-  return <TableTouristDestination data={touristDestinationList} loading={loading} />;
+  return (
+    <div>
+      <div className="flex justify-end">
+        <PrimaryButton
+          className="mb-4"
+          onClick={() => navigate('/setting/dashboard/add-tourist-destination')}
+        >
+          Tambah
+        </PrimaryButton>
+      </div>
+      <TableTouristDestination data={touristDestinationList} loading={loading} onDelete={getList} />
+    </div>
+  );
 };

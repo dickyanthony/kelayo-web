@@ -3,7 +3,7 @@ import {
   getAllRentTransportationAPI,
   getListRentTransportationByRoleAPI,
 } from '../../../../api/rentTransportation';
-import { TableRentTransportation } from '../../../../components';
+import { PrimaryButton, TableRentTransportation } from '../../../../components';
 import useSnackbar from '../../../../components/Snackbar';
 
 export default (props) => {
@@ -33,5 +33,17 @@ export default (props) => {
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
-  return <TableRentTransportation data={rentTransportationList} loading={loading} />;
+  return (
+    <div>
+      <div className="flex justify-end">
+        <PrimaryButton
+          className="mb-4"
+          onClick={() => navigate('/setting/dashboard/add-rent-transportation')}
+        >
+          Tambah
+        </PrimaryButton>
+      </div>
+      <TableRentTransportation data={rentTransportationList} loading={loading} onDelete={getList} />
+    </div>
+  );
 };

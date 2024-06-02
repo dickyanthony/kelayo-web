@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAllTourGuideAPI, getListTourGuideByRoleAPI } from '../../../../api/tourGuide';
-import { TableTourGuide } from '../../../../components';
+import { PrimaryButton, TableTourGuide } from '../../../../components';
 import useSnackbar from '../../../../components/Snackbar';
 
 export default (props) => {
   const { user } = props;
+  const navigate = useNavigate();
   const { openSnackbarError } = useSnackbar();
   const [tourGuideList, setTourGuideList] = useState([]);
 
@@ -28,5 +30,17 @@ export default (props) => {
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
-  return <TableTourGuide data={tourGuideList} loading={loading} />;
+  return (
+    <div>
+      <div className="flex justify-end">
+        <PrimaryButton
+          className="mb-4"
+          onClick={() => navigate('/setting/dashboard/add-tour-guide')}
+        >
+          Tambah
+        </PrimaryButton>
+      </div>
+      <TableTourGuide data={tourGuideList} loading={loading} onDelete={getList} />
+    </div>
+  );
 };

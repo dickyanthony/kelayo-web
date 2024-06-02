@@ -3,7 +3,7 @@ import {
   getAllLodgingReservationAPI,
   getListLodgingReservationByRoleAPI,
 } from '../../../../api/lodgingReservation';
-import { TableLodgingReservation } from '../../../../components';
+import { PrimaryButton, TableLodgingReservation } from '../../../../components';
 import useSnackbar from '../../../../components/Snackbar';
 
 export default (props) => {
@@ -33,5 +33,17 @@ export default (props) => {
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
-  return <TableLodgingReservation data={lodgingReservationList} loading={loading} />;
+  return (
+    <div>
+      <div className="flex justify-end">
+        <PrimaryButton
+          className="mb-4"
+          onClick={() => navigate('/setting/dashboard/add-lodging-reservation')}
+        >
+          Tambah
+        </PrimaryButton>
+      </div>
+      <TableLodgingReservation data={lodgingReservationList} loading={loading} onDelete={getList} />
+    </div>
+  );
 };
