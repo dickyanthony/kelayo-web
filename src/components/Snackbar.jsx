@@ -11,12 +11,11 @@ const useSnackbar = () => {
 
   const openSnackbarError = (message = 'Error') => {
     let msg = message;
-    console.log('msg==>', msg);
+
     if (msg === 'ERR_CANCELED') {
       return;
     }
     if (msg === '403') {
-      console.log('true');
       logout();
       msg = ' Sesi Telah Habis, Silahkan Login Kembali!';
     }

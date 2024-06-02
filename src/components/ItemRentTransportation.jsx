@@ -9,7 +9,7 @@ const ItemRentTransportation = (props) => {
 
   const navigate = useNavigate();
   let url = id ? `/rent-transportation-form/${item?.id}` : `/rent-transportation/${item?.id}`;
-  console.log(item?.image);
+
   return (
     <Card className={className} shadow="sm" isPressable={isPressable} onPress={() => navigate(url)}>
       <CardBody className="overflow-visible p-0">

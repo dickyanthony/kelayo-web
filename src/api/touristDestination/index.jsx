@@ -34,6 +34,28 @@ export const getDetailTouristDestinationAPI = async (id, signal) => {
   });
 };
 
+export const updateTouristDestinationAPI = async (params, signal) => {
+  const hasImages = ['image1', 'image2', 'image3'].some((key) => params[key] instanceof File);
+
+  let data;
+  if (hasImages) {
+    data = new FormData();
+    Object.keys(params).forEach((key) => {
+      data.append(key, params[key]);
+    });
+  } else {
+    data = params;
+  }
+
+  return apiCall({
+    url: `/tourist-destination/${params.id}`,
+    method: 'put',
+    data,
+    signal,
+    headers: hasImages ? { 'Content-Type': 'multipart/form-data' } : undefined,
+  });
+};
+
 export const deleteTouristDestinationAPI = async (params, signal) => {
   return apiCall({
     url: `/tourist-destination/${params.id}`,

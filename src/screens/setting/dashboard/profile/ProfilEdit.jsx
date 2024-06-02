@@ -36,7 +36,7 @@ export default () => {
     signal.current = new AbortController();
 
     setLoading(true);
-    console.log(userId);
+
     getDetailUserAPI(userId, signal.current?.signal)
       .then((res) => {
         const blob = new Blob([new Uint8Array(res.avatar.data)], { type: 'image/jpeg' });

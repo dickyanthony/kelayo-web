@@ -86,10 +86,10 @@ const statusColorMap = {
 
 export default (props) => {
   const { item = [] } = props;
-  console.log('item==>', item);
+
   const renderCell = React.useCallback((user, columnKey) => {
     const cellValue = user[columnKey];
-    console.log('user==>', user);
+
     switch (columnKey) {
       case 'name':
         return <Avatar user={user} name={cellValue} />;

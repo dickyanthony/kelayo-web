@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   getAllTouristDestinationAPI,
   getListTouristDestinationByRoleAPI,
@@ -9,6 +10,7 @@ import useSnackbar from '../../../../components/Snackbar';
 export default (props) => {
   const { user } = props;
   const { openSnackbarError } = useSnackbar();
+  const navigate = useNavigate();
   const [touristDestinationList, setTouristDestinationList] = useState([]);
 
   const [loading, setLoading] = useState(false);

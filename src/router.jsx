@@ -23,6 +23,9 @@ import PemanduWisataNew from './screens/setting/dashboard/pemanduWisata/PemanduW
 import PemesananPenginapanEdit from './screens/setting/dashboard/pemesananPenginapan/PemesananPenginapanEdit';
 import PemesananPenginapanDetail from './screens/setting/dashboard/pemesananPenginapan/PemesananPenginapanDetail';
 import PemesananPenginapanNew from './screens/setting/dashboard/pemesananPenginapan/PemesananPenginapanNew';
+import DestinasiWisataEdit from './screens/setting/dashboard/destinasiWisata/DestinasiWisataEdit';
+import DestinasiWisataDetail from './screens/setting/dashboard/destinasiWisata/DestinasiWisataDetail';
+import DestinasiWisataNew from './screens/setting/dashboard/destinasiWisata/DestinasiWisataNew';
 
 const router = createBrowserRouter([
   {
@@ -199,6 +202,30 @@ const router = createBrowserRouter([
     element: (
       <RequireAuth>
         <PemesananPenginapanEdit />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/add-tourist-destination',
+    element: (
+      <RequireAuth>
+        <DestinasiWisataNew />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/detail-tourist-destination/:id',
+    element: (
+      <RequireAuth>
+        <DestinasiWisataDetail />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/edit-tourist-destination/:id',
+    element: (
+      <RequireAuth>
+        <DestinasiWisataEdit />
       </RequireAuth>
     ),
   },

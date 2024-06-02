@@ -51,7 +51,6 @@ export default function TabTourist(props) {
           maxPrice = res.listData.reduce(function (prev, current) {
             return prev && prev.price > current.price ? prev : current;
           }).price;
-          console.log('max==>', maxPrice);
         }
         setTouristDestinationList({
           totalPage: res.totalPage,
@@ -65,7 +64,6 @@ export default function TabTourist(props) {
   };
 
   const onSubmitFilter = (data) => {
-    console.log('data==>', data);
     setLoading(true);
     const params = {};
 
@@ -106,7 +104,7 @@ export default function TabTourist(props) {
       </div>
     );
   };
-  console.log('price==>', price);
+
   const RenderTab = () => {
     switch (selected) {
       case 'wisata_alam':

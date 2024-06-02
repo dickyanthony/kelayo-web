@@ -133,9 +133,7 @@ const TourGuideDetail = () => {
 
   // const test = ['a', 'b'];
   // console.log(JSON.PAR(test));
-  const onSubmit = async (data) => {
-    console.log('data===>', data);
-  };
+  const onSubmit = async (data) => {};
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full">

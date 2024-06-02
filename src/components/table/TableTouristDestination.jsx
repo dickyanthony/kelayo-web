@@ -18,6 +18,7 @@ import { formatNumberWithSeparator } from '../../utils/numberConverter';
 import React, { useState, useRef } from 'react';
 import { deleteTouristDestinationAPI } from '../../api/touristDestination';
 import useSnackbar from '../Snackbar';
+import { useNavigate } from 'react-router-dom';
 const columns = [
   { name: 'PENGGUNA', uid: 'name' },
   { name: 'JUDUL', uid: 'title' },
@@ -28,6 +29,7 @@ const columns = [
 
 export default (props) => {
   const { data = [], loading = false, onDelete } = props;
+  const navigate = useNavigate();
   const { openSnackbarSuccess, openSnackbarError } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = React.useState(1);
