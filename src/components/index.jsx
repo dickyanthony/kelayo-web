@@ -37,6 +37,7 @@ import TableRentTransportation from './table/TableRentTransportation';
 import Avatar from './Avatar';
 import MultiCustomSelect from './MultiCustomSelect';
 import TextArea from './TextArea';
+import CustomCheckbox from './CustomCheckbox';
 
 export {
   TextInput,
@@ -81,4 +82,5 @@ export {
   Avatar,
   MultiCustomSelect,
   TextArea,
+  CustomCheckbox,
 };

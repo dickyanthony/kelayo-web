@@ -5,10 +5,12 @@ import {
 } from '../../../../api/lodgingReservation';
 import { PrimaryButton, TableLodgingReservation } from '../../../../components';
 import useSnackbar from '../../../../components/Snackbar';
+import { useNavigate } from 'react-router-dom';
 
 export default (props) => {
   const { user } = props;
   const { openSnackbarError } = useSnackbar();
+  const navigate = useNavigate();
   const [lodgingReservationList, setLodgingReservationList] = useState([]);
 
   const [loading, setLoading] = useState(false);

@@ -74,7 +74,7 @@ export default (props) => {
   const [page, setPage] = React.useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const signal = useRef();
-  const rowsPerPage = 1;
+  const rowsPerPage = 4;
 
   const pages = Math.ceil(data.length / rowsPerPage);
   const items = React.useMemo(() => {
@@ -132,15 +132,15 @@ export default (props) => {
       case 'actions':
         return (
           <div className="relative flex items-center gap-2">
-            <Tooltip content="Details">
+            <Tooltip content="Detail Penginapan">
               <span
                 className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                onClick={() => navigate(`/setting/dashboard/detail-loading-reservation/${tour.id}`)}
+                onClick={() => navigate(`/setting/dashboard/detail-lodging-reservation/${tour.id}`)}
               >
                 <EyeIcon />
               </span>
             </Tooltip>
-            <Tooltip content="Edit user">
+            <Tooltip content="Edit Penginapan">
               <span
                 className="text-lg text-default-400 cursor-pointer active:opacity-50"
                 onClick={() => navigate(`/setting/dashboard/edit-lodging-reservation/${tour.id}`)}
@@ -148,7 +148,7 @@ export default (props) => {
                 <EditIcon />
               </span>
             </Tooltip>
-            <Tooltip color="danger" content="Delete user">
+            <Tooltip color="danger" content="Hapus Penginapan">
               <span
                 className="text-lg text-danger cursor-pointer active:opacity-50"
                 onClick={() => deleteLodgingReservation(tour.id)}

@@ -6,7 +6,7 @@ export default () => {
     <div className="w-full ">
       <NavBar />
       <WrapHCenterXL>
-        <PemesananPenginapanForm isEdit={false} />
+        <PemesananPenginapanForm isNew />
       </WrapHCenterXL>
       <Footer />
     </div>

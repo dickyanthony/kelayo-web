@@ -20,7 +20,10 @@ import AkunNew from './screens/setting/dashboard/akun/AkunNew';
 import PemanduWisataEdit from './screens/setting/dashboard/pemanduWisata/PemanduWisataEdit';
 import PemanduWisataDetail from './screens/setting/dashboard/pemanduWisata/PemanduWisataDetail';
 import PemanduWisataNew from './screens/setting/dashboard/pemanduWisata/PemanduWisataNew';
-// import PemanduWisataNew from './screens/setting/dashboard/pemanduWisata/PemanduWisataNew';
+import PemesananPenginapanEdit from './screens/setting/dashboard/pemesananPenginapan/PemesananPenginapanEdit';
+import PemesananPenginapanDetail from './screens/setting/dashboard/pemesananPenginapan/PemesananPenginapanDetail';
+import PemesananPenginapanNew from './screens/setting/dashboard/pemesananPenginapan/PemesananPenginapanNew';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -172,6 +175,30 @@ const router = createBrowserRouter([
     element: (
       <RequireAuth>
         <PemanduWisataEdit />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/add-lodging-reservation',
+    element: (
+      <RequireAuth>
+        <PemesananPenginapanNew />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/detail-lodging-reservation/:id',
+    element: (
+      <RequireAuth>
+        <PemesananPenginapanDetail />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/edit-lodging-reservation/:id',
+    element: (
+      <RequireAuth>
+        <PemesananPenginapanEdit />
       </RequireAuth>
     ),
   },

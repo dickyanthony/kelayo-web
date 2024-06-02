@@ -91,7 +91,7 @@ export default (props) => {
       case 'actions':
         return (
           <div className="relative flex items-center gap-2">
-            <Tooltip content="Details">
+            <Tooltip content="Detail Destinasi Wisata">
               <span
                 className="text-lg text-default-400 cursor-pointer active:opacity-50"
                 onClick={() => navigate(`/setting/dashboard/detail-tourist-destination/${tour.id}`)}
@@ -99,7 +99,7 @@ export default (props) => {
                 <EyeIcon />
               </span>
             </Tooltip>
-            <Tooltip content="Edit user">
+            <Tooltip content="Edit Destinasi Wisata">
               <span
                 className="text-lg text-default-400 cursor-pointer active:opacity-50"
                 onClick={() => navigate(`/setting/dashboard/edit-tourist-destination/${tour.id}`)}
@@ -107,7 +107,7 @@ export default (props) => {
                 <EditIcon />
               </span>
             </Tooltip>
-            <Tooltip color="danger" content="Delete user">
+            <Tooltip color="danger" content="Hapus Destinasi Wisata">
               <span
                 className="text-lg text-danger cursor-pointer active:opacity-50"
                 onClick={() => deleteTouristDestination(tour.id)}

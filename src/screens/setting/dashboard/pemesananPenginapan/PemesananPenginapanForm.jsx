@@ -3,8 +3,7 @@ import { Card, Image } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import {
-  CustomSelect,
-  MultiCustomSelect,
+  CustomCheckbox,
   PrimaryButton,
   TextArea,
   TextInput,
@@ -14,7 +13,10 @@ import DefaultMale from '../../../../assets/default-male.jpeg';
 
 import { EditIcon } from '../../../../assets/EditIcon';
 import '../../../../css/AvatarStyle.css';
-import { getDetailTourGuideAPI, updateTourGuideAPI } from '../../../../api/tourGuide';
+import {
+  getDetailLodgingReservationAPI,
+  updateLodgingReservationAPI,
+} from '../../../../api/lodgingReservation';
 
 export default (props) => {
   const { isEdit, isNew } = props;
@@ -26,12 +28,12 @@ export default (props) => {
     defaultValues: {
       id: '',
       image: '',
-      name: '',
-      age: 0,
-      domisili: '',
+      title: '',
+      price: 0,
       description: '',
-      status: '',
-      competition: [],
+      isFreeWifi: 0,
+      isFreeWaterElectric: 0,
+      isPrivateBathroom: 0,
     },
   });
 
@@ -49,7 +51,7 @@ export default (props) => {
 
     setLoading(true);
 
-    getDetailTourGuideAPI(id, signal.current?.signal)
+    getDetailLodgingReservationAPI(id, signal.current?.signal)
       .then((res) => {
         let imageBlob;
         if (res.image) {
@@ -57,7 +59,7 @@ export default (props) => {
             new Blob([new Uint8Array(res.image.data)], { type: 'image/jpeg' })
           );
         }
-        reset({ ...res, image: imageBlob ?? '', competition: JSON.parse(res.competition) || [] });
+        reset({ ...res, image: imageBlob ?? '' });
         setImage(imageBlob ?? '');
       })
       .catch((err) => openSnackbarError(err))
@@ -65,14 +67,30 @@ export default (props) => {
   };
 
   const onSubmit = async (data) => {
+    const isFreeWifiInt =
+      typeof data.isFreeWifi !== 'number' ? (data.isFreeWifi === true ? 1 : 0) : data.isFreeWifi;
+
+    const isFreeWaterElectricInt =
+      typeof data.isFreeWaterElectric !== 'number'
+        ? data.isFreeWaterElectric === true
+          ? 1
+          : 0
+        : data.isFreeWaterElectric;
+    const isPrivateBathroomInt =
+      typeof data.isPrivateBathroom !== 'number'
+        ? data.isPrivateBathroom === true
+          ? 1
+          : 0
+        : data.isPrivateBathroom;
+
     const formData = new FormData();
     formData.append('id', id);
-    formData.append('name', data.name);
-    formData.append('age', data.age);
-    formData.append('domisili', data.domisili);
-    formData.append('status', data.status);
+    formData.append('title', data.title);
+    formData.append('price', data.price);
+    formData.append('isFreeWaterElectric', isFreeWaterElectricInt);
+    formData.append('isPrivateBathroom', isPrivateBathroomInt);
+    formData.append('isFreeWifi', isFreeWifiInt);
     formData.append('description', data.description);
-    formData.append('competition', JSON.stringify(data.competition));
     if (!isEdit) formData.append('userId', user.id);
 
     const previousImage = getValues('image');
@@ -80,24 +98,24 @@ export default (props) => {
       formData.append('image', image);
     }
 
-    updateTourGuideAPI(formData, signal.current?.signal)
+    updateLodgingReservationAPI(formData, signal.current?.signal)
       .then(() => {
         if (!isNew) getDetail();
         if (isNew) {
           reset({
             id: '',
             image: '',
-            name: '',
-            age: 0,
-            domisili: '',
+            title: '',
+            price: 0,
             description: '',
-            status: '',
-            competition: [],
+            isFreeWifi: false,
+            isFreeWaterElectric: false,
+            isPrivateBathroom: false,
           });
           setImage('');
         }
         openSnackbarSuccess(
-          isNew ? 'Pemandu wisata berhasil ditambahkan' : 'Pemandu wisata berhasil diperbarui'
+          isNew ? 'Penginapan berhasil ditambahkan' : 'Penginapan berhasil diperbarui'
         );
       })
       .catch((err) => openSnackbarError(err));
@@ -123,7 +141,7 @@ export default (props) => {
     <form method="post" onSubmit={handleSubmit(onSubmit)}>
       <Card className="w-full mt-4 md:w-[579px] h-full flex flex-col items-center md:ml-4">
         <div className="text-2xl text-center font-bold mt-4 md:mb-0">
-          {isEdit ? 'Edit ' : isNew ? 'Tambah' : 'Lihat '} {getValues('name')}
+          {isEdit ? 'Edit ' : isNew ? 'Tambah' : 'Lihat '} {getValues('title')}
         </div>
         <div className="w-5/6 flex flex-wrap justify-center flex-col gap-4">
           <div className="w-full flex justify-center items-center my-2 relative group">
@@ -131,7 +149,7 @@ export default (props) => {
               isBlurred
               width={240}
               src={image !== '' ? image : DefaultMale}
-              alt="pemandu-wisata"
+              alt="pemesanan-penginapan"
             />
 
             {(isEdit || isNew) && (
@@ -147,42 +165,31 @@ export default (props) => {
             )}
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <TextInput label="Nama" name="name" control={control} isDisabled={!isEdit && !isNew} />
+            <TextInput label="Nama" name="title" control={control} isDisabled={!isEdit && !isNew} />
             <TextInput
               type="number"
-              label="Umur"
-              name="age"
+              label="Harga"
+              name="price"
               control={control}
               isDisabled={!isEdit && !isNew}
             />
-            <TextInput
-              label="Domisili"
-              name="domisili"
+
+            <CustomCheckbox
+              name="isFreeWifi"
+              label="Gratis Wifi"
               control={control}
               isDisabled={!isEdit && !isNew}
             />
-            <CustomSelect
-              className="w-full"
-              options={[
-                { label: 'Mahasiswa', value: 'Mahasiswa' },
-                { label: 'Pekerja', value: 'Pekerja' },
-              ]}
+            <CustomCheckbox
+              name="isFreeWaterElectric"
+              label="Gratis Air & Listrik"
               control={control}
-              label="Status"
-              name="status"
               isDisabled={!isEdit && !isNew}
             />
-            <MultiCustomSelect
-              selectionMode="multiple"
-              className="w-full"
-              options={[
-                { label: 'Wisata Alam', value: 'Wisata Alam' },
-                { label: 'Wisata Sejarah', value: 'Wisata Sejarah' },
-                { label: 'Wisata Kuliner', value: 'Wisata Kuliner' },
-              ]}
+            <CustomCheckbox
+              name="isPrivateBathroom"
+              label="Kamar Mandi Pribadi"
               control={control}
-              label="Kompetensi"
-              name="competition"
               isDisabled={!isEdit && !isNew}
             />
           </div>
@@ -192,6 +199,7 @@ export default (props) => {
             control={control}
             isDisabled={!isEdit && !isNew}
           />
+
           {(isEdit || isNew) && (
             <PrimaryButton className="h-12 text-md w-full mt-4" onClick={handleSubmit(onSubmit)}>
               Simpan
