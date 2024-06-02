@@ -14,6 +14,9 @@ import RentTransportationDetail from './screens/rentTransportation/rentTransport
 import RentTransportationForm from './screens/rentTransportation/rentTransportationForm';
 import TouristDestinationDetail from './screens/touristDestination/touristDestinationDetail';
 import Setting from './screens/setting';
+import AkunEdit from './screens/setting/dashboard/akun/AkunEdit';
+import AkunDetail from './screens/setting/dashboard/akun/AkunDetail';
+import AkunNew from './screens/setting/dashboard/akun/AkunNew';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -116,6 +119,31 @@ const router = createBrowserRouter([
     element: (
       <RequireAuth>
         <Setting />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/add-account',
+    element: (
+      <RequireAuth>
+        <AkunNew />
+      </RequireAuth>
+    ),
+  },
+  ,
+  {
+    path: '/setting/dashboard/detail-account/:id',
+    element: (
+      <RequireAuth>
+        <AkunDetail />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/edit-account/:id',
+    element: (
+      <RequireAuth>
+        <AkunEdit />
       </RequireAuth>
     ),
   },

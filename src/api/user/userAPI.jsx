@@ -48,3 +48,12 @@ export const updateUserProfileAPI = async (params, signal) => {
     headers: hasImage ? { 'Content-Type': 'multipart/form-data' } : undefined,
   });
 };
+
+export const deleteUserAPI = async (params, signal) => {
+  return apiCall({
+    url: `/user/${params.id}`,
+    method: 'delete',
+    data: params,
+    signal,
+  });
+};

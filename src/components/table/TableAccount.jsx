@@ -1,3 +1,4 @@
+import React, { useRef, useState } from 'react';
 import {
   Table,
   TableHeader,
@@ -12,10 +13,11 @@ import {
 import { EyeIcon } from '../../assets/EyeIcon';
 import { EditIcon } from '../../assets/EditIcon';
 import { DeleteIcon } from '../../assets/DeleteIcon';
-import { Avatar } from '..';
+import { Avatar, UseSnackbar } from '..';
 import { formatNumberWithSeparator } from '../../utils/numberConverter';
 
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { deleteUserAPI } from '../../api/user/userAPI';
 const columns = [
   { name: 'NAMA', uid: 'name' },
   { name: 'EMAIL', uid: 'email' },
@@ -25,8 +27,12 @@ const columns = [
 ];
 
 export default (props) => {
-  const { data = [], loading = false } = props;
+  const { data = [], loading = false, onDelete } = props;
+  const navigate = useNavigate();
+  const { openSnackbarSuccess, openSnackbarError } = UseSnackbar();
   const [page, setPage] = React.useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const signal = useRef();
   const rowsPerPage = 4;
 
   const totalPages = Math.ceil(data.length / rowsPerPage);
@@ -36,6 +42,17 @@ export default (props) => {
     const end = start + rowsPerPage;
     return data.slice(start, end);
   }, [page, data]);
+
+  const deleteUser = (id) => {
+    setIsLoading(true);
+    deleteUserAPI({ id }, signal.current?.signal)
+      .then(() => {
+        openSnackbarSuccess('Pengguna berhasil dihapus');
+        onDelete();
+      })
+      .catch((err) => openSnackbarError(err))
+      .finally(() => setIsLoading(false));
+  };
 
   const renderCell = React.useCallback((tour, columnKey) => {
     const cellValue = tour[columnKey];
@@ -82,17 +99,26 @@ export default (props) => {
         return (
           <div className="relative flex items-center gap-2">
             <Tooltip content="Details">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+              <span
+                className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                onClick={() => navigate(`/setting/dashboard/detail-account/${tour.id}`)}
+              >
                 <EyeIcon />
               </span>
             </Tooltip>
             <Tooltip content="Edit user">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+              <span
+                className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                onClick={() => navigate(`/setting/dashboard/edit-account/${tour.id}`)}
+              >
                 <EditIcon />
               </span>
             </Tooltip>
             <Tooltip color="danger" content="Delete user">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
+              <span
+                className="text-lg text-danger cursor-pointer active:opacity-50"
+                onClick={() => deleteUser(tour.id)}
+              >
                 <DeleteIcon />
               </span>
             </Tooltip>
@@ -136,7 +162,7 @@ export default (props) => {
       <TableBody
         items={items}
         loadingContent={<Spinner />}
-        loadingState={loading ? 'loading' : 'idle'}
+        loadingState={loading || isLoading ? 'loading' : 'idle'}
       >
         {(item) => (
           <TableRow key={item.id}>

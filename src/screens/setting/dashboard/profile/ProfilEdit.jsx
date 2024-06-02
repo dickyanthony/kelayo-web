@@ -81,7 +81,7 @@ export default () => {
         // setValue('image', reader.result);
         setImage(reader.result);
       };
-      console.log('file==>', file);
+
       reader.readAsDataURL(file);
     }
   };

@@ -3,7 +3,7 @@ import DefaultMale from '../assets/default-male.jpeg';
 import DefaultFemale from '../assets/default-female.jpeg';
 
 export default (props) => {
-  const { user, name } = props;
+  const { customSrc, user = {}, name, ...restProps } = props;
 
   const createBlobURL = (imageData) => {
     const blob = new Blob([new Uint8Array(imageData)], { type: 'image/jpeg' });
@@ -18,7 +18,8 @@ export default (props) => {
 
   return (
     <User
-      avatarProps={{ radius: 'lg', src: avatar }}
+      {...restProps}
+      avatarProps={{ radius: 'lg', src: customSrc ?? avatar }}
       description={user.email ?? ''}
       name={user.name ?? ''}
     >

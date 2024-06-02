@@ -22,6 +22,7 @@ const CustomSelect = (props) => {
           }}
           {...restProps}
           {...field}
+          disabled
         >
           {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
