@@ -1,5 +1,15 @@
 import { apiCall } from '../';
+
+export const getDetailRentTransportationAPI2 = async (id, signal) => {
+  return apiCall({
+    url: `/rent-transportation/${id}`,
+    method: 'get',
+    data: null,
+    signal,
+  });
+};
 export const getListRentTransportationAPI = async (params, signal) => {
+  console.log('list==>');
   return apiCall({
     url: '/rent-transportation',
     method: 'post',
@@ -40,6 +50,28 @@ export const getDetailTransportationAPI = async (id, signal) => {
     method: 'get',
     data: null,
     signal,
+  });
+};
+
+export const updateRentTransportationAPI = async (params, signal) => {
+  const hasImage = params.image instanceof File;
+
+  let data;
+  if (hasImage) {
+    data = new FormData();
+    Object.keys(params).forEach((key) => {
+      data.append(key, params[key]);
+    });
+  } else {
+    data = params;
+  }
+
+  return apiCall({
+    url: `/rent-transportation/${params.id}`,
+    method: 'put',
+    data,
+    signal,
+    headers: hasImage ? { 'Content-Type': 'multipart/form-data' } : undefined,
   });
 };
 

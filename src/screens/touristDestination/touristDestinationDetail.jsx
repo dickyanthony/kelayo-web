@@ -56,6 +56,7 @@ const ImageSlider = ({ detail }) => {
 const TouristDestinationDetail = () => {
   const { id } = useParams();
   const { openSnackbarError } = UseSnackbar();
+  const [position, setPosition] = useState([-7.797068, 110.370529]);
   const [detail, setDetail] = useState({
     title: 'Pantai Kesirat',
     location: 'Kabupaten Gunung Kidul',
@@ -108,6 +109,10 @@ const TouristDestinationDetail = () => {
           image4: res.image4 ? createBlobURL(res.image4.data) : null,
         };
         setDetail(modifiedDetail);
+        setPosition([
+          res.lat !== '' ? Number(res.lat) : -7.797068,
+          res.lng !== '' ? Number(res.lng) : 110.370529,
+        ]);
       })
       .catch((err) => openSnackbarError(err));
   };
@@ -128,13 +133,10 @@ const TouristDestinationDetail = () => {
           </div>
           <div className="w-full h-2 border-b-1 border-black my-8" />
           <div className="grid grid-cols-1 sm:grid-cols-2 mt-4 mb-4 gap-4 justify-items-center min-h-[350px]">
-            <Map />
+            <Map position={position} setPositionProps={() => {}} />
             <div className="flex flex-row gap-2 items-center">
               <Image src={markerIcon} />
-              <div className="text-sm">
-                Karang, Girikarto, Panggang, Gunung Kidul Regency, Special Region of Yogyakarta
-                55872
-              </div>
+              <div className="text-sm">{detail?.location ?? ''}</div>
             </div>
           </div>
         </Card>

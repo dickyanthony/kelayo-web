@@ -33,11 +33,15 @@ import TableTouristDestination from './table/TableTouristDestination';
 import TableLodgingReservation from './table/TableLodgingReservation';
 import TableTourGuide from './table/TableTourGuide';
 import TableAccount from './table/TableAccount';
+import TableTransportation from './table/TableTransportation';
 import TableRentTransportation from './table/TableRentTransportation';
 import Avatar from './Avatar';
 import MultiCustomSelect from './MultiCustomSelect';
 import TextArea from './TextArea';
 import CustomCheckbox from './CustomCheckbox';
+import TableOrderPenginapan from './table/TableOrderPenginapan';
+import TableOrderPemandu from './table/TableOrderPemandu';
+import TableOrderTransportasi from './table/TableOrderTransportasi';
 
 export {
   TextInput,
@@ -78,9 +82,13 @@ export {
   TableLodgingReservation,
   TableTourGuide,
   TableAccount,
+  TableTransportation,
   TableRentTransportation,
   Avatar,
   MultiCustomSelect,
   TextArea,
   CustomCheckbox,
+  TableOrderPenginapan,
+  TableOrderPemandu,
+  TableOrderTransportasi,
 };

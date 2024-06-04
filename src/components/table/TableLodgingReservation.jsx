@@ -20,7 +20,7 @@ import useSnackbar from '../Snackbar';
 import { deleteLodgingReservationAPI } from '../../api/lodgingReservation';
 import { useNavigate } from 'react-router-dom';
 const columns = [
-  { name: 'PENGGUNA', uid: 'name' },
+  { name: 'DIBUAT OLEH', uid: 'name' },
   { name: 'JUDUL', uid: 'title' },
   { name: 'HARGA', uid: 'price' },
   { name: 'GRATIS AIR & LISTRIK', uid: 'isFreeWaterElectric' },

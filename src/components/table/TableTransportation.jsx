@@ -16,16 +16,19 @@ import { Avatar } from '..';
 
 import React, { useState, useRef } from 'react';
 import useSnackbar from '../Snackbar';
-import { deleteRentTransportationAPI } from '../../api/rentTransportation';
-import { useNavigate } from 'react-router-dom';
+import { deleteTransportationAPI } from '../../api/transportationAPI';
+import { useNavigate, useParams } from 'react-router-dom';
+import { formatNumberWithSeparator } from '../../utils/numberConverter';
 const columns = [
-  { name: 'DIBUAT OLEH', uid: 'name' },
-  { name: 'JUDUL', uid: 'title' },
+  { name: 'NAMA', uid: 'name' },
+  { name: 'HARGA', uid: 'price' },
   { name: 'AKSI', uid: 'actions' },
 ];
 
 export default (props) => {
-  const { data = [], loading = false, onDelete } = props;
+  const { data = [], loading = false, onDelete, hideEdit = false, hideDelete = false } = props;
+  const { id } = useParams();
+
   const { openSnackbarSuccess, openSnackbarError } = useSnackbar();
   const navigate = useNavigate();
   const [page, setPage] = React.useState(1);
@@ -56,9 +59,9 @@ export default (props) => {
       }
     };
 
-    const deleteRentTransportation = (id) => {
+    const deleteTransportation = (id) => {
       setIsLoading(true);
-      deleteRentTransportationAPI({ id }, signal.current?.signal)
+      deleteTransportationAPI({ id }, signal.current?.signal)
         .then(() => {
           openSnackbarSuccess('Transportasi berhasil dihapus');
           onDelete();
@@ -69,41 +72,51 @@ export default (props) => {
 
     switch (columnKey) {
       case 'name':
-        return <Avatar user={tour} name={cellValue} />;
-      case 'title':
+        return <p className="text-bold text-sm capitalize">{tour.name}</p>;
+      case 'price':
         return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{tour.title}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{Type()}</p>
-          </div>
+          <p className="text-bold text-sm capitalize">{formatNumberWithSeparator(tour.price)}</p>
         );
       case 'actions':
         return (
           <div className="relative flex items-center gap-2">
-            <Tooltip content="Detail Penyedia Penginapan">
+            <Tooltip content="Detail Transportasi">
               <span
                 className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                onClick={() => navigate(`/setting/dashboard/detail-rent-transportation/${tour.id}`)}
+                onClick={() =>
+                  navigate(
+                    `/setting/dashboard/detail-rent-transportation/${id}/detail-transportation/${tour.id}`
+                  )
+                }
               >
                 <EyeIcon />
               </span>
             </Tooltip>
-            <Tooltip content="Edit Penyedia Penginapan">
-              <span
-                className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                onClick={() => navigate(`/setting/dashboard/edit-rent-transportation/${tour.id}`)}
-              >
-                <EditIcon />
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Hapus Penyedia Transportasi">
-              <span
-                className="text-lg text-danger cursor-pointer active:opacity-50"
-                onClick={() => deleteRentTransportation(tour.id)}
-              >
-                <DeleteIcon />
-              </span>
-            </Tooltip>
+            {!hideEdit && (
+              <Tooltip content="Edit Transportasi">
+                <span
+                  className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                  onClick={() =>
+                    navigate(
+                      `/setting/dashboard/edit-rent-transportation/${id}/edit-transportation/${tour.id}`
+                    )
+                  }
+                >
+                  <EditIcon />
+                </span>
+              </Tooltip>
+            )}
+
+            {!hideDelete && (
+              <Tooltip color="danger" content="Hapus Transportasi">
+                <span
+                  className="text-lg text-danger cursor-pointer active:opacity-50"
+                  onClick={() => deleteTransportation(tour.id)}
+                >
+                  <DeleteIcon />
+                </span>
+              </Tooltip>
+            )}
           </div>
         );
       default:

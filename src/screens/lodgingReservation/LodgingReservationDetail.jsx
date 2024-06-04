@@ -15,20 +15,11 @@ import { Accordion, AccordionItem } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 import { getDetailLodgingReservationAPI } from '../../api/lodgingReservation';
 import { useEffect, useRef, useState } from 'react';
-const item = {
-  id: 1,
-  image: JogjaUnitPogung,
-  title: 'Jogja Unit Pogung',
-  description:
-    'Selamat datang diunit pogung ,dibangun dengan sentuhan arsitektur modern yang menyatu dengan kehangatan budaya lokal. unit pogung menyajikan kesempurnaan akomodasi untuk wisatawan yang ingin merasakan kenyamanan dan keindahan.',
-  price: 150000,
-  isFreeWifi: true,
-  isFreeWaterElectric: true,
-  isPrivateBathroom: true,
-};
+import useSnackbar from '../../components/Snackbar';
 
 const LodgingReservationDetail = () => {
   const { id } = useParams();
+  const { openSnackbarError } = useSnackbar();
   const { handleSubmit, control } = useForm();
 
   const [loading, setLoading] = useState(true);
@@ -70,11 +61,11 @@ const LodgingReservationDetail = () => {
           <div className="w-full">
             <div className="flex flex-col w-full gap-4 justify-between items-center my-4 sm:flex-row sm:items-start">
               {!loading ? (
-                <ItemLodgingReservation key={detail?.id} item={item} isPressable={false} />
+                <ItemLodgingReservation key={detail?.id} item={detail} isPressable={false} />
               ) : (
                 <SkeletonLodgingReservation />
               )}
-              <BookingPrice detail={detail} />
+              <BookingPrice detail={detail} hideButton />
             </div>
 
             <Accordion selectionMode="multiple" variant="shadow" className="mt-4">
@@ -92,7 +83,7 @@ const LodgingReservationDetail = () => {
                   <TextInput name="noHp" label="No Hp" control={control} />
                 </div>
               </AccordionItem>
-              <AccordionItem key="1" aria-label="Pembayaran" title="Pembayaran">
+              <AccordionItem key="1" aria-label="Pembayaran" title="Bukti Pembayaran">
                 <div className="grid mb-4 sm:grid-cols-2 gap-4">
                   <TextInput name="cardName" label="Nama Kartu" control={control} />
                   <TextInput name="cardNo" label="No Kartu" control={control} />
@@ -102,7 +93,7 @@ const LodgingReservationDetail = () => {
               </AccordionItem>
             </Accordion>
             <div className="flex justify-end mt-4">
-              <PrimaryButton className="w-full sm:w-auto">Bayar</PrimaryButton>
+              <PrimaryButton className="w-full sm:w-auto">Konfirmasi</PrimaryButton>
             </div>
           </div>
           <Footer />

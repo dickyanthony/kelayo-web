@@ -8,6 +8,8 @@ import PenyewaanTransportasiList from './dashboard/penyewaanTransportasi/Penyewa
 import { NavBar, WrapHCenterXL } from '../../components';
 import ProfilEdit from './dashboard/profile/ProfilEdit';
 import GantiPassword from './dashboard/GantiPassword/gantiPassword';
+import OrderPenginapanList from './dashboard/orderPenginapan/OrderPenginapanList';
+import OrderPemanduList from './dashboard/orderPemandu/OrderPemanduList';
 
 export default () => {
   const {
@@ -60,6 +62,27 @@ export default () => {
       key: 'pemandu_wisata',
       title: 'Pemandu Wisata',
       content: <PemanduWisataList user={user} />,
+    });
+
+  if (user.role === 'admin' || user.role === 'penyedia_penginapan' || user.role === 'normal')
+    tabData.push({
+      key: 'order_penginapan',
+      title: 'Pemesanan Penginapan',
+      content: <OrderPenginapanList user={user} />,
+    });
+
+  if (user.role === 'admin' || user.role === 'pemandu_wisata' || user.role === 'normal')
+    tabData.push({
+      key: 'order_pemandu',
+      title: 'Pemesanan Pemandu',
+      content: <OrderPemanduList user={user} />,
+    });
+
+  if (user.role === 'admin' || user.role === 'penyedia_transportasi' || user.role === 'normal')
+    tabData.push({
+      key: 'order_transportasi',
+      title: 'Order Transportasi',
+      content: <OrderPemanduList user={user} />,
     });
 
   return (

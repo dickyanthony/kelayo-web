@@ -19,7 +19,7 @@ import useSnackbar from '../Snackbar';
 import { deleteTourGuideAPI } from '../../api/tourGuide';
 import { useNavigate } from 'react-router-dom';
 const columns = [
-  { name: 'PENGGUNA', uid: 'name' },
+  { name: 'DIBUAT OLEH', uid: 'name' },
   { name: 'PEMANDU', uid: 'title' },
   { name: 'DOMISILI', uid: 'domisili' },
   { name: 'UMUR', uid: 'age' },

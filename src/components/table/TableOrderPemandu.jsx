@@ -8,6 +8,12 @@ import {
   Tooltip,
   Pagination,
   Spinner,
+  Chip,
+  DropdownTrigger,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Button,
 } from '@nextui-org/react';
 import { EyeIcon } from '../../assets/EyeIcon';
 import { EditIcon } from '../../assets/EditIcon';
@@ -16,12 +22,26 @@ import { Avatar } from '..';
 
 import React, { useState, useRef } from 'react';
 import useSnackbar from '../Snackbar';
-import { deleteRentTransportationAPI } from '../../api/rentTransportation';
+import { deleteTourGuideAPI } from '../../api/tourGuide';
 import { useNavigate } from 'react-router-dom';
+import { VerticalDotsIcon } from '../../assets/VerticalDotsIcon';
+
+const statusColorMap = {
+  selesai: 'success',
+  ambilDiTempat: 'danger',
+  menungguKonfirmasi: 'warning',
+};
 const columns = [
-  { name: 'DIBUAT OLEH', uid: 'name' },
-  { name: 'JUDUL', uid: 'title' },
   { name: 'AKSI', uid: 'actions' },
+  { name: 'PEMESAN', uid: 'order' },
+  { name: 'PENGiNAPAN', uid: 'penginapan' },
+  { name: 'NAMA', uid: 'name' },
+  { name: 'HP', uid: 'hp' },
+  { name: 'TANGGAL MULAI', uid: 'start' },
+  { name: 'TANGGAL BERAKHIR', uid: 'end' },
+  { name: 'TOTAL', uid: 'price' },
+  // { name: 'BUKTI PEMBAYARAN', uid: 'image' },
+  { name: 'STATUS', uid: 'status' },
 ];
 
 export default (props) => {
@@ -30,8 +50,9 @@ export default (props) => {
   const navigate = useNavigate();
   const [page, setPage] = React.useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const rowsPerPage = 4;
   const signal = useRef();
+  const rowsPerPage = 4;
+
   const totalPages = Math.ceil(data.length / rowsPerPage);
 
   const items = React.useMemo(() => {
@@ -43,67 +64,49 @@ export default (props) => {
   const renderCell = React.useCallback((tour, columnKey) => {
     const cellValue = tour[columnKey];
 
-    const Type = () => {
-      switch (tour.type) {
-        case 1:
-          return 'Mobil';
-
-        case 2:
-          return 'Motor';
-
-        default:
-          return '';
-      }
-    };
-
-    const deleteRentTransportation = (id) => {
-      setIsLoading(true);
-      deleteRentTransportationAPI({ id }, signal.current?.signal)
-        .then(() => {
-          openSnackbarSuccess('Transportasi berhasil dihapus');
-          onDelete();
-        })
-        .catch((err) => openSnackbarError(err))
-        .finally(() => setIsLoading(false));
-    };
-
     switch (columnKey) {
-      case 'name':
+      case 'order':
         return <Avatar user={tour} name={cellValue} />;
-      case 'title':
+      case 'penginapan':
+        return <Avatar user={tour} name={cellValue} />;
+      case 'name':
+        return <p className="text-bold text-sm capitalize">asd</p>;
+      case 'hp':
+        return <p className="text-bold text-sm capitalize">asd</p>;
+      case 'start':
+        return <p className="text-bold text-sm capitalize">asd</p>;
+      case 'end':
+        return <p className="text-bold text-sm capitalize">asd</p>;
+      case 'price':
+        return <p className="text-bold text-sm capitalize">asd</p>;
+      // case 'image':
+      //   return (
+      //     <Image
+      //       src="https://app.requestly.io/delay/5000/https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
+      //       alt="bukti-pembayaran"
+      //     />
+      //   );
+      case 'status':
         return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{tour.title}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{Type()}</p>
-          </div>
+          <Chip className="capitalize" color={statusColorMap['selesai']} size="sm" variant="flat">
+            {'cellValue'}
+          </Chip>
         );
       case 'actions':
         return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip content="Detail Penyedia Penginapan">
-              <span
-                className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                onClick={() => navigate(`/setting/dashboard/detail-rent-transportation/${tour.id}`)}
-              >
-                <EyeIcon />
-              </span>
-            </Tooltip>
-            <Tooltip content="Edit Penyedia Penginapan">
-              <span
-                className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                onClick={() => navigate(`/setting/dashboard/edit-rent-transportation/${tour.id}`)}
-              >
-                <EditIcon />
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Hapus Penyedia Transportasi">
-              <span
-                className="text-lg text-danger cursor-pointer active:opacity-50"
-                onClick={() => deleteRentTransportation(tour.id)}
-              >
-                <DeleteIcon />
-              </span>
-            </Tooltip>
+          <div className="relative flex justify-end items-center gap-2">
+            <Dropdown className="bg-background border-1 border-default-200">
+              <DropdownTrigger>
+                <Button isIconOnly radius="full" size="sm" variant="light">
+                  <VerticalDotsIcon className="text-default-400" />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu>
+                <DropdownItem>Bukti Pembayaran</DropdownItem>
+                <DropdownItem>Print Tiket</DropdownItem>
+                <DropdownItem>Delete</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </div>
         );
       default:

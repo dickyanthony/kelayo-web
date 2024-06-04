@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   getAllRentTransportationAPI,
   getListRentTransportationByRoleAPI,
@@ -9,6 +10,7 @@ import useSnackbar from '../../../../components/Snackbar';
 export default (props) => {
   const { user } = props;
   const { openSnackbarError } = useSnackbar();
+  const navigate = useNavigate();
   const [rentTransportationList, setRentTransportationList] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -38,7 +40,7 @@ export default (props) => {
       <div className="flex justify-end">
         <PrimaryButton
           className="mb-4"
-          onClick={() => navigate('/setting/dashboard/add-rent-transportation')}
+          onClick={() => navigate(`/setting/dashboard/add-rent-transportation`)}
         >
           Tambah
         </PrimaryButton>

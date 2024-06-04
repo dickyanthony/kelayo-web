@@ -29,7 +29,7 @@ export default function ItemLodgingReservation(props) {
               alt="Album cover"
               className="object-cover"
               height={200}
-              src={item.image}
+              src={item?.image ?? ''}
               width="100%"
             />
           </div>
@@ -37,21 +37,21 @@ export default function ItemLodgingReservation(props) {
           <div className="flex flex-col col-span-6 md:col-span-8">
             <div className="flex justify-between items-start">
               <div className="flex flex-col gap-0">
-                <h3 className="font-semibold text-primary-text">{item.title}</h3>
+                <h3 className="font-semibold text-primary-text">{item?.title ?? ''}</h3>
                 <div className="flex flex-wrap w-full items-center mb-4 mt-2">
-                  {item.isFreeWifi === 1 && (
+                  {item?.isFreeWifi === 1 && (
                     <ItemFeature featureTitle="Wifi Gratis" featureImage={WifiLogo} />
                   )}
-                  {item.isFreeWaterElectric === 1 && (
+                  {item?.isFreeWaterElectric === 1 && (
                     <ItemFeature featureTitle="Listrik Gratis" featureImage={ElectricLogo} />
                   )}
 
-                  {item.isPrivateBathroom === 1 && (
+                  {item?.isPrivateBathroom === 1 && (
                     <ItemFeature featureTitle="Kamar Mandi Pribadi" featureImage={BathroomLogo} />
                   )}
                 </div>
                 <p className="text-[10px] text-foreground/80 line-clamp-5 sm:text-small">
-                  {item.description}
+                  {item?.description}
                 </p>
               </div>
             </div>

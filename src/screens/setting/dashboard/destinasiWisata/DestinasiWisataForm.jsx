@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import {
   CustomCheckbox,
   CustomSelect,
+  Map,
   PrimaryButton,
   TextArea,
   TextInput,
@@ -44,7 +45,7 @@ export default (props) => {
   const [image1, setImage1] = useState('');
   const [image2, setImage2] = useState('');
   const [image3, setImage3] = useState('');
-
+  const [position, setPosition] = useState([-7.797068, 110.370529]);
   const signal = useRef();
 
   useEffect(() => {
@@ -89,6 +90,11 @@ export default (props) => {
         setImage1(imageBlob1 ?? '');
         setImage2(imageBlob2 ?? '');
         setImage3(imageBlob3 ?? '');
+        console.log(res.lat);
+        setPosition([
+          res.lat !== '' ? Number(res.lat) : -7.797068,
+          res.lng !== '' ? Number(res.lng) : 110.370529,
+        ]);
       })
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
@@ -102,6 +108,8 @@ export default (props) => {
     formData.append('location', data.location);
     formData.append('description', data.description);
     formData.append('type', data.type);
+    formData.append('lat', position[0]);
+    formData.append('lng', position[1]);
     if (!isEdit) formData.append('userId', user.id);
 
     const previousImage1 = getValues('image1');
@@ -238,7 +246,6 @@ export default (props) => {
               />
             ))}
           </div>
-
           <div className="grid gap-4 sm:grid-cols-2">
             <TextInput label="Nama" name="title" control={control} isDisabled={!isEdit && !isNew} />
             <TextInput
@@ -274,6 +281,15 @@ export default (props) => {
             control={control}
             isDisabled={!isEdit && !isNew}
           />
+          {!loading && (
+            <div className="w-full h-96">
+              <Map
+                draggable
+                position={position}
+                setPositionProps={(lat, lng) => setPosition([lat, lng])}
+              />
+            </div>
+          )}
 
           {(isEdit || isNew) && (
             <PrimaryButton className="h-12 text-md w-full mt-4" onClick={handleSubmit(onSubmit)}>

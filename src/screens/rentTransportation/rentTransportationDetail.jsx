@@ -10,7 +10,7 @@ import {
 } from '../../components';
 import RentalMobil from '../../assets/rental-mobil.png';
 import Fortuner from '../../assets/fortuner.png';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { getDetailRentTransportationAPI } from '../../api/rentTransportation';
 import useSnackbar from '../../components/Snackbar';
 const DATA_CAR = [
@@ -43,6 +43,8 @@ const DATA_CAR = [
 const RentTransportationDetail = () => {
   const { id } = useParams();
   const { openSnackbarError } = useSnackbar();
+  const navState = useLocation();
+  console.log(navState);
   const [rentTransportationDetail, setRentTransportationDetail] = useState({
     listData: [],
     storeName: '',
@@ -63,29 +65,26 @@ const RentTransportationDetail = () => {
     const params = { id: id };
     getDetailRentTransportationAPI(params, signal.current?.signal)
       .then((res) => {
-        const storeImageBlob = new Blob([new Uint8Array(res.storeImage.data)], {
-          type: 'image/jpeg',
-        });
-        const storeImage = URL.createObjectURL(storeImageBlob);
         const data = (res.listData || []).map((item) => {
-          const imageBlob = new Blob([new Uint8Array(item.image.data)], { type: 'image/jpeg' });
+          const imageBlob = new Blob([new Uint8Array(item.image?.data)], { type: 'image/jpeg' });
           const url = URL.createObjectURL(imageBlob);
           return {
             ...item,
-            image: url,
+            image: url ?? '',
           };
         });
+        console.log('data===>', data);
         setRentTransportationDetail({
           listData: data,
-          storeImage,
-          storeName: res.storeName,
+
           totalPage: res.totalPage,
           totalData: res.totalData,
         });
       })
-      .catch((err) => openSnackbarError(err))
+      .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   };
+  console.log(rentTransportationDetail);
   return (
     <div className="w-full">
       <NavBar className="absolute" style={{ width: '100vw' }} />
@@ -95,7 +94,7 @@ const RentTransportationDetail = () => {
         <CardBody className="flex-row !border-transparent justify-between items-center before:bg-white/10 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large w-[calc(100%_-_20%)] lg:w-[calc(100%_-_40%)] ml-1 z-10  max-w-screen-xl gap-4">
           <div className=" flex-grow mb-4">
             <div className="font-bold text-white text-2xl sm:text-xl lg:text-2xl xl:text-4xl w-4/6">
-              Selamat Datang di {rentTransportationDetail.storeName}
+              Selamat Datang di {navState.state?.name ?? ''}
             </div>
           </div>
           <Image
@@ -103,7 +102,7 @@ const RentTransportationDetail = () => {
             width={450}
             height={350}
             alt="rental"
-            src={rentTransportationDetail.storeImage}
+            src={navState.state?.image ?? ''}
           />
         </CardBody>
       </Card>
@@ -120,6 +119,7 @@ const RentTransportationDetail = () => {
               })}
           </div>
           {!loading && rentTransportationDetail.listData.length === 0 && <EmptyState />}
+
           <Footer />
         </div>
       </WrapHCenter>

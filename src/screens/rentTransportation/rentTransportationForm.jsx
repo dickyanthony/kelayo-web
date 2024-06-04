@@ -41,9 +41,9 @@ const RentTransportationForm = () => {
     setLoading(true);
     getDetailTransportationAPI(id, signal.current?.signal)
       .then((res) => {
-        const blob = new Blob([new Uint8Array(res.image.data)], { type: 'image/jpeg' });
+        const blob = new Blob([new Uint8Array(res.image?.data)], { type: 'image/jpeg' });
         const imageBlob = URL.createObjectURL(blob);
-        setDetail({ ...res, image: imageBlob });
+        setDetail({ ...res, image: imageBlob ?? '' });
       })
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
@@ -68,7 +68,7 @@ const RentTransportationForm = () => {
                 />
               )}
 
-              <BookingPrice detail={detail} />
+              <BookingPrice detail={detail} hideButton />
             </div>
             <Accordion selectionMode="multiple" variant="shadow" className="mt-4">
               <AccordionItem key="0" aria-label="Data Diri" title="Data Diri">

@@ -26,6 +26,12 @@ import PemesananPenginapanNew from './screens/setting/dashboard/pemesananPengina
 import DestinasiWisataEdit from './screens/setting/dashboard/destinasiWisata/DestinasiWisataEdit';
 import DestinasiWisataDetail from './screens/setting/dashboard/destinasiWisata/DestinasiWisataDetail';
 import DestinasiWisataNew from './screens/setting/dashboard/destinasiWisata/DestinasiWisataNew';
+import PenyewaanTransportasiEdit from './screens/setting/dashboard/penyewaanTransportasi/PenyewaanTransportasiEdit';
+import PenyewaanTransportasiDetail from './screens/setting/dashboard/penyewaanTransportasi/PenyewaanTransportasiDetail';
+import PenyewaanTransportasiNew from './screens/setting/dashboard/penyewaanTransportasi/PenyewaanTransportasiNew';
+import TransportasiEdit from './screens/setting/dashboard/penyewaanTransportasi/transportasi/TransportasiEdit';
+import TransportasiDetail from './screens/setting/dashboard/penyewaanTransportasi/transportasi/TransportasiDetail';
+import TransportasiNew from './screens/setting/dashboard/penyewaanTransportasi/transportasi/TransportasiNew';
 
 const router = createBrowserRouter([
   {
@@ -226,6 +232,54 @@ const router = createBrowserRouter([
     element: (
       <RequireAuth>
         <DestinasiWisataEdit />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/add-rent-transportation',
+    element: (
+      <RequireAuth>
+        <PenyewaanTransportasiNew />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/detail-rent-transportation/:id',
+    element: (
+      <RequireAuth>
+        <PenyewaanTransportasiDetail />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/edit-rent-transportation/:id',
+    element: (
+      <RequireAuth>
+        <PenyewaanTransportasiEdit />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/rent-transportation/:id/add-transportation/',
+    element: (
+      <RequireAuth>
+        <TransportasiNew />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/detail-rent-transportation/:id/detail-transportation/:rentId',
+    element: (
+      <RequireAuth>
+        <TransportasiDetail />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/setting/dashboard/edit-rent-transportation/:id/edit-transportation/:rentId',
+    element: (
+      <RequireAuth>
+        <TransportasiEdit />
       </RequireAuth>
     ),
   },

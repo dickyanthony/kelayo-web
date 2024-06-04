@@ -1,29 +1,21 @@
-import { useState } from "react";
-import { Card, CardHeader, CardFooter, Divider } from "@nextui-org/react";
-import { CustomDateRangePicker } from "../components";
-import { formatNumberWithSeparator } from "../utils/numberConverter";
-import { getLocalTimeZone, today } from "@internationalized/date";
-import { PrimaryButton } from "./Button";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { Card, CardHeader, CardFooter, Divider } from '@nextui-org/react';
+import { CustomDateRangePicker } from '../components';
+import { formatNumberWithSeparator } from '../utils/numberConverter';
+import { getLocalTimeZone, today } from '@internationalized/date';
+import { PrimaryButton } from './Button';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 export default function BookingPrice(props) {
-  const { detail } = props;
+  const { detail, hideButton = false } = props;
   const navigate = useNavigate();
   const [dateRange, setDateRange] = useState({ start: null, end: null });
   const [dateDifference, setDateDifference] = useState(0);
   useEffect(() => {
     const calculateDateDifference = () => {
       if (!dateRange.start || !dateRange.end) return 0;
-      const start = new Date(
-        dateRange.start.year,
-        dateRange.start.month - 1,
-        dateRange.start.day
-      );
-      const end = new Date(
-        dateRange.end.year,
-        dateRange.end.month - 1,
-        dateRange.end.day
-      );
+      const start = new Date(dateRange.start.year, dateRange.start.month - 1, dateRange.start.day);
+      const end = new Date(dateRange.end.year, dateRange.end.month - 1, dateRange.end.day);
       const diffTime = Math.abs(end - start);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
       return diffDays;
@@ -54,24 +46,21 @@ export default function BookingPrice(props) {
             <p className="text-xs">Termasuk Pajak Dan Biaya</p>
           </div>
           <div className="text-sm sm:text-xl font-semibold flex items-center">
-            Rp{" "}
+            Rp{' '}
             {!dateRange.start || !dateRange.end
               ? formatNumberWithSeparator(detail?.price ?? 0)
-              : formatNumberWithSeparator(
-                  (detail?.price ?? 0) * dateDifference
-                )}
+              : formatNumberWithSeparator((detail?.price ?? 0) * dateDifference)}
           </div>
         </div>
       </CardHeader>
       <Divider />
-
-      <CardFooter className="flex justify-center">
-        <PrimaryButton
-          onPress={() => navigate(`/lodging-reservation/${detail.id}`)}
-        >
-          Pesan
-        </PrimaryButton>
-      </CardFooter>
+      {!hideButton && (
+        <CardFooter className="flex justify-center">
+          <PrimaryButton onPress={() => navigate(`/lodging-reservation/${detail.id}`)}>
+            Pesan
+          </PrimaryButton>
+        </CardFooter>
+      )}
     </Card>
   );
 }

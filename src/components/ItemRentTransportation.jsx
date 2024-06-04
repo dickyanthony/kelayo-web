@@ -11,7 +11,12 @@ const ItemRentTransportation = (props) => {
   let url = id ? `/rent-transportation-form/${item?.id}` : `/rent-transportation/${item?.id}`;
 
   return (
-    <Card className={className} shadow="sm" isPressable={isPressable} onPress={() => navigate(url)}>
+    <Card
+      className={`md:min-w-[250px] md:max-w-[250px] ${className}`}
+      shadow="sm"
+      isPressable={isPressable}
+      onPress={() => navigate(url, { state: item })}
+    >
       <CardBody className="overflow-visible p-0">
         <Image
           shadow="sm"

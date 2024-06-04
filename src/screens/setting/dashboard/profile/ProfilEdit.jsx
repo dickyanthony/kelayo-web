@@ -39,10 +39,15 @@ export default () => {
 
     getDetailUserAPI(userId, signal.current?.signal)
       .then((res) => {
-        const blob = new Blob([new Uint8Array(res.avatar.data)], { type: 'image/jpeg' });
-        const imageBlob = URL.createObjectURL(blob);
-        reset({ ...res, image: imageBlob });
-        setImage(imageBlob);
+        const avatarData = res.avatar?.data;
+        if (avatarData) {
+          const blob = new Blob([new Uint8Array(avatarData)], { type: 'image/jpeg' });
+          const imageBlob = URL.createObjectURL(blob);
+          reset({ ...res, image: imageBlob });
+          setImage(imageBlob);
+        } else {
+          reset(res);
+        }
       })
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
