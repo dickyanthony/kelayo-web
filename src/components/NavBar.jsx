@@ -75,7 +75,7 @@ export default function NavBar(props) {
                 radius="sm"
                 variant="light"
               >
-                Fitur
+                Layanan
               </Button>
             </DropdownTrigger>
           </NavbarItem>
