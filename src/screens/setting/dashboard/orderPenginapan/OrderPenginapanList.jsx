@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllTourGuideAPI, getListTourGuideByRoleAPI } from '../../../../api/tourGuide';
 import { PrimaryButton, TableOrderPenginapan, TableTourGuide } from '../../../../components';
 import useSnackbar from '../../../../components/Snackbar';
+import {
+  getAllOrderLodgingReservationAPI,
+  getAllOrderLodgingReservationByUserIdAPI,
+} from '../../../../api/orderLodgingReservationAPI';
 
 export default (props) => {
   const { user } = props;
@@ -13,6 +16,7 @@ export default (props) => {
   const [loading, setLoading] = useState(false);
 
   const signal = useRef();
+
   useEffect(() => {
     getList();
   }, []);
@@ -23,12 +27,18 @@ export default (props) => {
 
     setLoading(true);
     const params = {};
-    if (user.role !== 'admin') params.id = user.id;
-    const api = user.role === 'admin' ? getAllTourGuideAPI : getListTourGuideByRoleAPI;
+    if (user.role === 'normal') params.userId = user.id;
+    if (user.role === 'penyedia_penginapan') params.lodgingReservationUserId = user.id;
+    const api =
+      user.role !== 'normal'
+        ? getAllOrderLodgingReservationAPI
+        : getAllOrderLodgingReservationByUserIdAPI;
     api(params, signal.current?.signal)
       .then((res) => setTourGuideList(res))
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
-  return <TableOrderPenginapan data={tourGuideList} loading={loading} />;
+  return (
+    <TableOrderPenginapan user={user} data={tourGuideList} loading={loading} getList={getList} />
+  );
 };

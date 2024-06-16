@@ -144,7 +144,7 @@ export default (props) => {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody items={item}>
+      <TableBody emptyContent={'Tidak ada data'} items={item}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}

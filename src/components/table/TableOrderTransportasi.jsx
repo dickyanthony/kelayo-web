@@ -89,7 +89,7 @@ export default (props) => {
       case 'status':
         return (
           <Chip className="capitalize" color={statusColorMap['selesai']} size="sm" variant="flat">
-            {'cellValue'}
+            {'Selesai'}
           </Chip>
         );
       case 'actions':
@@ -145,6 +145,7 @@ export default (props) => {
         )}
       </TableHeader>
       <TableBody
+        emptyContent={'Tidak ada data'}
         items={items}
         loadingContent={<Spinner />}
         loadingState={loading || isLoading ? 'loading' : 'idle'}

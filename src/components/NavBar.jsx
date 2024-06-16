@@ -75,7 +75,7 @@ export default function NavBar(props) {
                 radius="sm"
                 variant="light"
               >
-                Fitur
+                Layanan
               </Button>
             </DropdownTrigger>
           </NavbarItem>
@@ -120,7 +120,7 @@ export default function NavBar(props) {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        <NavbarItem>
+        {/* <NavbarItem>
           <NavLink
             className={({ isActive, isPending }) =>
               isPending
@@ -134,7 +134,7 @@ export default function NavBar(props) {
           >
             Tentang Kami
           </NavLink>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
 
       <NavbarContent className="" as="div" justify="end">

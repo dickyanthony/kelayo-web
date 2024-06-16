@@ -42,6 +42,7 @@ import CustomCheckbox from './CustomCheckbox';
 import TableOrderPenginapan from './table/TableOrderPenginapan';
 import TableOrderPemandu from './table/TableOrderPemandu';
 import TableOrderTransportasi from './table/TableOrderTransportasi';
+import OrderPDF from './OrderPDF';
 
 export {
   TextInput,
@@ -91,4 +92,5 @@ export {
   TableOrderPenginapan,
   TableOrderPemandu,
   TableOrderTransportasi,
+  OrderPDF,
 };

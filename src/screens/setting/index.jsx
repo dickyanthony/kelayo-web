@@ -10,6 +10,7 @@ import ProfilEdit from './dashboard/profile/ProfilEdit';
 import GantiPassword from './dashboard/GantiPassword/gantiPassword';
 import OrderPenginapanList from './dashboard/orderPenginapan/OrderPenginapanList';
 import OrderPemanduList from './dashboard/orderPemandu/OrderPemanduList';
+import Dashboard from './dashboard/dashboard';
 
 export default () => {
   const {
@@ -28,6 +29,10 @@ export default () => {
       content: <GantiPassword />,
     },
   ];
+
+  if (user.role !== 'normal') {
+    tabData.unshift({ key: 'dashboard', title: 'Dashboard', content: <Dashboard /> });
+  }
 
   if (user.role === 'admin')
     tabData.push({
@@ -67,14 +72,14 @@ export default () => {
   if (user.role === 'admin' || user.role === 'penyedia_penginapan' || user.role === 'normal')
     tabData.push({
       key: 'order_penginapan',
-      title: 'Pemesanan Penginapan',
+      title: 'Order Penginapan',
       content: <OrderPenginapanList user={user} />,
     });
 
   if (user.role === 'admin' || user.role === 'pemandu_wisata' || user.role === 'normal')
     tabData.push({
       key: 'order_pemandu',
-      title: 'Pemesanan Pemandu',
+      title: 'Order Pemandu',
       content: <OrderPemanduList user={user} />,
     });
 

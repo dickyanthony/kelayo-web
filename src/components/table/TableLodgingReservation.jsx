@@ -194,6 +194,7 @@ export default (props) => {
         )}
       </TableHeader>
       <TableBody
+        emptyContent={'Tidak ada data'}
         items={items}
         loadingContent={<Spinner />}
         loadingState={loading || isLoading ? 'loading' : 'idle'}

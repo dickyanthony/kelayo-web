@@ -20,6 +20,7 @@ export default (props) => {
     <User
       {...restProps}
       avatarProps={{ radius: 'lg', src: customSrc ?? avatar }}
+      classNames={{ description: 'line-clamp-2' }}
       description={user.email ?? ''}
       name={user.name ?? ''}
     >

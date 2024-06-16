@@ -66,7 +66,7 @@ export default function Login() {
             >
               Login
             </PrimaryButton>
-            <div className="text-center overflow-hidden text-ellipsis">atau masuk dengan</div>
+            {/* <div className="text-center overflow-hidden text-ellipsis">atau masuk dengan</div>
             <ButtonWithLeftIcon
               className="border-black w-full h-14 text-md"
               icon={
@@ -80,7 +80,7 @@ export default function Login() {
               }
             >
               Masuk Dengan Google
-            </ButtonWithLeftIcon>
+            </ButtonWithLeftIcon> */}
             <CardFooter className="justify-center">
               <div>
                 Belum punya akun?{' '}
