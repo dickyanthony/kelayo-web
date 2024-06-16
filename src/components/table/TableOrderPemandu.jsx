@@ -18,7 +18,7 @@ import {
 import { EyeIcon } from '../../assets/EyeIcon';
 import { EditIcon } from '../../assets/EditIcon';
 import { DeleteIcon } from '../../assets/DeleteIcon';
-import { Avatar } from '..';
+import { Avatar, OrderPDF } from '..';
 
 import React, { useState, useRef } from 'react';
 import useSnackbar from '../Snackbar';
@@ -26,14 +26,18 @@ import { deleteTourGuideAPI } from '../../api/tourGuide';
 import { useNavigate } from 'react-router-dom';
 import { VerticalDotsIcon } from '../../assets/VerticalDotsIcon';
 
+import { pdf } from '@react-pdf/renderer';
+import { updateOrderLodgingReservationAPI } from '../../api/orderLodgingReservationAPI';
+import { formatNumberWithSeparator } from '../../utils/numberConverter';
+import { formatDateToDDMMYYYY } from '../../utils/dateConverter';
 const statusColorMap = {
-  selesai: 'success',
-  ambilDiTempat: 'danger',
-  menungguKonfirmasi: 'warning',
+  1: 'warning',
+  2: 'primary',
+  3: 'success',
 };
 const columns = [
   { name: 'AKSI', uid: 'actions' },
-  { name: 'PEMESAN', uid: 'order' },
+  { name: 'PEMESAN', uid: 'order', minWidth: 300 },
   { name: 'PENGiNAPAN', uid: 'penginapan' },
   { name: 'NAMA', uid: 'name' },
   { name: 'HP', uid: 'hp' },
@@ -45,7 +49,7 @@ const columns = [
 ];
 
 export default (props) => {
-  const { data = [], loading = false, onDelete } = props;
+  const { data = [], user, loading = false, onDelete, getList } = props;
   const { openSnackbarSuccess, openSnackbarError } = useSnackbar();
   const navigate = useNavigate();
   const [page, setPage] = React.useState(1);
@@ -61,35 +65,99 @@ export default (props) => {
     return data.slice(start, end);
   }, [page, data]);
 
+  const handleOpenPDF = async (tour) => {
+    const doc = <OrderPDF order={tour} />;
+    const asPdf = pdf([]);
+    asPdf.updateContainer(doc);
+    const blob = await asPdf.toBlob();
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+  };
+
+  const updateStatus = (item, status) => {
+    setIsLoading(true);
+    const params = { id: item.id, status: status };
+    updateOrderLodgingReservationAPI(params)
+      .then(() => {
+        getList();
+        openSnackbarSuccess('Status Berhasil Diupdate');
+      })
+      .catch((err) => openSnackbarError(err))
+      .finally(() => setIsLoading(false));
+  };
+
+  const getStatusText = (status) => {
+    switch (status) {
+      // selesai: 'success',
+      // ambilDiTempat: 'danger',
+      // menungguKonfirmasi: 'warning'
+      case 1:
+        return 'Menunggu Konfirmasi';
+
+      case 2:
+        return 'Silahkan Print Tiket';
+
+      case 3:
+        return 'Selesai';
+
+      default:
+        'Terima Kasih';
+    }
+  };
+
+  const renderStatusButton = (item) => {
+    if (user.role !== 'normal') {
+      switch (item.status) {
+        case 1:
+          return <DropdownItem onPress={() => updateStatus(item, 2)}>Diproses</DropdownItem>;
+
+        case 2:
+          return <DropdownItem onPress={() => updateStatus(item, 3)}>Selesai</DropdownItem>;
+
+        default:
+          return null;
+      }
+    } else {
+      return null;
+    }
+  };
+
   const renderCell = React.useCallback((tour, columnKey) => {
     const cellValue = tour[columnKey];
+    const fullName = (tour.first_name ?? '') + ' ' + (tour.last_name ?? '');
 
     switch (columnKey) {
       case 'order':
-        return <Avatar user={tour} name={cellValue} />;
+        return <Avatar user={tour.account} name={cellValue} />;
       case 'penginapan':
-        return <Avatar user={tour} name={cellValue} />;
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-sm capitalize">{tour.product.title}</p>
+            <p className="text-bold text-sm capitalize text-default-400 line-clamp-2">
+              {tour.product.description}
+            </p>
+          </div>
+        );
+
       case 'name':
-        return <p className="text-bold text-sm capitalize">asd</p>;
+        return <p className="text-bold text-sm capitalize">{fullName}</p>;
       case 'hp':
-        return <p className="text-bold text-sm capitalize">asd</p>;
+        return <p className="text-bold text-sm capitalize">{tour.hp}</p>;
       case 'start':
-        return <p className="text-bold text-sm capitalize">asd</p>;
+        return <p className="text-bold text-sm capitalize">{formatDateToDDMMYYYY(tour.start)}</p>;
       case 'end':
-        return <p className="text-bold text-sm capitalize">asd</p>;
+        return <p className="text-bold text-sm capitalize">{formatDateToDDMMYYYY(tour.end)}</p>;
       case 'price':
-        return <p className="text-bold text-sm capitalize">asd</p>;
-      // case 'image':
-      //   return (
-      //     <Image
-      //       src="https://app.requestly.io/delay/5000/https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
-      //       alt="bukti-pembayaran"
-      //     />
-      //   );
+        return (
+          <p className="text-bold text-sm capitalize">
+            Rp {formatNumberWithSeparator(tour.total_price)}
+          </p>
+        );
+
       case 'status':
         return (
-          <Chip className="capitalize" color={statusColorMap['selesai']} size="sm" variant="flat">
-            {'cellValue'}
+          <Chip className="capitalize" color={statusColorMap[tour.status]} size="sm" variant="flat">
+            {getStatusText(tour.status)}
           </Chip>
         );
       case 'actions':
@@ -102,9 +170,10 @@ export default (props) => {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem>Bukti Pembayaran</DropdownItem>
-                <DropdownItem>Print Tiket</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
+                {/* <DropdownItem>Bukti Pembayaran</DropdownItem> */}
+                {renderStatusButton(tour)}
+                <DropdownItem onPress={() => handleOpenPDF(tour)}>Print Tiket</DropdownItem>
+                {/* <DropdownItem>Delete</DropdownItem> */}
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -116,7 +185,7 @@ export default (props) => {
 
   return (
     <Table
-      className="max-w-screen-xl md:min-w-[1034px]"
+      className="max-w-screen-2xl md:min-w-[1034px]"
       aria-label="Example table with custom cells"
       selectionMode="single"
       showSelectionCheckboxes={false}
@@ -139,7 +208,11 @@ export default (props) => {
     >
       <TableHeader columns={columns}>
         {(column) => (
-          <TableColumn key={column.uid} align={column.uid === 'actions' ? 'center' : 'start'}>
+          <TableColumn
+            key={column.uid}
+            minWidth={column.minWidth}
+            align={column.uid === 'actions' ? 'center' : 'start'}
+          >
             {column.name}
           </TableColumn>
         )}

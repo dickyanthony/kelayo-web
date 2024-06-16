@@ -150,7 +150,7 @@ export default (props) => {
       case 'price':
         return (
           <p className="text-bold text-sm capitalize">
-            Rp.{formatNumberWithSeparator(tour.total_price)}
+            Rp {formatNumberWithSeparator(tour.total_price)}
           </p>
         );
 

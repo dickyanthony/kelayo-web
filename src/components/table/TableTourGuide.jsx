@@ -18,11 +18,14 @@ import React, { useState, useRef } from 'react';
 import useSnackbar from '../Snackbar';
 import { deleteTourGuideAPI } from '../../api/tourGuide';
 import { useNavigate } from 'react-router-dom';
+import { formatNumberWithSeparator } from '../../utils/numberConverter';
 const columns = [
   { name: 'DIBUAT OLEH', uid: 'name' },
   { name: 'PEMANDU', uid: 'title' },
-  { name: 'DOMISILI', uid: 'domisili' },
+  { name: 'ALAMAT', uid: 'domisili' },
   { name: 'UMUR', uid: 'age' },
+  { name: 'HARGA', uid: 'price' },
+  { name: 'NO HP', uid: 'phone' },
   { name: 'AKSI', uid: 'actions' },
 ];
 
@@ -71,6 +74,12 @@ export default (props) => {
         return <p className="text-bold text-sm capitalize">{tour.domisili}</p>;
       case 'age':
         return <p className="text-bold text-sm capitalize">{tour.age}</p>;
+      case 'price':
+        return (
+          <p className="text-bold text-sm capitalize">Rp {formatNumberWithSeparator(tour.price)}</p>
+        );
+      case 'phone':
+        return <p className="text-bold text-sm capitalize">{tour.phone}</p>;
       case 'actions':
         return (
           <div className="relative flex items-center gap-2">

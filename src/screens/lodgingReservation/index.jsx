@@ -13,6 +13,7 @@ import AnjumaBackpacker from '../../assets/lodgingReservation/anjuma-backpacker.
 import JogjaUnitPogung from '../../assets/lodgingReservation/jogja-unit-pogung.png';
 import UmahBuDee from '../../assets/lodgingReservation/umah-bu-dee.png';
 import { getListLodgingReservationAPI } from '../../api/lodgingReservation';
+import { useNavigate } from 'react-router-dom';
 const DATA = [
   {
     id: 1,
@@ -51,7 +52,7 @@ const DATA = [
 
 export default function LodgingReservation() {
   const { openSnackbarError } = UseSnackbar();
-
+  const navigate = useNavigate();
   const signal = useRef(new AbortController());
   const [lodgingReservationList, setLodgingReservationList] = useState({
     totalData: 0,
@@ -110,7 +111,10 @@ export default function LodgingReservation() {
                 <CustomPagination totalPage={lodgingReservationList.totalPage} />
               </div>
               <div className="order-1 sm:order-2">
-                <BookingPrice detail={bookingDetail} />
+                <BookingPrice
+                  detail={bookingDetail}
+                  onOrder={() => navigate(`/lodging-reservation/${bookingDetail.id}`)}
+                />
               </div>
             </>
           )}

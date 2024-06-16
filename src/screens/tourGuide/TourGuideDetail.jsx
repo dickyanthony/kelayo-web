@@ -12,9 +12,12 @@ import {
   WrapHCenterXL,
   CardReview,
   UseSnackbar,
+  BookingPrice,
 } from '../../components';
 import Mesyah from '../../assets/mesyah-dwi-nastiya.png';
 import { getDetailTourGuideAPI } from '../../api/tourGuide';
+import { formatNumberWithSeparator } from '../../utils/numberConverter';
+import DefaultMale from '../../assets/default-male.jpeg';
 
 const DUMMY_DETAIL = {
   name: 'MEYSYAH DWI NASTIYA',
@@ -57,13 +60,14 @@ const CardInfo = ({ detail }) => {
   return (
     <Card className="p-4 w-fit sm:min-w-[265px] md:min-w-[305px] lg:min-w-[345px]">
       <div className="flex flex-col justify-center items-center text-center">
-        <Image width={265} src={detail.image} alt={detail.name} />
+        <Image width={265} src={detail.image ?? DefaultMale} alt={detail.name} />
         <div className="font-bold w-fit flex-grow mt-4 mb-4">{detail.name}</div>
       </div>
       <div className="px-8">
         <p className="text-xs">Umur: {detail.age}</p>
         <p className="text-xs">Status: {detail.status}</p>
-        <p className="text-xs">Domisili: {detail.domisili}</p>
+        <p className="text-xs">Alamat: {detail.domisili}</p>
+        <p className="text-xs">Harga: Rp {formatNumberWithSeparator(detail.price)}</p>
       </div>
     </Card>
   );
@@ -104,11 +108,26 @@ const TourGuideDetail = () => {
   const { handleSubmit, control } = useForm();
   const [loading, setLoading] = useState(true);
   const [detail, setDetail] = useState(null);
+  const [dateRange, setDateRange] = useState({ start: null, end: null });
+  const [dateDifference, setDateDifference] = useState(0);
   const signal = useRef();
 
   useEffect(() => {
     if (id) getDetail();
   }, [id]);
+
+  useEffect(() => {
+    const calculateDateDifference = () => {
+      if (!dateRange.start || !dateRange.end) return 0;
+      const start = new Date(dateRange.start.year, dateRange.start.month - 1, dateRange.start.day);
+      const end = new Date(dateRange.end.year, dateRange.end.month - 1, dateRange.end.day);
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays;
+    };
+
+    setDateDifference(calculateDateDifference());
+  }, [dateRange]);
 
   const createBlobURL = (imageData) => {
     const blob = new Blob([new Uint8Array(imageData)], { type: 'image/jpeg' });
@@ -143,22 +162,12 @@ const TourGuideDetail = () => {
             <div className="flex flex-col sm:flex-row gap-4 mt-4">
               <div className="flex flex-col gap-4 w-fit order-1 sm:order-none">
                 <CardInfo detail={detail} />
-                <Card className="p-4 items-center">
-                  <CustomDateRangePicker className="mb-4" name="dateRange" control={control} />
-                  <CustomSelect
-                    label="Tipe"
-                    className="mb-4"
-                    name="type"
-                    options={[
-                      { label: 'Private', value: 'private' },
-                      { label: 'Kelompok', value: 'kelompok' },
-                    ]}
-                    control={control}
-                  />
-                  <PrimaryButton className="max-w-[290px]" onPress={handleSubmit(onSubmit)}>
-                    Sambungkan
-                  </PrimaryButton>
-                </Card>
+                <BookingPrice
+                  detail={detail}
+                  onOrder={() => {
+                    console.log('true');
+                  }}
+                />
               </div>
               <div className="flex flex-col gap-2 order-2 sm:order-none">
                 <CardCompetition detail={detail} />

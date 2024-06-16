@@ -1,4 +1,3 @@
-// OrderPDF.js
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/renderer';
 import { formatNumberWithSeparator } from '../utils/numberConverter';
@@ -139,7 +138,7 @@ const OrderPDF = ({ order }) => (
             <Text style={styles.tableCell}>{formatDateToDDMMYYYY(order.end)}</Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>Rp. {formatNumberWithSeparator(order.total_price)}</Text>
+            <Text style={styles.tableCell}>Rp {formatNumberWithSeparator(order.total_price)}</Text>
           </View>
         </View>
 
@@ -148,7 +147,7 @@ const OrderPDF = ({ order }) => (
             <Text style={styles.tableCellHeader}>Subtotal:</Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>Rp. {formatNumberWithSeparator(order.total_price)}</Text>
+            <Text style={styles.tableCell}>Rp {formatNumberWithSeparator(order.total_price)}</Text>
           </View>
         </View>
         <View style={styles.tableRow}>
@@ -156,7 +155,7 @@ const OrderPDF = ({ order }) => (
             <Text style={styles.tableCellHeader}>Pajak:</Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>Rp. 0</Text>
+            <Text style={styles.tableCell}>Rp 0</Text>
           </View>
         </View>
 
@@ -165,7 +164,7 @@ const OrderPDF = ({ order }) => (
             <Text style={styles.tableCellHeader}>Total:</Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>Rp. {formatNumberWithSeparator(order.total_price)}</Text>
+            <Text style={styles.tableCell}>Rp {formatNumberWithSeparator(order.total_price)}</Text>
           </View>
         </View>
       </View>

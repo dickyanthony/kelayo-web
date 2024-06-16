@@ -30,6 +30,8 @@ export default (props) => {
       age: 0,
       domisili: '',
       description: '',
+      price: 0,
+      phone: '',
       status: '',
       competition: [],
     },
@@ -72,6 +74,8 @@ export default (props) => {
     formData.append('domisili', data.domisili);
     formData.append('status', data.status);
     formData.append('description', data.description);
+    formData.append('price', data.price);
+    formData.append('phone', data.phone);
     formData.append('competition', JSON.stringify(data.competition));
     if (!isEdit) formData.append('userId', user.id);
 
@@ -90,7 +94,9 @@ export default (props) => {
             name: '',
             age: 0,
             domisili: '',
+            price: 0,
             description: '',
+            phone: '',
             status: '',
             competition: [],
           });
@@ -156,8 +162,21 @@ export default (props) => {
               isDisabled={!isEdit && !isNew}
             />
             <TextInput
-              label="Domisili"
+              label="Alamat"
               name="domisili"
+              control={control}
+              isDisabled={!isEdit && !isNew}
+            />
+            <TextInput
+              type="number"
+              label="Harga"
+              name="price"
+              control={control}
+              isDisabled={!isEdit && !isNew}
+            />
+            <TextInput
+              label="No HP"
+              name="phone"
               control={control}
               isDisabled={!isEdit && !isNew}
             />

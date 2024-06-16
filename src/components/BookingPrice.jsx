@@ -7,7 +7,7 @@ import { PrimaryButton } from './Button';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 export default function BookingPrice(props) {
-  const { detail, hideButton = false } = props;
+  const { detail, hideButton = false, onOrder = () => {} } = props;
   const navigate = useNavigate();
   const [dateRange, setDateRange] = useState({ start: null, end: null });
   const [dateDifference, setDateDifference] = useState(0);
@@ -56,9 +56,7 @@ export default function BookingPrice(props) {
       <Divider />
       {!hideButton && (
         <CardFooter className="flex justify-center">
-          <PrimaryButton onPress={() => navigate(`/lodging-reservation/${detail.id}`)}>
-            Pesan
-          </PrimaryButton>
+          <PrimaryButton onPress={onOrder}>Pesan</PrimaryButton>
         </CardFooter>
       )}
     </Card>

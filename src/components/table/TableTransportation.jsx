@@ -75,7 +75,7 @@ export default (props) => {
         return <p className="text-bold text-sm capitalize">{tour.name}</p>;
       case 'price':
         return (
-          <p className="text-bold text-sm capitalize">{formatNumberWithSeparator(tour.price)}</p>
+          <p className="text-bold text-sm capitalize">Rp {formatNumberWithSeparator(tour.price)}</p>
         );
       case 'actions':
         return (
