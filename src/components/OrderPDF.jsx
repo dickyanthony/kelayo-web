@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   orderId: {
+    color: '#686D76',
     fontSize: 16,
     marginBottom: 10,
   },
@@ -100,12 +101,16 @@ const OrderPDF = ({ order }) => (
       <View style={styles.headerContainer}>
         <Text style={styles.textInfo}>Silahkan berikan tiket ini pada penyedia</Text>
       </View>
-      <Text style={styles.title}>TIket: #{order.id}</Text>
+      <Text style={styles.title}>Tiket: #{order.id}</Text>
       <View style={styles.orderInfo}>
         <Text style={styles.orderId}>
-          Kamu menerima order dari {(order.first_name ?? '') + ' ' + (order.last_name ?? '')}:
+          Halo{' '}
+          <Text style={{ color: 'black' }}>
+            {(order.first_name ?? '') + ' ' + (order.last_name ?? '')}
+          </Text>
+          , berikan tiket ini kepada <Text style={{ color: 'black' }}>{order.product.title}</Text>:
         </Text>
-        <Text style={styles.orderDate}>{order.orderDate}</Text>
+        <Text style={styles.orderDate}>Tanggal Transaksi: {formatDateToDDMMYYYY(order.trans)}</Text>
       </View>
       <View style={styles.table}>
         <View style={styles.tableRow}>
@@ -170,7 +175,11 @@ const OrderPDF = ({ order }) => (
       <Text style={styles.address}>{order.city}</Text>
       <Text style={styles.address}>{order.zipCode}</Text>
       <Text style={styles.address}>{order.country}</Text>
-      <Text style={styles.note}>Selamat atas penjualannya</Text>
+      <Text style={styles.note}>Terima kasih telah menggunakan layanan</Text>
+      <View style={[styles.headerContainer, { marginTop: 8 }]}>
+        <Image src="/images/rounded-kelayo-logo.png" style={styles.logo} />
+        <Text style={styles.header}>Kelayo</Text>
+      </View>
     </Page>
   </Document>
 );
