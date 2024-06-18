@@ -11,24 +11,14 @@ import GantiPassword from './dashboard/GantiPassword/gantiPassword';
 import OrderPenginapanList from './dashboard/orderPenginapan/OrderPenginapanList';
 import OrderPemanduList from './dashboard/orderPemandu/OrderPemanduList';
 import Dashboard from './dashboard/dashboard';
+import OrderTransportasiList from './dashboard/orderTransportasi/OrderTransportasiList';
 
 export default () => {
   const {
     authState: { user },
   } = useAuth();
 
-  const tabData = [
-    {
-      key: 'profil',
-      title: 'Profil',
-      content: <ProfilEdit />,
-    },
-    {
-      key: 'ganti_password',
-      title: 'Ganti Password',
-      content: <GantiPassword />,
-    },
-  ];
+  const tabData = [];
 
   if (user.role !== 'normal') {
     tabData.unshift({ key: 'dashboard', title: 'Dashboard', content: <Dashboard /> });
@@ -87,7 +77,7 @@ export default () => {
     tabData.push({
       key: 'order_transportasi',
       title: 'Order Transportasi',
-      content: <OrderPemanduList user={user} />,
+      content: <OrderTransportasiList user={user} />,
     });
 
   return (

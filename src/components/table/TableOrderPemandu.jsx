@@ -38,7 +38,7 @@ const statusColorMap = {
 const columns = [
   { name: 'AKSI', uid: 'actions' },
   { name: 'PEMESAN', uid: 'order', minWidth: 300 },
-  { name: 'PENGiNAPAN', uid: 'penginapan' },
+  { name: 'PEMANDU', uid: 'pemandu' },
   { name: 'NAMA', uid: 'name' },
   { name: 'HP', uid: 'hp' },
   { name: 'TANGGAL MULAI', uid: 'start' },
@@ -129,7 +129,7 @@ export default (props) => {
     switch (columnKey) {
       case 'order':
         return <Avatar user={tour.account} name={cellValue} />;
-      case 'penginapan':
+      case 'pemandu':
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{tour.product.title}</p>

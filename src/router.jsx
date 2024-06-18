@@ -32,6 +32,7 @@ import PenyewaanTransportasiNew from './screens/setting/dashboard/penyewaanTrans
 import TransportasiEdit from './screens/setting/dashboard/penyewaanTransportasi/transportasi/TransportasiEdit';
 import TransportasiDetail from './screens/setting/dashboard/penyewaanTransportasi/transportasi/TransportasiDetail';
 import TransportasiNew from './screens/setting/dashboard/penyewaanTransportasi/transportasi/TransportasiNew';
+import Account from './screens/setting/account';
 
 const router = createBrowserRouter([
   {
@@ -131,7 +132,15 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/setting',
+    path: '/profile',
+    element: (
+      <RequireAuth>
+        <Account />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: '/dashboard',
     element: (
       <RequireAuth>
         <Setting />

@@ -25,23 +25,23 @@ function setChartOption() {
           },
         },
       },
-      labels: ['데드리프트', '벤치프레스', '스쿼트'],
+      labels: ['Menunggu Konfirmasi', 'Silahkan Print Tiket', 'Selesai'],
       fill: {
         opacity: 1,
         colors: ['#0066FF', '#7AFFBF', '#00D1FF'],
       },
       tooltip: {
         enabled: true,
-        y: {
-          formatter: function (val) {
-            return val !== 1 ? val + 'kg' : val - 1 + 'kg';
-          },
-          title: {
-            formatter: function (seriesName) {
-              return '';
-            },
-          },
-        },
+        // y: {
+        //   formatter: function (val) {
+        //     return val !== 1 ? val + 'kg' : val - 1 + 'kg';
+        //   },
+        //   title: {
+        //     formatter: function (seriesName) {
+        //       return '';
+        //     },
+        //   },
+        // },
       },
       stroke: {
         show: false, //차트 border
@@ -52,41 +52,22 @@ function setChartOption() {
   return ChartOptions.options;
 }
 
-export default function UserPowerChart({ PowerData }) {
+export default function UserPowerChart({ title, detail }) {
+  console.log('Detail==>', detail);
   return (
     <ChartsBox>
       <ApexCharts
         options={setChartOption()}
-        series={[20, 40, 60]}
+        series={detail?.value ?? [0, 0, 0]}
         type="donut"
         width="300"
         height="300"
       />
       <InnerInfo>
         <InnerTop>
-          <InfoSumTitle>3대력</InfoSumTitle>
-          <InfoSumValue>3</InfoSumValue>
+          <InfoSumTitle>{title}</InfoSumTitle>
+          <InfoSumValue>{detail?.value.reduce((acc, val) => acc + val, 0)}</InfoSumValue>
         </InnerTop>
-        <InnderBottom>
-          <div>
-            <InfoPowerTitle>벤치프레스</InfoPowerTitle>
-            <InfoPowerValue style={{ color: '#0066ff' }}>
-              {/* {PowerData[0] !== 1 ? PowerData[0] : PowerData[0] - 1} */}
-            </InfoPowerValue>
-          </div>
-          <div>
-            <InfoPowerTitle>데드리프트</InfoPowerTitle>
-            <InfoPowerValue style={{ color: '#7affbf' }}>
-              {/* {PowerData[1] !== 1 ? PowerData[1] : PowerData[1] - 1} */}
-            </InfoPowerValue>
-          </div>
-          <div>
-            <InfoPowerTitle>스쿼트</InfoPowerTitle>
-            <InfoPowerValue style={{ color: '#00d1ff' }}>
-              {/* {PowerData[2] !== 1 ? PowerData[2] : PowerData[2] - 1} */}
-            </InfoPowerValue>
-          </div>
-        </InnderBottom>
       </InnerInfo>
     </ChartsBox>
   );
@@ -98,7 +79,7 @@ const ChartsBox = styled.div`
 
 const InnerInfo = styled.div`
   position: absolute;
-  top: 60px;
+  top: 90px;
   left: 46px;
   width: 200px;
   display: flex;
@@ -111,7 +92,6 @@ const InnerTop = styled.div`
 `;
 
 const InfoSumTitle = styled.p`
-  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -137,7 +117,6 @@ const InnderBottom = styled.div`
 `;
 
 const InfoPowerTitle = styled.span`
-  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -147,7 +126,6 @@ const InfoPowerTitle = styled.span`
 `;
 
 const InfoPowerValue = styled.div`
-  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;

@@ -27,7 +27,7 @@ import { useNavigate } from 'react-router-dom';
 import { VerticalDotsIcon } from '../../assets/VerticalDotsIcon';
 
 import { pdf } from '@react-pdf/renderer';
-import { updateOrderLodgingReservationAPI } from '../../api/orderLodgingReservationAPI';
+import { updateOrderTransportationAPI } from '../../api/orderTransportationAPI';
 import { formatNumberWithSeparator } from '../../utils/numberConverter';
 import { formatDateToDDMMYYYY } from '../../utils/dateConverter';
 const statusColorMap = {
@@ -38,7 +38,7 @@ const statusColorMap = {
 const columns = [
   { name: 'AKSI', uid: 'actions' },
   { name: 'PEMESAN', uid: 'order', minWidth: 300 },
-  { name: 'PENGiNAPAN', uid: 'penginapan' },
+  { name: 'TRANSPORTASI', uid: 'transportasi' },
   { name: 'NAMA', uid: 'name' },
   { name: 'HP', uid: 'hp' },
   { name: 'TANGGAL MULAI', uid: 'start' },
@@ -77,7 +77,7 @@ export default (props) => {
   const updateStatus = (item, status) => {
     setIsLoading(true);
     const params = { id: item.id, status: status };
-    updateOrderLodgingReservationAPI(params)
+    updateOrderTransportationAPI(params)
       .then(() => {
         getList();
         openSnackbarSuccess('Status Berhasil Diupdate');
@@ -129,7 +129,7 @@ export default (props) => {
     switch (columnKey) {
       case 'order':
         return <Avatar user={tour.account} name={cellValue} />;
-      case 'penginapan':
+      case 'transportasi':
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{tour.product.title}</p>

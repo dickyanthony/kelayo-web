@@ -14,3 +14,15 @@ body {
 .skeleton-loader {
   @apply bg-gray-300 dark:bg-gray-700 animate-pulse;
 }
+
+.gradient-green-card {
+  background: linear-gradient(to right, #ddf2c5, #c0edac);
+}
+
+.gradient-yellow-card {
+  background: linear-gradient(to right, #f1efcf, #eee5c0);
+}
+
+.gradient-orange-card {
+  background: linear-gradient(to right, #f1cebd, #f8b1b4); /* Gradient orange */
+}

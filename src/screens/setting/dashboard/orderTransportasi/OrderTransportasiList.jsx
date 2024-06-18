@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllTourGuideAPI, getListTourGuideByRoleAPI } from '../../../../api/tourGuide';
+import {
+  getAllOrderTransportationAPI,
+  getAllOrderTransportationByUserIdAPI,
+} from '../../../../api/orderTransportationAPI';
 import { PrimaryButton, TableOrderTransportasi } from '../../../../components';
 import useSnackbar from '../../../../components/Snackbar';
 
@@ -23,12 +26,14 @@ export default (props) => {
 
     setLoading(true);
     const params = {};
-    if (user.role !== 'admin') params.id = user.id;
-    const api = user.role === 'admin' ? getAllTourGuideAPI : getListTourGuideByRoleAPI;
+    if (user.role === 'normal') params.userId = user.id;
+    if (user.role === 'penyedia_transportasi') params.transportationUserId = user.id;
+    const api =
+      user.role !== 'normal' ? getAllOrderTransportationAPI : getAllOrderTransportationByUserIdAPI;
     api(params, signal.current?.signal)
       .then((res) => setTourGuideList(res))
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
-  return <TableOrderTransportasi data={tourGuideList} loading={loading} />;
+  return <TableOrderTransportasi user={user} data={tourGuideList} loading={loading} />;
 };

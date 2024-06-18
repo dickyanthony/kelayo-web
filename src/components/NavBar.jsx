@@ -192,7 +192,10 @@ export default function NavBar(props) {
             <DropdownItem className="sm:hidden" key="tentang-kami" onPress={() => navigate('/')}>
               Tentang Kami
             </DropdownItem>
-            <DropdownItem key="dashboard" color="foreground" onPress={() => navigate('/setting')}>
+            <DropdownItem key="dashboard" color="foreground" onPress={() => navigate('/profile')}>
+              Profile
+            </DropdownItem>
+            <DropdownItem key="dashboard" color="foreground" onPress={() => navigate('/dashboard')}>
               Dashboard
             </DropdownItem>
             <DropdownItem className="text-danger" key="logout" color="danger" onPress={logout}>
