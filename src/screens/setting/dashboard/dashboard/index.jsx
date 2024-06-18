@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Card } from '@nextui-org/react';
-import { getDashboardAPI, getDashboarSparkdAPI } from '../../../../api/dashboardAPI';
+import { getDashboardAPI, getDashboardSparkAPI } from '../../../../api/dashboardAPI';
 import PieChart from './PieChart';
 import SparkLine from './SparkLine';
 import Bag from '/images/gradient-green-bag.svg';
@@ -42,7 +42,7 @@ export default () => {
     setLoading(true);
     const params = {};
     if (user.role !== 'admin') params.userId = user.id;
-    getDashboarSparkdAPI(signal.current?.signal)
+    getDashboardSparkAPI(params, signal.current?.signal)
       .then((res) => {
         setSparklineDetail(res);
       })
@@ -69,7 +69,7 @@ export default () => {
       {!loading && (
         <>
           {(user.role === 'admin' || user.role === 'penyedia_penginapan') && (
-            <Card className="container p-4 mt-4" isBlurred>
+            <Card className="container p-8 mt-4" isBlurred>
               <div>Order Penginanpan</div>
               <PieChart
                 detail={pieChartDetail.orderLodgingReservation}

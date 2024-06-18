@@ -8,11 +8,11 @@ export const getDashboardAPI = async (params, signal) => {
     signal,
   });
 };
-export const getDashboarSparkdAPI = async (signal) => {
+export const getDashboardSparkAPI = async (params, signal) => {
   return apiCall({
     url: `/dashboard/spark`,
-    method: 'get',
-    data: null,
+    method: 'post',
+    data: params,
     signal,
   });
 };

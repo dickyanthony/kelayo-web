@@ -1,35 +1,34 @@
 import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  Tooltip,
+  Button,
+  Chip,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Pagination,
   Spinner,
-  Chip,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
-  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
 } from '@nextui-org/react';
-import { EyeIcon } from '../../assets/EyeIcon';
-import { EditIcon } from '../../assets/EditIcon';
-import { DeleteIcon } from '../../assets/DeleteIcon';
 import { Avatar, OrderPDF } from '..';
 
-import React, { useState, useRef } from 'react';
-import useSnackbar from '../Snackbar';
-import { deleteTourGuideAPI } from '../../api/tourGuide';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { VerticalDotsIcon } from '../../assets/VerticalDotsIcon';
+import useSnackbar from '../Snackbar';
 
 import { pdf } from '@react-pdf/renderer';
 import { updateOrderLodgingReservationAPI } from '../../api/orderLodgingReservationAPI';
-import { formatNumberWithSeparator } from '../../utils/numberConverter';
 import { formatDateToDDMMYYYY } from '../../utils/dateConverter';
+import { formatNumberWithSeparator } from '../../utils/numberConverter';
+import { PrintIcon } from '../../assets/Print.jsx';
+import { ProcessIcon } from '../../assets/Process.jsx';
+import { CompleteIcon } from '../../assets/Complete.jsx';
+
 const statusColorMap = {
   1: 'warning',
   2: 'primary',
@@ -109,10 +108,28 @@ export default (props) => {
     if (user.role !== 'normal') {
       switch (item.status) {
         case 1:
-          return <DropdownItem onPress={() => updateStatus(item, 2)}>Diproses</DropdownItem>;
+          return (
+            <DropdownItem
+              startContent={
+                <ProcessIcon className="text-xl text-default-500 pointer-events-none flex-shrink-0" />
+              }
+              onPress={() => updateStatus(item, 2)}
+            >
+              Diproses
+            </DropdownItem>
+          );
 
         case 2:
-          return <DropdownItem onPress={() => updateStatus(item, 3)}>Selesai</DropdownItem>;
+          return (
+            <DropdownItem
+              startContent={
+                <CompleteIcon className="text-xl text-default-500 pointer-events-none flex-shrink-0" />
+              }
+              onPress={() => updateStatus(item, 3)}
+            >
+              Selesai
+            </DropdownItem>
+          );
 
         default:
           return null;
@@ -172,7 +189,14 @@ export default (props) => {
               <DropdownMenu>
                 {/* <DropdownItem>Bukti Pembayaran</DropdownItem> */}
                 {renderStatusButton(tour)}
-                <DropdownItem onPress={() => handleOpenPDF(tour)}>Print Tiket</DropdownItem>
+                <DropdownItem
+                  startContent={
+                    <PrintIcon className="text-xl text-default-500 pointer-events-none flex-shrink-0" />
+                  }
+                  onPress={() => handleOpenPDF(tour)}
+                >
+                  Print Tiket
+                </DropdownItem>
                 {/* <DropdownItem>Delete</DropdownItem> */}
               </DropdownMenu>
             </Dropdown>
