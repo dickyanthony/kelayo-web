@@ -16,6 +16,8 @@ import { useForm } from 'react-hook-form';
 import { getDetailLodgingReservationAPI } from '../../api/lodgingReservation';
 import { useEffect, useRef, useState } from 'react';
 import useSnackbar from '../../components/Snackbar';
+import { createTransactionAPI } from '../../api/midtransAPI';
+import { v4 as uuid } from 'uuid';
 
 const LodgingReservationDetail = () => {
   const { id } = useParams();
@@ -52,9 +54,27 @@ const LodgingReservationDetail = () => {
       .finally(() => setLoading(false));
   };
 
-  const onSubmit = async (data) => {};
+  const onSubmit = async (data, total) => {
+    if (signal.current) signal.current.abort();
+    signal.current = new AbortController();
+    console.log('Data===>', data);
+    const params = {
+      id: uuid(),
+      // id: detail.id,
+      product: detail.title,
+      total: total,
+    };
+
+    createTransactionAPI(params, signal.current?.signal)
+      .then((response) => window.snap.pay(response))
+      .catch((err) => openSnackbarError(err));
+  };
+
+  const handleSubmitWithTotal = (total) => {
+    handleSubmit((data) => onSubmit(data, total))();
+  };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmitWithTotal}>
       <div className="w-full ">
         <NavBar />
         <WrapHCenterXL>
@@ -65,7 +85,7 @@ const LodgingReservationDetail = () => {
               ) : (
                 <SkeletonLodgingReservation />
               )}
-              <BookingPrice detail={detail} hideButton />
+              <BookingPrice detail={detail} onOrder={handleSubmitWithTotal} />
             </div>
 
             <Accordion selectionMode="multiple" variant="shadow" className="mt-4">
@@ -92,9 +112,6 @@ const LodgingReservationDetail = () => {
                 </div>
               </AccordionItem>
             </Accordion>
-            <div className="flex justify-end mt-4">
-              <PrimaryButton className="w-full sm:w-auto">Konfirmasi</PrimaryButton>
-            </div>
           </div>
           <Footer />
         </WrapHCenterXL>

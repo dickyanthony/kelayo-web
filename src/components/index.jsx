@@ -1,48 +1,50 @@
-import TextInput from './TextInput';
-import { SmallCheckbox, MedimumCheckbox, LargeCheckbox } from './Checkbox';
-import { PrimaryButton, ButtonWithLeftIcon } from './Button';
-import WrapVHCenter from './WrapVHCenter';
-import WrapHCenter from './WrapHCenter';
-import WrapHCenterXL from './WrapHCenterXL';
-import UseSnackbar from './Snackbar';
-import NavBar from './NavBar';
-import CategoryMenu from './CategoryMenu';
-import ItemTourCard from './ItemTourCard';
-import Footer from './Footer';
-import TabTourist from './TabTourist';
-import CustomPagination from './CustomPagination';
-import CustomCarousel from './CustomCarousel';
-import ItemLodgingReservation from './ItemLodgingReservation';
+import Avatar from './Avatar';
 import BookingPrice from './BookingPrice';
-import CustomDateRangePicker from './CustomDateRangePicker';
-import FilterPrice from './FilterPrice';
+import { ButtonWithLeftIcon, PrimaryButton } from './Button';
+import CardReview from './CardReview';
+import CategoryMenu from './CategoryMenu';
+import { LargeCheckbox, MedimumCheckbox, SmallCheckbox } from './Checkbox';
+import CustomCarousel from './CustomCarousel';
+import CustomCheckbox from './CustomCheckbox';
 import CustomDatePicker from './CustomDatePicker';
+import CustomDateRangePicker from './CustomDateRangePicker';
+import CustomPagination from './CustomPagination';
 import CustomSelect from './CustomSelect';
 import CustomSlider from './CustomSlider';
-import ItemTourGuide from './ItemTourGuide';
-import ItemRentTransportation from './ItemRentTransportation';
-import TabRentTransportation from './TabRentTransportation';
-import CardReview from './CardReview';
-import Map from './Map';
-import Page404 from './Page404';
-import CustomCard from './skeleton/CustomCard';
 import EmptyState from './EmptyState';
+import FilterPrice from './FilterPrice';
+import Footer from './Footer';
+import ItemLodgingReservation from './ItemLodgingReservation';
+import ItemRentTransportation from './ItemRentTransportation';
+import ItemTourCard from './ItemTourCard';
+import ItemTourGuide from './ItemTourGuide';
+import Map from './Map';
+import MultiCustomSelect from './MultiCustomSelect';
+import NavBar from './NavBar';
+import OrderPDF from './OrderPDF';
+import Page404 from './Page404';
+import PaymentFailed from './PaymentFailed';
+import PaymentSuccess from './PaymentSuccess';
+import CustomCard from './skeleton/CustomCard';
 import SkeletonLodgingReservation from './skeleton/SkeletonLodgingReservation';
 import SkeletonRentTransportation from './skeleton/SkeletonRentTransportation';
-import TableTouristDestination from './table/TableTouristDestination';
-import TableLodgingReservation from './table/TableLodgingReservation';
-import TableTourGuide from './table/TableTourGuide';
+import UseSnackbar from './Snackbar';
 import TableAccount from './table/TableAccount';
-import TableTransportation from './table/TableTransportation';
-import TableRentTransportation from './table/TableRentTransportation';
-import Avatar from './Avatar';
-import MultiCustomSelect from './MultiCustomSelect';
-import TextArea from './TextArea';
-import CustomCheckbox from './CustomCheckbox';
-import TableOrderPenginapan from './table/TableOrderPenginapan';
+import TableLodgingReservation from './table/TableLodgingReservation';
 import TableOrderPemandu from './table/TableOrderPemandu';
+import TableOrderPenginapan from './table/TableOrderPenginapan';
 import TableOrderTransportasi from './table/TableOrderTransportasi';
-import OrderPDF from './OrderPDF';
+import TableRentTransportation from './table/TableRentTransportation';
+import TableTourGuide from './table/TableTourGuide';
+import TableTouristDestination from './table/TableTouristDestination';
+import TableTransportation from './table/TableTransportation';
+import TabRentTransportation from './TabRentTransportation';
+import TabTourist from './TabTourist';
+import TextArea from './TextArea';
+import TextInput from './TextInput';
+import WrapHCenter from './WrapHCenter';
+import WrapHCenterXL from './WrapHCenterXL';
+import WrapVHCenter from './WrapVHCenter';
 
 export {
   TextInput,
@@ -93,4 +95,6 @@ export {
   TableOrderPemandu,
   TableOrderTransportasi,
   OrderPDF,
+  PaymentSuccess,
+  PaymentFailed,
 };

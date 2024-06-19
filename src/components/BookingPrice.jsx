@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { Card, CardHeader, CardFooter, Divider } from '@nextui-org/react';
+import { getLocalTimeZone, today } from '@internationalized/date';
+import { Card, CardFooter, CardHeader, Divider } from '@nextui-org/react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CustomDateRangePicker } from '../components';
 import { formatNumberWithSeparator } from '../utils/numberConverter';
-import { getLocalTimeZone, today } from '@internationalized/date';
 import { PrimaryButton } from './Button';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 export default function BookingPrice(props) {
   const { detail, hideButton = false, onOrder = () => {} } = props;
   const navigate = useNavigate();
   const [dateRange, setDateRange] = useState({ start: null, end: null });
   const [dateDifference, setDateDifference] = useState(0);
+
   useEffect(() => {
     const calculateDateDifference = () => {
       if (!dateRange.start || !dateRange.end) return 0;
@@ -56,7 +56,17 @@ export default function BookingPrice(props) {
       <Divider />
       {!hideButton && (
         <CardFooter className="flex justify-center">
-          <PrimaryButton onPress={onOrder}>Pesan</PrimaryButton>
+          <PrimaryButton
+            onPress={() =>
+              onOrder(
+                !dateRange.start || !dateRange.end
+                  ? detail?.price ?? 0
+                  : (detail?.price ?? 0) * dateDifference
+              )
+            }
+          >
+            Pesan
+          </PrimaryButton>
         </CardFooter>
       )}
     </Card>
