@@ -12,6 +12,7 @@ const SparkLine = ({
   from = '#42a5f5',
   to = '#1e88e5',
   sparklineDetail = [],
+  total = 0,
 }) => {
   const renderTooltip = ({ active, payload, label }) => {
     return (
@@ -22,6 +23,7 @@ const SparkLine = ({
       </div>
     );
   };
+
   return (
     <Card
       className={`min-w-[240px] min-h-[240px] max-w-[240px] max-h-[240px] p-4 px-8 ${className}`}
@@ -32,9 +34,7 @@ const SparkLine = ({
           <div className={`variant="h6" fontWeight="bold" ${titleClass}`}>
             {detail?.title ?? 'Title'}
           </div>
-          <div className={`flex-grow content-center text-2xl ${totalClass}`}>
-            {detail?.total ?? 0}
-          </div>
+          <div className={`flex-grow content-center text-2xl ${totalClass}`}>{total}</div>
         </div>
         <div
           style={{

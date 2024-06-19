@@ -90,6 +90,14 @@ export default () => {
                       ? sparklineDetail?.orderLodgingReservation[1]
                       : []
                   }
+                  total={
+                    sparklineDetail?.orderLodgingReservation
+                      ? sparklineDetail?.orderLodgingReservation[1].reduce(
+                          (accumulator, current) => accumulator + current.value,
+                          0
+                        )
+                      : 0
+                  }
                 />
                 <SparkLine
                   detail={sparkLineTake}
@@ -105,6 +113,14 @@ export default () => {
                       ? sparklineDetail?.orderLodgingReservation[2]
                       : []
                   }
+                  total={
+                    sparklineDetail?.orderLodgingReservation
+                      ? sparklineDetail?.orderLodgingReservation[2].reduce(
+                          (accumulator, current) => accumulator + current.value,
+                          0
+                        )
+                      : 0
+                  }
                 />
                 <SparkLine
                   detail={sparkLineSuccess}
@@ -119,6 +135,14 @@ export default () => {
                     sparklineDetail?.orderLodgingReservation
                       ? sparklineDetail?.orderLodgingReservation[3]
                       : []
+                  }
+                  total={
+                    sparklineDetail?.orderLodgingReservation
+                      ? sparklineDetail?.orderLodgingReservation[3].reduce(
+                          (accumulator, current) => accumulator + current.value,
+                          0
+                        )
+                      : 0
                   }
                 />
               </div>
@@ -145,6 +169,14 @@ export default () => {
                   sparklineDetail={
                     sparklineDetail?.orderTourGuide ? sparklineDetail?.orderTourGuide[1] : []
                   }
+                  total={
+                    sparklineDetail?.orderTourGuide
+                      ? sparklineDetail?.orderTourGuide[1].reduce(
+                          (accumulator, current) => accumulator + current.value,
+                          0
+                        )
+                      : 0
+                  }
                 />
                 <SparkLine
                   detail={sparkLineTake}
@@ -158,6 +190,14 @@ export default () => {
                   sparklineDetail={
                     sparklineDetail?.orderTourGuide ? sparklineDetail?.orderTourGuide[2] : []
                   }
+                  total={
+                    sparklineDetail?.orderTourGuide
+                      ? sparklineDetail?.orderTourGuide[2].reduce(
+                          (accumulator, current) => accumulator + current.value,
+                          0
+                        )
+                      : 0
+                  }
                 />
                 <SparkLine
                   detail={sparkLineSuccess}
@@ -170,6 +210,14 @@ export default () => {
                   from="#5BE49B"
                   sparklineDetail={
                     sparklineDetail?.orderTourGuide ? sparklineDetail?.orderTourGuide[3] : []
+                  }
+                  total={
+                    sparklineDetail?.orderTourGuide
+                      ? sparklineDetail?.orderTourGuide[3].reduce(
+                          (accumulator, current) => accumulator + current.value,
+                          0
+                        )
+                      : 0
                   }
                 />
               </div>
@@ -197,6 +245,14 @@ export default () => {
                       ? sparklineDetail?.orderTransportation[1]
                       : []
                   }
+                  total={
+                    sparklineDetail?.orderTransportation
+                      ? sparklineDetail?.orderTransportation[1].reduce(
+                          (accumulator, current) => accumulator + current.value,
+                          0
+                        )
+                      : 0
+                  }
                 />
                 <SparkLine
                   detail={sparkLineTake}
@@ -212,6 +268,14 @@ export default () => {
                       ? sparklineDetail?.orderTransportation[2]
                       : []
                   }
+                  total={
+                    sparklineDetail?.orderTransportation
+                      ? sparklineDetail?.orderTransportation[2].reduce(
+                          (accumulator, current) => accumulator + current.value,
+                          0
+                        )
+                      : 0
+                  }
                 />
                 <SparkLine
                   detail={sparkLineSuccess}
@@ -226,6 +290,14 @@ export default () => {
                     sparklineDetail?.orderTransportation
                       ? sparklineDetail?.orderTransportation[3]
                       : []
+                  }
+                  total={
+                    sparklineDetail?.orderTransportation
+                      ? sparklineDetail?.orderTransportation[3].reduce(
+                          (accumulator, current) => accumulator + current.value,
+                          0
+                        )
+                      : 0
                   }
                 />
               </div>
