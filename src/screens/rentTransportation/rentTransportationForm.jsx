@@ -33,6 +33,7 @@ const RentTransportationForm = () => {
   const [detail, setDetail] = useState();
   const [loading, setLoading] = useState(false);
   const signal = useRef();
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     if (id) getDetail();

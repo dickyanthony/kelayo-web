@@ -84,7 +84,7 @@ const RentTransportationDetail = () => {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   };
-  console.log(rentTransportationDetail);
+
   return (
     <div className="w-full">
       <NavBar className="absolute" style={{ width: '100vw' }} />

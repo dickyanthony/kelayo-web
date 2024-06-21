@@ -114,6 +114,7 @@ const TourGuideDetail = () => {
   const [dateRange, setDateRange] = useState({ start: null, end: null });
   const [dateDifference, setDateDifference] = useState(0);
   const signal = useRef();
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     if (id) getDetail();
