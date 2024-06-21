@@ -8,6 +8,14 @@ export const getAllOrderLodgingReservationAPI = async (params, signal) => {
     signal,
   });
 };
+export const insertOrderLodgingReservationAPI = async (params, signal) => {
+  return apiCall({
+    url: `/order-lodging-reservation/create-transaction`,
+    method: 'post',
+    data: params,
+    signal,
+  });
+};
 
 export const getAllOrderLodgingReservationByUserIdAPI = async (params, signal) => {
   return apiCall({

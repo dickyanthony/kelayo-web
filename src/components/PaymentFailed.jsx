@@ -19,7 +19,7 @@ export default function PaymentFailed({ detail }) {
         </p>
 
         <div className="mt-6 space-x-4">
-          <PrimaryButton className="py-2 px-4 rounded" onClick={() => navigate('/home')}>
+          <PrimaryButton className="py-2 px-4 rounded" onClick={() => navigate('/')}>
             Beranda
           </PrimaryButton>
           <SecondaryButton className="py-2 px-4 rounded" onClick={() => navigate('/dashboard')}>

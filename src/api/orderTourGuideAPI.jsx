@@ -26,3 +26,12 @@ export const updateOrderTourGuideAPI = async (params, signal) => {
     signal,
   });
 };
+
+export const insertOrderTourGuideAPI = async (params, signal) => {
+  return apiCall({
+    url: `/order-tour-guide/create-transaction`,
+    method: 'post',
+    data: params,
+    signal,
+  });
+};

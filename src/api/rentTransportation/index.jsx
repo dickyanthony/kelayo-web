@@ -9,7 +9,6 @@ export const getDetailRentTransportationAPI2 = async (id, signal) => {
   });
 };
 export const getListRentTransportationAPI = async (params, signal) => {
-  console.log('list==>');
   return apiCall({
     url: '/rent-transportation',
     method: 'post',

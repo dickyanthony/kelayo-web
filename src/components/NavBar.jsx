@@ -24,6 +24,8 @@ import {
 } from '../assets/NavBarIcon.jsx';
 import RoundedLogoNoname from '../assets/rounded-kelayo-noname.png';
 import { useAuth } from '../hook/auth/Auth.jsx';
+import DefaultMale from '../assets/default-male.jpeg';
+import DefaultFemale from '../assets/default-female.jpeg';
 const icons = {
   chevron: <ChevronDown fill="currentColor" size={16} />,
   scale: <Scale className="text-warning" fill="currentColor" size={30} />,
@@ -38,6 +40,17 @@ export default function NavBar(props) {
   const navigate = useNavigate();
   const { logout } = useAuth();
   const userInfo = JSON.parse(localStorage.getItem('user'));
+
+  const createBlobURL = (imageData) => {
+    const blob = new Blob([new Uint8Array(imageData)], { type: 'image/jpeg' });
+    return URL.createObjectURL(blob);
+  };
+
+  const avatar = userInfo.avatar
+    ? createBlobURL(userInfo.avatar.data)
+    : userInfo.gender === 1
+    ? DefaultMale
+    : DefaultFemale;
 
   return (
     <Navbar
@@ -147,7 +160,7 @@ export default function NavBar(props) {
               color="primary"
               name="Jason Hughes"
               size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              src={avatar}
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">

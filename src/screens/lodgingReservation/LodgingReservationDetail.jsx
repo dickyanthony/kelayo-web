@@ -1,36 +1,47 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
+import { Accordion, AccordionItem } from '@nextui-org/react';
+import { useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { v4 as uuid } from 'uuid';
+import { getDetailLodgingReservationAPI } from '../../api/lodgingReservation';
+import { createTransactionAPI } from '../../api/midtransAPI';
+import { insertOrderLodgingReservationAPI } from '../../api/orderLodgingReservationAPI';
 import {
   BookingPrice,
   Footer,
   ItemLodgingReservation,
-  SkeletonLodgingReservation,
   NavBar,
-  PrimaryButton,
+  SkeletonLodgingReservation,
   TextInput,
   WrapHCenterXL,
 } from '../../components';
-import JogjaUnitPogung from '../../assets/lodgingReservation/jogja-unit-pogung.png';
-import { Accordion, AccordionItem } from '@nextui-org/react';
-import { useForm } from 'react-hook-form';
-import { getDetailLodgingReservationAPI } from '../../api/lodgingReservation';
-import { useEffect, useRef, useState } from 'react';
 import useSnackbar from '../../components/Snackbar';
-import { createTransactionAPI } from '../../api/midtransAPI';
-import { v4 as uuid } from 'uuid';
+import { formatDateToYYYYMMDD } from '../../utils/dateConverter';
 
 const LodgingReservationDetail = () => {
   const { id } = useParams();
   const { openSnackbarError } = useSnackbar();
   const { handleSubmit, control } = useForm();
-
+  const user = JSON.parse(localStorage.getItem('user'));
   const [loading, setLoading] = useState(true);
   const [detail, setDetail] = useState(null);
   const signal = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) getDetail();
   }, [id]);
+
+  // useEffect(() => {
+  //   const queryParams = new URLSearchParams(location.search);
+  //   const transactionStatus = queryParams.get('transaction_status');
+  //   const orderId = queryParams.get('order_id');
+
+  //   if (transactionStatus === 'settlement' && orderId) {
+  //     handlePaymentSuccess(orderId);
+  //   }
+  // }, [location.search]);
 
   const createBlobURL = (imageData) => {
     const blob = new Blob([new Uint8Array(imageData)], { type: 'image/jpeg' });
@@ -54,24 +65,56 @@ const LodgingReservationDetail = () => {
       .finally(() => setLoading(false));
   };
 
-  const onSubmit = async (data, total) => {
+  const onSubmit = async (data, total, start, end) => {
+    if (
+      data.firstName === undefined ||
+      data.lastName === undefined ||
+      data.email === undefined ||
+      data.confirmEmail === undefined ||
+      data.noHp === undefined
+    ) {
+      openSnackbarError('Isi data diri!');
+      return;
+    }
+    if (data.email !== data.confirmEmail) {
+      openSnackbarError('Periksa email!');
+      return;
+    }
     if (signal.current) signal.current.abort();
     signal.current = new AbortController();
-    console.log('Data===>', data);
+
     const params = {
       id: uuid(),
-      // id: detail.id,
       product: detail.title,
       total: total,
+
+      lodging_reservation_id: id,
+      first_name: data.firstName,
+      last_name: data.lastName,
+      hp: data.noHp,
+      trans: new Date().toISOString().split('T')[0],
+      start: start,
+      end: end,
+      total_price: total,
+      image: null,
+      user_id: user.id,
+      status: 1,
+      type: 'lodging_reservation',
     };
 
     createTransactionAPI(params, signal.current?.signal)
-      .then((response) => window.snap.pay(response))
+      .then((response) => {
+        window.snap.pay(response);
+      })
       .catch((err) => openSnackbarError(err));
   };
 
-  const handleSubmitWithTotal = (total) => {
-    handleSubmit((data) => onSubmit(data, total))();
+  const handleSubmitWithTotal = (total, start, end) => {
+    if ((start === null) | (end === null)) openSnackbarError('Pilih tanggal reservasi!');
+    const startDate = formatDateToYYYYMMDD(new Date(start.year, start.month - 1, start.day));
+    const endDate = formatDateToYYYYMMDD(new Date(end.year, end.month - 1, end.day));
+
+    handleSubmit((data) => onSubmit(data, total, startDate, endDate))();
   };
   return (
     <form onSubmit={handleSubmitWithTotal}>
@@ -103,14 +146,14 @@ const LodgingReservationDetail = () => {
                   <TextInput name="noHp" label="No Hp" control={control} />
                 </div>
               </AccordionItem>
-              <AccordionItem key="1" aria-label="Pembayaran" title="Bukti Pembayaran">
+              {/* <AccordionItem key="1" aria-label="Pembayaran" title="Bukti Pembayaran">
                 <div className="grid mb-4 sm:grid-cols-2 gap-4">
                   <TextInput name="cardName" label="Nama Kartu" control={control} />
                   <TextInput name="cardNo" label="No Kartu" control={control} />
                   <TextInput name="mm" label="MM/YY" control={control} />
                   <TextInput name="cvc" label="CVC" control={control} />
                 </div>
-              </AccordionItem>
+              </AccordionItem> */}
             </Accordion>
           </div>
           <Footer />

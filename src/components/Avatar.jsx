@@ -12,7 +12,7 @@ export default (props) => {
 
   const avatar = user.avatar
     ? createBlobURL(user.avatar.data)
-    : user.gender === 'male'
+    : user.gender === 1
     ? DefaultMale
     : DefaultFemale;
 

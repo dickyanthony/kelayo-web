@@ -26,3 +26,12 @@ export const updateOrderTransportationAPI = async (params, signal) => {
     signal,
   });
 };
+
+export const insertOrderTransportationAPI = async (params, signal) => {
+  return apiCall({
+    url: `/order-transportation/create-transaction`,
+    method: 'post',
+    data: params,
+    signal,
+  });
+};

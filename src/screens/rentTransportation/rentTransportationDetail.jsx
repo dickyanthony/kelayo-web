@@ -73,7 +73,7 @@ const RentTransportationDetail = () => {
             image: url ?? '',
           };
         });
-        console.log('data===>', data);
+
         setRentTransportationDetail({
           listData: data,
 

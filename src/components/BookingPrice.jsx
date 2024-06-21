@@ -61,7 +61,9 @@ export default function BookingPrice(props) {
               onOrder(
                 !dateRange.start || !dateRange.end
                   ? detail?.price ?? 0
-                  : (detail?.price ?? 0) * dateDifference
+                  : (detail?.price ?? 0) * dateDifference,
+                dateRange.start,
+                dateRange.end
               )
             }
           >

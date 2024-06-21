@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Card, Image } from '@nextui-org/react';
+import { AccordionItem, Card, Image, Accordion } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import CheckIcon from '../../assets/check-icon.png';
 import {
@@ -13,11 +13,14 @@ import {
   CardReview,
   UseSnackbar,
   BookingPrice,
+  TextInput,
 } from '../../components';
 import Mesyah from '../../assets/mesyah-dwi-nastiya.png';
 import { getDetailTourGuideAPI } from '../../api/tourGuide';
 import { formatNumberWithSeparator } from '../../utils/numberConverter';
 import DefaultMale from '../../assets/default-male.jpeg';
+import { createTransactionAPI } from '../../api/midtransAPI';
+import { formatDateToYYYYMMDD } from '../../utils/dateConverter';
 
 const DUMMY_DETAIL = {
   name: 'MEYSYAH DWI NASTIYA',
@@ -152,9 +155,59 @@ const TourGuideDetail = () => {
 
   // const test = ['a', 'b'];
   // console.log(JSON.PAR(test));
-  const onSubmit = async (data) => {};
+  const onSubmit = async (data, total, start, end) => {
+    if (
+      data.firstName === undefined ||
+      data.lastName === undefined ||
+      data.email === undefined ||
+      data.confirmEmail === undefined ||
+      data.noHp === undefined
+    ) {
+      openSnackbarError('Isi data diri!');
+      return;
+    }
+    if (data.email !== data.confirmEmail) {
+      openSnackbarError('Periksa email!');
+      return;
+    }
+    if (signal.current) signal.current.abort();
+    signal.current = new AbortController();
+
+    const params = {
+      id: uuid(),
+      product: detail.title,
+      total: total,
+
+      lodging_reservation_id: id,
+      first_name: data.firstName,
+      last_name: data.lastName,
+      hp: data.noHp,
+      trans: new Date().toISOString().split('T')[0],
+      start: start,
+      end: end,
+      total_price: total,
+      image: null,
+      user_id: user.id,
+      status: 1,
+      type: 'tour_guide',
+    };
+
+    createTransactionAPI(params, signal.current?.signal)
+      .then((response) => {
+        window.snap.pay(response);
+      })
+      .catch((err) => openSnackbarError(err));
+  };
+
+  const handleSubmitWithTotal = (total, start, end) => {
+    if ((start === null) | (end === null)) openSnackbarError('Pilih tanggal reservasi!');
+    const startDate = formatDateToYYYYMMDD(new Date(start.year, start.month - 1, start.day));
+    const endDate = formatDateToYYYYMMDD(new Date(end.year, end.month - 1, end.day));
+
+    handleSubmit((data) => onSubmit(data, total, startDate, endDate))();
+  };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmitWithTotal}>
       <div className="w-full">
         <NavBar />
         <WrapHCenterXL>
@@ -162,12 +215,7 @@ const TourGuideDetail = () => {
             <div className="flex flex-col sm:flex-row gap-4 mt-4">
               <div className="flex flex-col gap-4 w-fit order-1 sm:order-none">
                 <CardInfo detail={detail} />
-                <BookingPrice
-                  detail={detail}
-                  onOrder={() => {
-                    console.log('true');
-                  }}
-                />
+                <BookingPrice detail={detail} onOrder={handleSubmitWithTotal} />
               </div>
               <div className="flex flex-col gap-2 order-2 sm:order-none">
                 <CardCompetition detail={detail} />
@@ -176,6 +224,30 @@ const TourGuideDetail = () => {
               </div>
             </div>
           )}
+          <Accordion selectionMode="multiple" variant="shadow" className="mt-4">
+            <AccordionItem key="0" aria-label="Data Diri" title="Data Diri">
+              <div className="grid mb-4 sm:grid-cols-2 gap-4">
+                <TextInput name="firstName" label="Nama Depan" control={control} />
+                <TextInput name="lastName" label="Nama Belakang" control={control} />
+                <TextInput type="email" name="email" label="Email" control={control} />
+                <TextInput
+                  type="email"
+                  name="confirmEmail"
+                  label="Konfirmasi Email"
+                  control={control}
+                />
+                <TextInput name="noHp" label="No Hp" control={control} />
+              </div>
+            </AccordionItem>
+            {/* <AccordionItem key="1" aria-label="Pembayaran" title="Bukti Pembayaran">
+                <div className="grid mb-4 sm:grid-cols-2 gap-4">
+                  <TextInput name="cardName" label="Nama Kartu" control={control} />
+                  <TextInput name="cardNo" label="No Kartu" control={control} />
+                  <TextInput name="mm" label="MM/YY" control={control} />
+                  <TextInput name="cvc" label="CVC" control={control} />
+                </div>
+              </AccordionItem> */}
+          </Accordion>
           <Footer />
         </WrapHCenterXL>
       </div>
