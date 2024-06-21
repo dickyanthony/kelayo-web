@@ -73,7 +73,7 @@ const RentTransportationForm = () => {
 
     const params = {
       id: uuid(),
-      product: detail.title,
+      product: detail.name,
       total: total,
 
       transportation_id: id,

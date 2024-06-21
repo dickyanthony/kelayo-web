@@ -176,7 +176,7 @@ const TourGuideDetail = () => {
 
     const params = {
       id: uuid(),
-      product: detail.title,
+      product: detail.name,
       total: total,
 
       lodging_reservation_id: id,
