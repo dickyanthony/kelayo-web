@@ -21,7 +21,7 @@ import { formatNumberWithSeparator } from '../../utils/numberConverter';
 import DefaultMale from '../../assets/default-male.jpeg';
 import { createTransactionAPI } from '../../api/midtransAPI';
 import { formatDateToYYYYMMDD } from '../../utils/dateConverter';
-
+import { v4 as uuid } from 'uuid';
 const DUMMY_DETAIL = {
   name: 'MEYSYAH DWI NASTIYA',
   age: 20,
