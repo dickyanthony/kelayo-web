@@ -179,7 +179,7 @@ const TourGuideDetail = () => {
       product: detail.name,
       total: total,
 
-      lodging_reservation_id: id,
+      tour_guide_id: id,
       first_name: data.firstName,
       last_name: data.lastName,
       hp: data.noHp,
