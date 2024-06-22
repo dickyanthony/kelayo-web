@@ -1,10 +1,11 @@
-import { Card, CardBody, DatePicker, Image, Input, Select } from '@nextui-org/react';
-import { CategoryMenu, Footer, NavBar, WrapHCenterXL } from '../../components';
-import Home1 from '../../assets/home-1.png';
+import { Card, CardBody, Image } from '@nextui-org/react';
 import Airplane from '../../assets/airplane.png';
-import Line from '../../assets/line.png';
-import InfoEvent from './InfoEvent';
 import CurvedLine from '../../assets/curved-line.png';
+import Home1 from '../../assets/home-1.png';
+import Line from '../../assets/line.png';
+import { CategoryMenu, Footer, MyChatBot, NavBar, WrapHCenterXL } from '../../components';
+import InfoEvent from './InfoEvent';
+
 const Home = () => {
   return (
     <>
@@ -134,6 +135,7 @@ const Home = () => {
         </Card>
         <WrapHCenterXL>
           <InfoEvent />
+          <MyChatBot />
           <Footer />
         </WrapHCenterXL>
       </div>

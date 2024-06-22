@@ -1,0 +1,63 @@
+.chatbot-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #417dc1;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+.chatbot-button.open:hover {
+  transform: rotate(360deg);
+}
+
+.chatbot-button.close:hover {
+  transform: rotate(-360deg);
+}
+
+.chatbot-container {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 1000;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.chatbot-container.slide-in {
+  animation: slideIn 0.5s forwards;
+}
+
+.chatbot-container.slide-out {
+  animation: slideOut 0.5s forwards;
+}

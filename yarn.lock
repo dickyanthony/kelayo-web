@@ -5393,6 +5393,10 @@ react-apexcharts@^1.4.1:
   dependencies:
     prop-types "^15.8.1"
 
+"react-chatbotify@https://github.com/dickyanthony/react-chatbotify":
+  version "1.7.0"
+  resolved "https://github.com/dickyanthony/react-chatbotify#2edd61b90ff694f4152e049b7a3ec934da8f00a4"
+
 react-dom@^18.3.1:
   version "18.3.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.3.1.tgz#c2265d79511b57d479b3dd3fdfa51536494c5cb4"

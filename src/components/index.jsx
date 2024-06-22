@@ -45,6 +45,7 @@ import TextInput from './TextInput';
 import WrapHCenter from './WrapHCenter';
 import WrapHCenterXL from './WrapHCenterXL';
 import WrapVHCenter from './WrapVHCenter';
+import MyChatBot from './MyChatBot';
 
 export {
   TextInput,
@@ -97,4 +98,5 @@ export {
   OrderPDF,
   PaymentSuccess,
   PaymentFailed,
+  MyChatBot,
 };
