@@ -1,30 +1,30 @@
-import { Image } from "@nextui-org/react";
-import Whitelocation from "../../assets/white-location.png";
-import WhiteSport from "../../assets/white-water-sport.png";
-import WhiteCar from "../../assets/white-car.png";
-import PrambananEvent from "../../assets/prambanan-info-event.png";
+import { Image } from '@nextui-org/react';
+import Whitelocation from '../../assets/white-location.png';
+import WhiteSport from '../../assets/white-water-sport.png';
+import WhiteCar from '../../assets/white-car.png';
+import PrambananEvent from '../../assets/prambanan-info-event.png';
 
 const DATA_EVENT = [
   {
     image: Whitelocation,
-    title: "Pilih Wisata",
+    title: 'Pilih Wisata',
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus ",
-    bgColor: "#F0BB1F",
+      'Temukan destinasi wisata favorit Anda dan pilih dari berbagai pilihan menarik yang kami tawarkan. Jadikan liburan Anda tak terlupakan.',
+    bgColor: '#F0BB1F',
   },
   {
     image: WhiteSport,
-    title: "Cek Ketersediaan",
+    title: 'Cek Ketersediaan',
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus ",
-    bgColor: "#F15A2B",
+      'Pastikan ketersediaan tiket dan fasilitas di destinasi pilihan Anda sebelum berangkat. Cek jadwal dan ketersediaan dengan mudah.',
+    bgColor: '#F15A2B',
   },
   {
     image: WhiteCar,
-    title: "Pesan",
+    title: 'Pesan',
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus ",
-    bgColor: "#006380",
+      'Pesan tiket Anda dengan mudah dan cepat. Nikmati kemudahan proses pemesanan untuk pengalaman liburan yang menyenangkan.',
+    bgColor: '#006380',
   },
 ];
 
@@ -36,12 +36,7 @@ const ItemInfoEvent = ({ item }) => {
           className="min-w-12 min-h-12 rounded-xl justify-center items-center flex flex-wrap"
           style={{ backgroundColor: item.bgColor }}
         >
-          <Image
-            isZoomed
-            src={item.image}
-            alt={item.title}
-            className="w-6 h-6"
-          />
+          <Image isZoomed src={item.image} alt={item.title} className="w-6 h-6" />
         </div>
         <div className="ml-4">
           <div className="font-bold text-[#5E6282] ">{item.title}</div>
