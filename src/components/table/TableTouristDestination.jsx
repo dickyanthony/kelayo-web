@@ -20,11 +20,11 @@ import { deleteTouristDestinationAPI } from '../../api/touristDestination';
 import useSnackbar from '../Snackbar';
 import { useNavigate } from 'react-router-dom';
 const columns = [
+  { name: 'AKSI', uid: 'actions' },
   { name: 'DIBUAT OLEH', uid: 'name' },
   { name: 'JUDUL', uid: 'title' },
   { name: 'LOKASI', uid: 'location' },
   { name: 'HARGA', uid: 'price' },
-  { name: 'AKSI', uid: 'actions' },
 ];
 
 export default (props) => {

@@ -18,11 +18,11 @@ import { Avatar, UseSnackbar } from '..';
 import { useNavigate } from 'react-router-dom';
 import { deleteUserAPI } from '../../api/user/userAPI';
 const columns = [
+  { name: 'AKSI', uid: 'actions' },
   { name: 'NAMA', uid: 'name' },
   { name: 'EMAIL', uid: 'email' },
   { name: 'GENDER', uid: 'gender' },
   { name: 'PERAN', uid: 'role' },
-  { name: 'AKSI', uid: 'actions' },
 ];
 
 export default (props) => {

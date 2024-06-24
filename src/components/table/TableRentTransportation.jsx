@@ -19,9 +19,9 @@ import useSnackbar from '../Snackbar';
 import { deleteRentTransportationAPI } from '../../api/rentTransportation';
 import { useNavigate } from 'react-router-dom';
 const columns = [
+  { name: 'AKSI', uid: 'actions' },
   { name: 'DIBUAT OLEH', uid: 'name' },
   { name: 'JUDUL', uid: 'title' },
-  { name: 'AKSI', uid: 'actions' },
 ];
 
 export default (props) => {

@@ -34,5 +34,5 @@ export default (props) => {
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));
   };
-  return <TableOrderPemandu user={user} data={tourGuideList} loading={loading} />;
+  return <TableOrderPemandu user={user} data={tourGuideList} loading={loading} getList={getList} />;
 };

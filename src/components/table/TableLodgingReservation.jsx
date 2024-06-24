@@ -20,13 +20,13 @@ import useSnackbar from '../Snackbar';
 import { deleteLodgingReservationAPI } from '../../api/lodgingReservation';
 import { useNavigate } from 'react-router-dom';
 const columns = [
+  { name: 'AKSI', uid: 'actions' },
   { name: 'DIBUAT OLEH', uid: 'name' },
   { name: 'JUDUL', uid: 'title' },
   { name: 'HARGA', uid: 'price' },
   { name: 'GRATIS AIR & LISTRIK', uid: 'isFreeWaterElectric' },
   { name: 'GRATIS WIFI', uid: 'isFreeWifi' },
   { name: 'KAMAR MANDI PRIBADI', uid: 'isPrivateBathroom' },
-  { name: 'AKSI', uid: 'actions' },
 ];
 
 const CheckIcon = () => {

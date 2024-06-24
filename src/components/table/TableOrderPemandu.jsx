@@ -203,14 +203,17 @@ export default (props) => {
                 >
                   Print Tiket
                 </DropdownItem>
-                <DropdownItem
-                  startContent={
-                    <ChatIcon className="text-xl text-default-500 pointer-events-none flex-shrink-0" />
-                  }
-                  onPress={() => handleChatPress(tour.hp)}
-                >
-                  Chat WA
-                </DropdownItem>
+                {user?.role !== 'normal' && (
+                  <DropdownItem
+                    startContent={
+                      <ChatIcon className="text-xl text-default-500 pointer-events-none flex-shrink-0" />
+                    }
+                    onPress={() => handleChatPress(tour.hp)}
+                  >
+                    Chat WA
+                  </DropdownItem>
+                )}
+
                 {/* <DropdownItem>Delete</DropdownItem> */}
               </DropdownMenu>
             </Dropdown>

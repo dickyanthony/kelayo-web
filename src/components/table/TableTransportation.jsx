@@ -20,9 +20,9 @@ import { deleteTransportationAPI } from '../../api/transportationAPI';
 import { useNavigate, useParams } from 'react-router-dom';
 import { formatNumberWithSeparator } from '../../utils/numberConverter';
 const columns = [
+  { name: 'AKSI', uid: 'actions' },
   { name: 'NAMA', uid: 'name' },
   { name: 'HARGA', uid: 'price' },
-  { name: 'AKSI', uid: 'actions' },
 ];
 
 export default (props) => {

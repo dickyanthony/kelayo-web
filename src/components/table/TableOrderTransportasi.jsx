@@ -80,7 +80,7 @@ export default (props) => {
         getList();
         openSnackbarSuccess('Status Berhasil Diupdate');
       })
-      .catch((err) => openSnackbarError(err))
+      .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
   };
 

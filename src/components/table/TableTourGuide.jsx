@@ -20,13 +20,13 @@ import { deleteTourGuideAPI } from '../../api/tourGuide';
 import { useNavigate } from 'react-router-dom';
 import { formatNumberWithSeparator } from '../../utils/numberConverter';
 const columns = [
+  { name: 'AKSI', uid: 'actions' },
   { name: 'DIBUAT OLEH', uid: 'name' },
   { name: 'PEMANDU', uid: 'title' },
   { name: 'ALAMAT', uid: 'domisili' },
   { name: 'UMUR', uid: 'age' },
   { name: 'HARGA', uid: 'price' },
   { name: 'NO HP', uid: 'phone' },
-  { name: 'AKSI', uid: 'actions' },
 ];
 
 export default (props) => {
