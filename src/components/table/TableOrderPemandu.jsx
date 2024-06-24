@@ -30,6 +30,7 @@ import { ChatIcon } from '../../assets/Chat.jsx';
 import { PrintIcon } from '../../assets/Print.jsx';
 import { ProcessIcon } from '../../assets/Process.jsx';
 import { CompleteIcon } from '../../assets/Complete.jsx';
+import { updateOrderTourGuideAPI } from '../../api/orderTourGuideAPI';
 
 const statusColorMap = {
   1: 'warning',
@@ -83,7 +84,7 @@ export default (props) => {
   const updateStatus = (item, status) => {
     setIsLoading(true);
     const params = { id: item.id, status: status };
-    updateOrderLodgingReservationAPI(params)
+    updateOrderTourGuideAPI(params)
       .then(() => {
         getList();
         openSnackbarSuccess('Status Berhasil Diupdate');
