@@ -48,6 +48,7 @@ export default () => {
         } else {
           reset(res);
         }
+        localStorage.setItem('user', JSON.stringify(res));
       })
       .catch((err) => openSnackbarError(err))
       .finally(() => setLoading(false));

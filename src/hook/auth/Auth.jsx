@@ -15,17 +15,21 @@ const authReducer = (state, action) => {
 
 const AuthProvider = ({ children }) => {
   const user = localStorage.getItem('user');
+  const token = localStorage.getItem('token');
   const [authState, dispatch] = useReducer(authReducer, {
-    isAuthenticated: !!user,
+    isAuthenticated: !!token,
     user: user ? JSON.parse(user) : null,
   });
 
   const login = (user) => {
+    localStorage.setItem('token', JSON.stringify(user.token));
+
     localStorage.setItem('user', JSON.stringify(user));
     dispatch({ type: 'LOGIN', user });
   };
 
   const logout = () => {
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
     dispatch({ type: 'LOGOUT' });
   };

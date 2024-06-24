@@ -20,7 +20,7 @@ export default () => {
 
   const tabData = [];
 
-  if (user.role !== 'normal') {
+  if (user.role !== 'normal' && user.role !== 'destinasi_wisata') {
     tabData.unshift({ key: 'dashboard', title: 'Dashboard', content: <Dashboard /> });
   }
 
